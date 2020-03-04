@@ -2,7 +2,6 @@
 session_start();
 require_once 'setup.php';
 $start_date=(date("D")=="Mon" ? strtotime("today") : strtotime("last monday"));
-echo date("d-m-Y", $start_date) . "  was the last monday";
 ?>
 
 <!DOCTYPE HTML>
