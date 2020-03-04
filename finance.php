@@ -92,7 +92,9 @@ if($perm_level >= 2){
 			$day=$start_date+$i*24*3600;
 			$date=date("d-m-Y", $day);
 			if(array_key_exists($date, $orders)){
+				if(!empty($orders[$date])){
 				array_push($days, date("N", $day)-1);
+				}
 			}
 		}
 		if(empty($days)){
@@ -100,9 +102,13 @@ if($perm_level >= 2){
 		}
 		echo "<h1>" . $user['realname'] . "</h1>";
 		foreach($days as $day){
-			echo "<h2>" . date("l" , $start_date+$day*24*3600) . "</h2>";
 			$date=date("d-m-Y",$start_date+$day*24*3600);
 			$order = $orders[$date];
+			if(empty($order)){
+				continue;
+			}
+			echo "<h2>" . date("l" , $start_date+$day*24*3600) . "</h2>";
+			
 			//var_dump($order);
 			echo "<table><tr><th>Product</th><th>Aantal</th><th>Verwijder</th><th>Prijs</th></tr>";
 			$dag_totaal=0;
