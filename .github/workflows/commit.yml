@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: SSH Remote Commands
-    - uses: appleboy/ssh-action@v0.0.7
+      uses: appleboy/ssh-action@v0.0.7
       with:
         host: wijgaanappie.nl
         username: u63467p60473
