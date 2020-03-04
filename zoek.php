@@ -78,11 +78,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 require_once 'setup.php';
 require_once 'simple_html_dom.php';
 if(!empty($_GET['query'])){
-	/*
-$ch = curl_init('https://www.ah.nl/zoeken?query='.$_GET['query']);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);*/
 $response = file_get_contents('https://www.ah.nl/zoeken?query='.$_GET['query']);
 $parse = new simple_html_dom($response);
 //$parse->load($response);
@@ -105,7 +100,6 @@ foreach($producten as $product){
         $i = 0;
         break;
     } $i += 1;
-    //curl_setopt($ch, CURLOPT_URL, 'https://www.ah.nl/service/rest/delegate?url='.urlencode($product));
     $response = json_decode(file_get_contents('https://www.ah.nl/service/rest/delegate?url='.urlencode($product)),true); // true is for array, false for stdClass
     foreach((array)$response['_embedded']['lanes'] as $lane){
         if($lane['type'] == 'ProductDetailLane'){
