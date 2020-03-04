@@ -1,4 +1,4 @@
-name: CI
+name: update wijgaanappie op server
 
 on: [push]
 
@@ -9,11 +9,10 @@ jobs:
 
     steps:
     - name: SSH Remote Commands
-    - uses: appleboy/ssh-action@v0.0.7
-    -
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+      uses: appleboy/ssh-action@v0.0.7
+      with:
+        host: wijgaanappie.nl
+        username: u63467p60473
+        password: uTu3S84GbE9cfRY19VjqkbNc94XnGPcM
+        port: 7685
+        script: cd public_html; git pull https://wijgaanappie-bot:uTu3S84GbE9cfRY19VjqkbNc94XnGPcM@github.com/willem640/wijgaanappie.nl
