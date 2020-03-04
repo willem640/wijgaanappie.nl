@@ -1,0 +1,352 @@
+@font-face{
+    font-family: "Hamburg";
+    src: url("fonts/Hamburg-Regular.woff2") format("woff2");
+    font-style: regular;
+    font-weight: regular;
+}
+@font-face{
+    font-family: "Hamburg";
+    src: url("fonts/Hamburg-DemiBold.woff2") format("woff2");
+    font-style: demibold;
+    font-weight: demibold;
+}
+@font-face{
+    font-family: "Hamburg";
+    src: url("fonts/Hamburg-Bold.woff2") format("woff2");
+    font-style: bold;
+    font-weight: bold;
+}
+@font-face{
+    font-family: "Hamburg";
+    src: url("fonts/Hamburg-Medium.woff2") format("woff2");
+    font-style: medium;
+    font-weight: medium;
+}
+label {
+        font-family: Hamburg;
+        font-style: regular;
+}
+input#fancy_a{
+	color: #FFFFFF;
+	border-color:#00ADE6;
+	font-family: Hamburg;
+	font-weight: demibold;
+	text-shadow: 2px 2px #303030;
+	font-size: 2vw;
+	text-decoration: none;
+	padding-left: 2.5vw;
+	padding-right: 2.5vw;
+	padding-top: 1vw;
+	padding-bottom: 1vw;
+	transition: 0.4s;
+	border-style:solid;
+        background: #00ADE6;
+        border-radius: 8px;
+}
+input#fancy_a:hover{
+    	color: #00ADE6;
+	background-color: #FFFFFF;
+	border-color:#00ADE6;
+}
+p {
+	font-family: Hamburg;
+	font-style: regular;
+	
+}
+h2 {
+	font-family: Hamburg;
+	
+}
+.status p{
+        font-size: 2em;
+}
+.status {
+        width: 30vw;
+}
+
+th, tr {
+	
+	font-family: Hamburg;
+	font-style: regular;
+	
+}
+#confirm {
+	
+	font-family: Hamburg;
+	width: 30vw;
+	font-size: 2vw;
+	text-align: center;
+	background-color:#00ADE6;
+	
+	color: white;
+	text-shadow: 2px 2px #303030;
+	border-radius: 8px;
+	transition: 0.4s;
+	
+}
+#confirm:hover{
+	background-color:white;
+	color: #00ADE6;
+	border-color:#00ADE6;border-color:#00ADE6;
+}
+#aantal {
+	float: left;
+	height: 32px;
+	font-family: Hamburg;
+	font-style: regular;
+}
+.content{
+	
+	margin-left: 2vw;
+	margin-right: 2vw;
+	
+}
+.content h1 {
+	
+	font-family: Hamburg;
+	font-weight: demibold;
+	
+}
+.content p {
+	
+	font-family: Hamburg;
+	font-weight: regular;
+	margin-top: 1vw;
+	
+}
+.status {
+	
+	float: right;
+	margin-left: 2vw;
+	margin-bottom: 2vw;
+	
+}
+.banner-mobile{
+    visibility:hidden;
+    position: absolute;
+}
+body {
+	
+	margin: 0;
+	
+}
+.banner {
+	margin: 0;
+	background-color: #00ADE6;
+	display: flex;
+	justify-content: flex-end;
+}
+a#banner_a, a#home, a#fancy_a{
+	color: #FFFFFF;
+	border-color:#00ADE6;
+	font-family: Hamburg;
+	font-weight: demibold;
+	text-shadow: 2px 2px #303030;
+	font-size: 2vw;
+	text-decoration: none;
+	padding-left: 2.5vw;
+	padding-right: 2.5vw;
+	padding-top: 1vw;
+	padding-bottom: 1vw;
+	transition: 0.4s;
+	
+}
+a#home {
+	position: absolute;
+	left:0;
+}
+a#banner_a:hover, a#home:hover, a#fancy_a:hover {
+	color: #00ADE6;
+	background-color: #FFFFFF;
+	border-color:#00ADE6;
+	
+}
+a#fancy_a{
+	border-style:solid;
+    background: #00ADE6;
+    border-radius: 8px;
+	border-color:#00ADE6;
+}
+
+a#unstyle{
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: inherit;
+}
+
+td{
+    background-color: white;
+}
+.left {
+	float:left;
+}
+.right {
+	float: right;
+}
+
+img{
+    max-width:100%;
+    height: auto;
+}
+th, td{
+    border-bottom: lightgray 1px solid;
+    text-align:center;
+}
+th{
+    padding:15px;
+}
+table{
+    margin: 1.5vw;
+    border-spacing:0px;
+}
+
+input[type="search"]{
+	font-family: Hamburg;
+	font-weight: regular;
+	font-size: .8vw;
+    width: 15vw;
+    margin: 0.8vw 1.5vw 0 1.5vw;
+    padding: 0.5vw;
+    line-height: 1.5vw;
+    border-radius: 4px;
+    border: 2px lightgray solid;
+    box-sizing: border-box;
+    transition: 0.5s;
+    padding-left: 2.5vw;
+    background-color: white;
+    background-image: url("assets/search_logo.png");
+    background-position-y: center; 
+    background-position-x: 0.5vw;
+    background-size: 1.5vw 1.5vw;
+    background-repeat: no-repeat;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition:0.4s;
+    
+}
+
+input[type="search"]:focus{
+    border:gray 2px solid;
+    outline: none;
+    transition: 0.5s;
+    width: 97vw;
+}
+.order {
+	
+	width:70vw;
+	margin-right:0;
+	float:left;
+	
+}
+h1 {
+	font-family: Hamburg;
+}
+.order h2 {
+	font-family: Hamburg;
+	margin-left: 1vw;
+}
+.order h1 {
+	font-family: Hamburg;
+	margin-left: 1vw;
+}
+.order th {
+	padding-left:.67vw;
+	padding-right:.67vw;
+	text-align:left;
+}
+.order td {
+	padding-left:.67vw;
+	padding-right:.67vw;	
+	padding-top: 1vw;
+	padding-bottom: 1vw;
+	text-align: left;
+}
+.grid{
+    display:grid;
+    grid-template-columns: auto auto auto auto auto;
+    border-collapse: collapse;
+
+}
+.grid img {
+	height:14.4vw;
+}
+.grid-item{
+    border: 1px solid lightgray;
+    padding: 0.5vw;
+    position: relative;
+    padding-bottom:2vw;
+    font-size: 1.3em;
+    font-family: Hamburg;
+    height: 20vw;
+}
+.grid p{
+	margin:0;
+	height:3vw;
+	padding-top: 1vw;
+}
+
+.leftGrid {
+    position: absolute;
+    bottom:0;
+    left:0.3vw;
+    font-size: .8em;
+	height:1.6vw;
+}
+.rightGrid {
+    position: absolute;
+    bottom:0;
+    right:0.3vw;
+    font-size: .8em;
+	height:1.6vw;
+}
+input[type=submit]#top{
+    position:absolute;
+    top: 4.5vw;
+    right:0.2vw;
+    width: 5vw;
+    height:2vw;
+}
+select#top{
+    position:absolute;
+    top: 4.5vw;
+    right: 0;
+    height:2vw;
+    min-height:20px;
+}
+
+.spacer{
+    height: 2.4vw;
+    min-height: 20px;
+}
+
+input[type=text], input[type=password], input[type=tel], input[type=email]{
+    padding: 1em;
+    width:20em; 
+    margin: 0.8em;
+    border-radius: 4px;
+    border: 2px lightgray solid;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+input:focus{
+    border:gray 2px solid;
+    outline: none;
+    transition: 0.5s;
+}
+
+.form{
+    margin: 0 auto;
+    width: 40vw;
+}
+.form label{
+    display: inline-block;
+    float: left;
+    text-align: center;
+    vertical-align: central;
+    line-height: 40px;    
+}
+.form input{
+    display: inline-block;
+    float: right;
+    text-align: left;
+    margin: 10px;
+}
