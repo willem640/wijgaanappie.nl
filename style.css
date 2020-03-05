@@ -3,24 +3,32 @@
     src: url("fonts/Hamburg-Regular.woff2") format("woff2");
     font-style: regular;
     font-weight: regular;
+    font-display: swap;
+
 }
 @font-face{
     font-family: "Hamburg";
     src: url("fonts/Hamburg-DemiBold.woff2") format("woff2");
     font-style: demibold;
     font-weight: demibold;
+    font-display: swap;
+
 }
 @font-face{
     font-family: "Hamburg";
     src: url("fonts/Hamburg-Bold.woff2") format("woff2");
     font-style: bold;
     font-weight: bold;
+    font-display: swap;
+
 }
 @font-face{
     font-family: "Hamburg";
     src: url("fonts/Hamburg-Medium.woff2") format("woff2");
     font-style: medium;
     font-weight: medium;
+    font-display: swap;
+
 }
 label {
         font-family: Hamburg;
