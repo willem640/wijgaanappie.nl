@@ -107,24 +107,48 @@ foreach($bonus['_embedded']['lanes'] as $lane){
             $sortdir = SORT_ASC;
         }
         if (strpos(($_GET['sort'] ?? ''), 'price') !== false) {
-            $col = array_column(array_column(array_column(array_column($products,'_embedded'),'product'),'priceLabel'),'now');
+            $col = array_column(
+                    array_column(
+                            array_column(
+                                    array_column($products,
+                                    '_embedded'),
+                            'product'),
+                    'priceLabel'),
+                   'now');
         } else { // sort alphabetically if something weird was selected, such as 'alphabetical'
-            $col = array_column(array_column(array_column($products,'_embedded'),'product'),'description'); // access column with desc, nested bc php is dumb
+            $col = array_column(
+                    array_column(
+                            array_column($products,
+                            '_embedded'),
+                    'product'),
+                   'description'); // access column with desc, nested bc php is dumb
         } 
         //print_r($products);
         array_multisort($col,$sortdir,$products);
         foreach($products as $el){
             $prod = $el['_embedded']['product'];
-                echo '<form id="form_'.$prod['id'].'" method="post" action="bestelling.php">'
+                echo '<form method="post" action="bestelling.php">'
                         . '<input name="product" type="hidden" value=\''.str_replace("'",'',json_encode($prod)).'\'>'
-                        . '<a id="unstyle" href="#" onclick="document.getElementById(\'form_'.$prod['id'].'\').submit();">'
-                        . '<div class="grid-item">'. '<p>'.($prod['description'] ?? '').'</p>'.'<br>'
-                        . '<img id="tableImg" src="'.($prod['images'][0]['link']['href'] ?? '').'"><br>'
+                        . '<a id="unstyle" href="#" onclick="this.form.submit();">'
+                        . '<div class="grid-item">'
+                        . '<p>'.($prod['description'] ?? '').'</p>'
+                        .'<br>'
+                        . '<img id="tableImg" src="'.($prod['images'][0]['link']['href'] ?? '').'">'
+                        . '<br>'
                         . '<div class="leftGrid">'
-                        . '<del>€'.($prod['priceLabel']['was'] ?? '').'</del>'
-                        . ' €'.($prod['priceLabel']['now'] ?? '')
-                        . '</div><div class="rightGrid">'
-                        . ($prod['discount']['label'] ?? '').''
+                        . (
+                                isset($prod['priceLabel']['was']) ?
+                                    '<del>€'.$prod['priceLabel']['was'].'</del>' 
+                                :   ''
+                            )
+                        . (
+                                isset($prod['priceLabel']['was'])?
+                                    ' €'.($prod['priceLabel']['now'] ?? '')
+                                  : ''
+                            )
+                        . '</div>'
+                        . '<div class="rightGrid">'
+                        . ucfirst(strtolower($prod['discount']['label'] ?? '')).''
                         . '</div></div></a></form>';
     }
     
