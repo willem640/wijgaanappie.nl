@@ -35,7 +35,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
     <div class="banner">
 	<a class="left active" id="home" href="index.php">Robins AH Bestelservice</a>
-        <a class="right" id="banner_a" href="zoek.php">Zoek</a>
+        <a class="right" id="banner_a" href="zoeken.php">Zoek</a>
 	<a class="right" id="banner_a" href="bonus.php">Bonus</a>
 	<a class="right" id="banner_a" href="bestelling.php">Bestel</a>
 	<a class="right" id="banner_a" href="contact.php">Contact</a>
