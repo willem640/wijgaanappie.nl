@@ -322,11 +322,15 @@ h1 {
     height: 35vw;
 }
 
+.grid-item p{
+	font-size:1.6em
+}
+
 .leftGrid {
     position: absolute;
     bottom:1vw;
     left:1.8vw;
-    font-size: 1.3em;
+    font-size: 1.6em;
 	height: 2.8vw;
 
 }
@@ -334,7 +338,7 @@ h1 {
     position: absolute;
     bottom:1vw;
     right:1.8vw;
-    font-size: 1.3em;
+    font-size: 1.6em;
 	height: 2.8vw;
 }
 
