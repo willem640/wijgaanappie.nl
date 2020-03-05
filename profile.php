@@ -59,7 +59,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->       <div class="banner">
 	<a class="left active" id="home" href="index.php">Robins AH Bestelservice</a>
-        <a class="right" id="banner_a" href="zoek.php">Zoek</a>
+        <a class="right" id="banner_a" href="zoeken.php">Zoek</a>
 	<a class="right" id="banner_a" href="bonus.php">Bonus</a>
 	<a class="right" id="banner_a" href="bestelling.php">Bestel</a>
 	<a class="right" id="banner_a" href="contact.php">Contact</a>
@@ -79,7 +79,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="dropdown-content">
 	<ul>
       <li><a id="mobile_banner_a" href="index.php">Home</a>
-      <li><a id="mobile_banner_a" href="zoek.php">Zoek</a>
+      <li><a id="mobile_banner_a" href="zoeken.php">Zoek</a>
       <li><a id="mobile_banner_a" href="bonus.php">Bonus</a>
       <li><a id="mobile_banner_a" href="bestelling.php">Bestel</a>
       <li><a id="mobile_banner_a" href="contact.php">Contact</a>
