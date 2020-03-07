@@ -4,7 +4,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
            $(function(){
-           $("#loadBanner").load("header.html"); 
+           $("#loadBanner").load("header.php"); 
            });         
         </script>
     </head>
