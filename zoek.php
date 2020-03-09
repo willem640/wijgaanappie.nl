@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start();
+header('Location: zoeken.php');?>
 
 <!DOCTYPE html>
 <html>
