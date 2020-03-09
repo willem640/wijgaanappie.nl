@@ -275,6 +275,9 @@ input[type="search"]:focus{
 h1 {
 	font-family: Hamburg;
 }
+.order table{
+	margin: 0 auto;
+}
 .order h2 {
 	font-family: Hamburg;
 	margin-left: 1vw;
