@@ -146,7 +146,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <?php
 $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
 if($perm_level >= 2){
-    echo '<a href="lijstje.php">Boodschappenlijstje</a>';
+    echo '<a id="fancy_a" href="lijstje.php">Boodschappenlijstje</a>';
     echo '<br><br><form method="post">'
     . '<input type="submit" name="naar appie" value="vandaag naar de appie">'
     . '<input type="submit" name="niet naar appie" value="vandaag niet naar de appie">'
