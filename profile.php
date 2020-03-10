@@ -137,11 +137,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	});
 </script>
 <div class="submenu" style="float:right">
-	
-	<a href="logout.php" id="fancy_a" style="float:right;">Uitloggen</a>
-
 	<a href="history.php" id="fancy_a" style="float:right;">Eerdere <br>Bestellingen</a>
-
+	<br>
+	<a href="logout.php" id="fancy_a" style="float:right;">Uitloggen</a>
 	</a>
 </div>
 </body>
