@@ -126,10 +126,10 @@ if(!isset($_GET['query'])){
 ?>
 <div id="arrows" style="width:100%">
     <form method="get">
-        <a href="#" onclick="this.closest('form').elements['start'].value = <?php echo ($_GET['start']??1-10>0?$_GET['start']??1-10:1); ?>;this.closest('form').submit()">
+        <a href="#" onclick="this.closest('form').elements['start'].value = <?php echo (($_GET['start']??1)-10>0?($_GET['start']??1)-10:1); ?>;this.closest('form').submit()">
             <img src="assets/TriangleArrow-Left.svg" alt="" style="width:10%; float: left; margin:50px">
         </a>
-        <a href="#" onclick="this.closest('form').elements['start'].value = <?php echo ($_GET['start']??1+10<100?$_GET['start']??1+10:$_GET['start']??1); ?>;this.closest('form').submit()">
+        <a href="#" onclick="this.closest('form').elements['start'].value = <?php echo (($_GET['start']??1)+10<100?($_GET['start']??1)+10:($_GET['start']??1)); ?>;this.closest('form').submit()">
             <img src="assets/TriangleArrow-Right.svg" alt="" style="width:10%; float: right; margin:50px">
         </a>
         <input type="hidden" name="start">
