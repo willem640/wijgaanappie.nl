@@ -98,7 +98,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h1>Welkom bij Wijgaanappie.nl</h1>
 <p>Wij zijn Willem en Robin, en wij heten je welkom op de site voor onze lokale bezorgservice waarbij wij jou dé spullen bezorgen die jij nodig hebt! Wij bezorgen van alles
 om en nabij de school en direct vanaf jouw favoriete Albert Heijn op de Pottenbakkerssingel<br>Wil jij ook wat bestellen? Registreer je dan eerst en kies jouw producten
-uit het ruime assortiment.<br><br><br> </p>
+uit het ruime assortiment.
+<a href="https://wijgaanappie.nl/zoeken.php?query=wi451137">Klik hier om een focaccia Mozarella te bestellen</a><br><br><br> </p>
 </div>
 
 </body>
