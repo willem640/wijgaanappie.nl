@@ -170,6 +170,7 @@ a#banner_a, a#home, a#fancy_a{
 	padding-top: 1vw;
 	padding-bottom: 1vw;
 	transition: 0.4s;
+	margin: 2px 0;
 	
 }
 a#home {
@@ -274,6 +275,9 @@ input[type="search"]:focus{
 }
 h1 {
 	font-family: Hamburg;
+}
+.order table{
+	margin: 0 auto;
 }
 .order h2 {
 	font-family: Hamburg;

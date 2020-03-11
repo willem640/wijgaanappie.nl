@@ -96,12 +96,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	$curr_order=DB::query('SELECT contents FROM current_orders WHERE username= %s', $_SESSION['username']);
 	$curr_order=json_decode($curr_order[0]['contents'], true);
 	if(empty($curr_order)){
-		echo '<div class="order">';
-		echo '<h1>Je hebt nog niks besteld</h1>';
+		echo '<div class="order" style="width: 100%;">';
+		echo '<h1 style="display:inline; float:left">Je hebt nog niks besteld</h1>';
 		
 	} else {
-		echo '<div class="order">';
-		echo '<h1>Bestellingen</h1>';
+		echo '<div class="order" style="width: 100%;">';
+		echo '<h1 style="display:inline; float:left">Bestellingen</h1>';
 		echo '<table id="products" style="width:70%">';
         echo '<tr><th>Product</th><th>Prijs</th><th>Aantal</th><th></th></tr>';
 		$i=0;
@@ -136,19 +136,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     $(".dropdown-content").slideToggle(200, "swing");
 	});
 </script>
-
-
-<br><br><br>
-<a href="logout.php" id="fancy_a" style="float:right;">Uitloggen</a>
-
-<a href="history.php" id="fancy_a" style="float:right;">Eerdere <br>Bestellingen</a>
-
-</a><br>
+<div class="submenu" style="float:right">
+	<a href="history.php" id="fancy_a" style="float:right;">Eerdere <br>Bestellingen</a>
+	<br>
+	<a href="logout.php" id="fancy_a" style="float:right;">Uitloggen</a>
+	</a>
+</div>
 </body>
 <?php
 $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
 if($perm_level >= 2){
-    echo '<a href="lijstje.php">Boodschappenlijstje</a>';
+    echo '<a id="fancy_a" href="lijstje.php">Boodschappenlijstje</a>';
     echo '<br><br><form method="post">'
     . '<input type="submit" name="naar appie" value="vandaag naar de appie">'
     . '<input type="submit" name="niet naar appie" value="vandaag niet naar de appie">'

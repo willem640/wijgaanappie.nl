@@ -81,10 +81,10 @@ require_once 'simple_html_dom.php';
 if(!empty($_GET['query'])){
 
 $response = file_get_contents('https://www.googleapis.com/customsearch/v1?'
-        . 'key='. $customSearch['apiKey']
-        . '&cx='. $customSearch['searchID']
-        . '&q=' . urlencode($_GET['query']));
-
+        . 'key='.    $customSearch['apiKey']
+        . '&cx='.    $customSearch['searchID']
+        . '&q=' .    urlencode($_GET['query'])
+        . '&start='. (int)($_GET['start']??1));
 $parse_producten = json_decode($response, true);
 
 foreach ($parse_producten['items'] as $parse_prod){
@@ -120,8 +120,22 @@ foreach($producten as $product){
 }
 echo '</table>';
 }
-
+if(!isset($_GET['query'])){
+    goto no_arrows;
+}
 ?>
-
+<div id="arrows" style="width:100%">
+    <form method="get">
+        <a href="#" onclick="this.closest('form').elements['start'].value = <?php echo ($_GET['start']??1-10>0?$_GET['start']??1-10:1); ?>;this.closest('form').submit()">
+            <img src="assets/TriangleArrow-Left.svg" alt="" style="width:10%; float: left; margin:50px">
+        </a>
+        <a href="#" onclick="this.closest('form').elements['start'].value = <?php echo ($_GET['start']??1+10<100?$_GET['start']??1+10:$_GET['start']??1); ?>;this.closest('form').submit()">
+            <img src="assets/TriangleArrow-Right.svg" alt="" style="width:10%; float: right; margin:50px">
+        </a>
+        <input type="hidden" name="start">
+        <input type="hidden" name="query" value="<?php echo $_GET['query']?>">
+    </form>
+</div>
+<?php no_arrows:?>
     </body>
 </html>
