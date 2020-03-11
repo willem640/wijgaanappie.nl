@@ -157,7 +157,7 @@ a#banner_a, a#home, a#fancy_a{
 	padding-top: 1vw;
 	padding-bottom: 1vw;
 	transition: 0.4s;
-	
+	margin: 2px 0;
 }
 a#home {
 	position: absolute;
