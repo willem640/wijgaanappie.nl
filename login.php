@@ -6,19 +6,20 @@ if($logged_in){
     header('Location: index.php');
 }
 $username = ($_COOKIE['username'] ?? '');
-$token = DB::query('SELECT * FROM `cookie users` WHERE username = %s',$username);
-if(isset($token[0]['token']) && $token[0]['token'] == $_COOKIE['logintoken']){
-    // found session, is it valid?
-    $date = new DateTime($token[0]['login time']);
-    $dif = $date->diff(new DateTime);
-    if($dif->days <= 30){//yay, the token is less than thirty days old
-        $_SESSION['loggedin'] = true;
-        $_SESSION['username'] = $token[0]['username'];
-        echo('<script type="text/javascript">window.location="index.php"</script>');
-        exit();
-    } else { // token is invalid
-        DB::delete('cookie users','username = %s',$token[0]['username']);
-}}
+$tokens = DB::query('SELECT * FROM `cookie users` WHERE username = %s',$username);
+foreach($tokens as $token){
+    if(isset($token['token']) && $token['token'] == $_COOKIE['logintoken']){
+        // found session, is it valid?
+        $date = new DateTime($token['login time']);
+        $dif = $date->diff(new DateTime);
+        if($dif->days <= 30){//yay, the token is less than thirty days old
+            $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $token['username'];
+            echo('<script type="text/javascript">window.location="index.php"</script>');
+            exit();
+        } else { // token is invalid
+            DB::delete('cookie users','username = %s',$token['username']);
+}}}
 $error = '';
 if(isset($_POST['username']) && isset($_POST['password'])){
     $user = DB::query('SELECT * FROM users WHERE username = %s',$_POST['username']);
