@@ -6,7 +6,8 @@ require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
 session_start();
-require('setup.php');
+require_once('header.php');
+require_once('setup.php');
 if($_SESSION['loggedin'] ?? false){
     header('Location: /');
 } elseif(!empty($_POST['username'])){
