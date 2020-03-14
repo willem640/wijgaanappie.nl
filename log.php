@@ -1,3 +1,3 @@
 <?php
-$lon=($_GET['lon'] :: 0);
+$lon=($_GET['lon'] ?? 0);
 ?>
