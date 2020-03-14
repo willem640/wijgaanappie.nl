@@ -63,7 +63,7 @@ foreach($bonus['_embedded']['lanes'] as $lane){
             $prod = $el['_embedded']['product'];
                 echo '<form method="post" action="bestelling.php">'
                         . '<input name="product" type="hidden" value=\''.str_replace("'",'',json_encode($prod)).'\'>'
-                        . '<a id="unstyle" href="#" onclick="this.form.submit();">'
+                        . '<a id="unstyle" href="#" onclick="this.closest("form").submit();">'
                         . '<div class="grid-item">'
                         . '<p>'.($prod['description'] ?? '').'</p>'
                         .'<br>'
