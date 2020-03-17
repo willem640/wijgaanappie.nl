@@ -4,7 +4,7 @@ require_once 'setup.php';
 
 
 $ordhist=DB::query('SELECT previous_orders FROM users WHERE username=%s', $_SESSION['username']);
-$ordhist=json_decode($ordhist[0]['previous_orders'], true);
+$ordhist=array_reverse(json_decode($ordhist[0]['previous_orders'], true));
 ?>
 
 <!DOCTYPE HTML>
