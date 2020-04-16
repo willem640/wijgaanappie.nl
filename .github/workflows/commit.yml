@@ -1,0 +1,20 @@
+name: update wijgaanappie op server
+
+on: 
+  push:
+    branches: [master, mobile]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: SSH Remote Commands
+      uses: appleboy/ssh-action@v0.0.7
+      with:
+        host: wijgaanappie.nl
+        username: u63467p60473
+        password: uTu3S84GbE9cfRY19VjqkbNc94XnGPcM
+        port: 7685
+        script: ./download.sh
