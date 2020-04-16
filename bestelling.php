@@ -196,9 +196,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <h4 id="price">€'.$prod['priceLabel']['now'].'</h4>
                             <h4 id="amount">'.$prod['bestelling_amount'].' Stuks</h4>
                             <div class="buttons">
-                            <form method="post" id="cancel_order_'.$prod['id'].'">
-                            <input type="hidden" name="cancel_order" value="'.$prod['id'].'">
-                            <button onclick="document.getElementById(\'cancel_order_'.$prod['id'].'\').submit();" id="remove" style="float:left">Verwijder</button>
+                            <form method="post" id="delete'.$prod['id'].'">
+                            <input type="hidden" name="delete" value="'.$prod['id'].'">
+                            <button onclick="document.getElementById(\'delete'.$prod['id'].'\').submit();" id="remove" style="float:left">Verwijder</button>
                             </form>
                             <button id="up" style="float:right">+</button>
                             <button id="down" style="float:right">-</button>
@@ -218,6 +218,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
     ?>
 </div>
+<div class="submenu">
+    <button onclick="document.getElementById(\'place_order_'.$prod['id'].'\').submit();">
 </div>
 <script>
 	$(".buttons button").click(function(e){
