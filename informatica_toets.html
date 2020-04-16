@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Basis HTML/CSS</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153875032-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153875032-1');
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5GJ825S');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="uvDiVjrbFuwiF-ME9NPjbmsZsRXQGzNzGdJUElgM7DQ" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Basis HTML/CSS </h1>
+<h2>Inleiding</h2>
+<p>Dit is een samenvatting voor de informaticatoets over HTML/CSS op dinsdag 11 februari 2020, ook heb ik wat handige links verzameld die handig zijn voor tijdens de toets, die je flink wat tijd besparen.</p>
+<h2>Lijst HTML tags</h2>
+<p>Hieronder een lijstje van de belangrijkste HTML tags die je zult moeten gebruiken op de toets. <br> Vergeet niet dat bijna alle tags moeten worden afgesloten met dezelfde tag maar met een backslash ervoor!</p>
+<dl>
+<dt>&lt;!DOCTYPE HTML&gt;</dt>
+<dd>Begin van html document</dd>
+<dt>&lt;html&gt;</dt>
+<dd>Opening van je webpagina</dd>
+<dt>&lt;head&gt;</dt>
+<dd>Alle informatie die niet op je webpagina verschijnt maar belangrijk is voor de pagina zoals titel en links naar stylesheets</dd>
+<dt>&lt;body&gt;</dt>
+<dd>Alles wat op je pagina verschijnt</dd>
+<dt>&lt;title&gt;</dt>
+<dd>De titel van je pagina</dd>
+<dt>&lt;link&gt;</dt>
+<dd>Een document linken aan je pagina, meestal stylesheets, door rel="stylesheet" type="text/css" href="[link naar stylesheet]" toe te voegen</dd>
+<dt>&lt;meta&gt;</dt>
+<dd>Informatie over je pagina toevoegen zoals bijvoorbeeld keywords voor zoekmachines</dd>
+<dt>&lt;h1&gt;-&lt;h6&gt;</dt>
+<dd>Verschillende koppen die je kunt gebruiken, de groter het getal de kleiner de kop</dd>
+<dt>&lt;p&gt;</dt>
+<dd>Tekst</dd>
+<dt>&lt;ul&gt; met &lt;li&gt;</dt>
+<dd>Ongeordende lijst met zijn listitem</dd>
+<dt>&lt;ol&gt; met &lt;li&gt;</dt>
+<dd>Geordende lijst met zijn listitem</dd>
+<dt>&lt;dl&gt; met &lt;dt&gt; en &lt;dd&gt;</dt>
+<dd>Begrippenlijst met zijn termitem en definitie-item</dd>
+<dt>&lt;a&gt;</dt>
+<dd>Een link, voeg in de href attribute de link toe</dd>
+<dt>&lt;img&gt;</dt>
+<dd>Een afbeelding, voeg in de src attribute de link naar de afbeelding toe</dd>
+<dt>&lt;header&gt;</dt>
+<dd>Header-blok</dd>
+<dt>&lt;article&gt;</dt>
+<dd>Blok voor artikel</dd>
+<dt>&lt;nav&gt;</dt>
+<dd>Blok voor navigatiebalk of menu</dd>
+<dt>&lt;div&gt;</dt>
+<dd>Een division, wordt gebruikt om elementen te groeperen</dd>
+<dt>&lt;map&gt;</dt>
+<dd>Een imagemap, gebruikt om bepaalde delen van een afbeelding aanklikbaar te maken, geef in de name attribute de juiste naam weer die je bij img geeft in imagemap attribute</dd>
+</dl>
+<div id="boxmodel" style="">
+<h2>Het Boxmodel</h2>
+<p style="width:80vw; float: left;">Bij webdesign is het boxmodel erg belangrijk. Het geeft weer hoe een element weer wordt gegeven op de website door middel van de margin, padding en zijn border. Let op
+   de padding is de toegevoegde ruimte binnen de border van het element, de margin die buiten het element en de border is de rand om het element heen. Als je de width van een element opgeeft, 
+   zal de daadwerkelijke breedte van het element die width zijn plus de border, margin en padding aan beide kanten! <br> Een visualisatie van het boxmodel is in het plaatje nog even weergegeven.</p>
+<img src="/assets/box-model.png" alt="boxmodel" style="float: left; width:18vw"/>
+</div>
+<div id="css">
+<h2>CSS - Een korte samenvatting</h2>
+<p>Een handige manier om je webpagina op te fleuren is door middel van styling, wat het best gedaan kan worden door CSS stylesheets te gebruiken. Dit zijn aparte .css bestanden die je linkt aan je html pagina door 
+   de link tag te gebruiken, zoals al eerder uitgelegd. <br>In je css bestand geef je informatie weer over hoe bepaalde delen van je webpagina eruit moeten zien. Dit doe je door een selector toe te passen.
+   <br> Dit zijn selectors op basis van tag (bijv. alle a tags), id met de hashtag, en class met een punt. De classes en id's kun je aan tags toevoegen in je html document als attributes. <br>
+   Vervolgens zet je tussen accolades eerst het type styling wat je wil toepassen, een dubbele punt, de stylingsinformatie afgesloten met een puntkomma, ook te zien in de afbeelding hiernaast. <br>
+   De css styling properties zijn nogal vanzelfsprekend, meestal is aan de naam al wel te zien wat het doet, zo bepaald de background-color de achtergrondkleur en de color de tekstkleur. </p>
+</div>
+<div id="blokkendoos">
+<h2>De Blokkendoos</h2>
+<p style="float:left; width:80vw;">Bij webdesign heb je soms ook te maken met de zogenaamde blokkendoos, die bestaat uit meerdere blokelementen, de nav, article, footer, header en div elementen. Deze kun je makkelijk positioneren door middel van de float property die je toepast op deze elementen.
+   Door bijvoorbeeld float:left te gebruiken op een element zal dit element naar linksboven drijven totdat het tegen een ander element aanbotst. De volgorde die je gebruikt in je html code voor de verschillende blokelementen is dan altijd van links naar rechts, van boven naar beneden, als je float:left gebruikt.</p>
+<img src="/assets/blokkendoos.PNG" style="float:left"/>
+</div>
+</body>
+</html>
