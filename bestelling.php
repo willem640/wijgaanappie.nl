@@ -175,6 +175,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		}
 	});
 </script>
+<div class="wrapper">
+<div id="card">
     <?php
     if($logged_in){
 		
@@ -217,7 +219,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
     
     ?>
-
+</div>
+</div>
     </body>
 
 </html>
