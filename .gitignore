@@ -2,6 +2,7 @@
 /nbproject/private/
 download.sh
 upload.sh
+.github
 node_modules
 package.json
 package-lock.json

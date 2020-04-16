@@ -15,4 +15,4 @@ jobs:
         username: u63467p60473
         password: uTu3S84GbE9cfRY19VjqkbNc94XnGPcM
         port: 7685
-        script: cd public_html; ./download.sh
+        script: ./download.sh
