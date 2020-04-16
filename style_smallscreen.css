@@ -448,17 +448,18 @@ input[type="search"]:focus{
 }
 input#fancy_a{
 	color: #FFFFFF;
-	border-color:#00ADE6;
+	border-color:#1976d2;
 	font-family: Hamburg;
 	font-weight: demibold;
 	text-shadow: 2px 2px #303030;
-	height: 4vw;
-	font-size: 2vw;
+	font-size: 2vh;
 	text-decoration: none;
 	padding-left: 2.5vw;
 	padding-right: 2.5vw;
 	padding-top: 1vw;
 	padding-bottom: 1vw;
+	transition: 0.4s;
+	margin: 2px 0;
 	border-style:solid;
 	background: #1976d2;
 	border-radius: 8px;
@@ -588,7 +589,7 @@ input#fancy_a{
 	left: 0;
 	margin-left: 10vw;
 }
-.submenu a {
+.submenu a, .submenu input {
 	height: 5vh;
 	width: 20vw;
 	bottom: -2.5vh;
