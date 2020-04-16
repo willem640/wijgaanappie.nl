@@ -1,6 +1,8 @@
 name: update wijgaanappie op server
 
-on: [push]
+on: 
+  push:
+    branches: [master, mobile]
 
 jobs:
   build:
