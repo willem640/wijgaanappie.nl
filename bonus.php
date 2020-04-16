@@ -1,60 +1,37 @@
-<?php session_start(); ?>
+<?php session_start(); 
+require_once 'header_material.php';?>
 
 <!DOCTYPE html>
 <html>
-    <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153875032-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-153875032-1');
-</script>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5GJ825S');</script>
-<!-- End Google Tag Manager -->
-        <meta charset="utf-8">
-        <title>Bonus</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<?php echo $header;?>
         <link rel='stylesheet' media='only screen and (max-width: 1080px)' href='style_smallscreen.css' />
-    </head>
-    <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5GJ825S"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-<div class="banner-mobile">
-  <div class="dropdown">
-    <button class="dropbtn"> Robins AH Bestelservice
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-	<ul>
-      <li><a id="mobile_banner_a" href="index.php">Home</a>
-      <li><a id="mobile_banner_a" href="zoeken.php">Zoek</a>
-      <li><a id="mobile_banner_a" href="bonus.php">Bonus</a>
-      <li><a id="mobile_banner_a" href="bestelling.php">Bestel</a>
-      <li><a id="mobile_banner_a" href="contact.php">Contact</a>
-      <?php if($logged_in){
-        echo '<li><a id="mobile_banner_a" href="profile.php">Profiel</a>';
-        } else {
-        echo '<li><a id="mobile_banner_a" href="login.php">Inloggen</a>';
-        } ?>
-	</ul>
-    </div>
-  </div>
-</div>
-<script>
-	$('.dropbtn').on('touchstart', function (event) {
-    $(".dropdown-content").slideToggle(200, "swing");
-	});
-</script>
+        <link type=\"text/css\" rel=\"stylesheet\" media=\"only screen and (min-width: 1080px)\" href=\"style.css\">
+        <script type="text/javascript">
+        var dialog;
+        window.onload = function() {
+            var ripple_surfaces = $('.ripple-surface');
+            for(var i = 0; i < ripple_surfaces.length; ++i){
+                mdc.ripple.MDCRipple.attachTo(ripple_surfaces[i]);
+            }
+            dialog = new mdc.dialog.MDCDialog(document.querySelector('.bonus-product-dialog'));
+        }
+        function buyProductDialog(title, price_was, price_now, unit_size, discount, index){
+            $('#bonus-product-dialog-title')[0].innerHTML = title;
+            if(price_was === ''){
+                $('#bonus-product-dialog-content')[0].innerHTML = 
+                    `Voor: ${price_now}<br>`.concat(
+                    `Korting: ${discount}<br>`,
+                    `${unit_size}`)
+            } else {
+                $('#bonus-product-dialog-content')[0].innerHTML = 
+                    `Van: ${price_was}<br>`.concat(
+                    `Voor: ${price_now}<br>`,
+                    `Korting: ${discount}<br>`,
+                    `${unit_size}`)
+                }
+            dialog.open();
+        }
+        </script>
         <form method="get">
             <select id="top" name="sort" onchange="if(this.value != 0) { this.form.submit(); }">
                 <?php
@@ -68,7 +45,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </select>
         </form>
         <div class="spacer"></div>
-<div class="grid">
+        
+<div class="mdc-dialog bonus-product-dialog">
+  <div class="mdc-dialog__container">
+    <div class="mdc-dialog__surface"
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="my-dialog-title"
+      aria-describedby="my-dialog-content">
+        <h2 class="mdc-dialog__title" id="bonus-product-dialog-title">
+            
+        </h2>
+      <div class="mdc-dialog__content" id="bonus-product-dialog-content">
+          
+      </div>
+      <footer class="mdc-dialog__actions">
+        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label">No</span>
+        </button>
+        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label">Yes</span>
+        </button>
+      </footer>
+    </div>
+  </div>
+  <div class="mdc-dialog__scrim"></div>
+</div>
+
+<ul class="mdc-image-list bonus-image-list mdc-image-list--with-text-protection">
 <?php
 require_once 'setup.php';
 require_once 'simple_html_dom.php';
@@ -92,29 +98,41 @@ foreach($bonus['_embedded']['lanes'] as $lane){
             $sortdir = SORT_ASC;
         }
         if (strpos(($_GET['sort'] ?? ''), 'price') !== false) {
-            $col = array_column(array_column(array_column(array_column($products,'_embedded'),'product'),'priceLabel'),'now');
+            $col = array_column(
+                    array_column(
+                            array_column(
+                                    array_column($products,
+                                    '_embedded'),
+                            'product'),
+                    'priceLabel'),
+                   'now');
         } else { // sort alphabetically if something weird was selected, such as 'alphabetical'
-            $col = array_column(array_column(array_column($products,'_embedded'),'product'),'description'); // access column with desc, nested bc php is dumb
+            $col = array_column(
+                    array_column(
+                            array_column($products,
+                            '_embedded'),
+                    'product'),
+                   'description'); // access column with desc, nested bc php is dumb
         } 
         //print_r($products);
         array_multisort($col,$sortdir,$products);
-        foreach($products as $el){
+        foreach($products as $key => $el){
             $prod = $el['_embedded']['product'];
-                echo '<form id="form_'.$prod['id'].'" method="post" action="bestelling.php">'
-                        . '<input name="product" type="hidden" value=\''.str_replace("'",'',json_encode($prod)).'\'>'
-                        . '<a id="unstyle" href="#" onclick="document.getElementById(\'form_'.$prod['id'].'\').submit();">'
-                        . '<div class="grid-item">'. '<p>'.($prod['description'] ?? '').'</p>'.'<br>'
-                        . '<img id="tableImg" src="'.($prod['images'][0]['link']['href'] ?? '').'"><br>'
-                        . '<div class="leftGrid">'
-                        . '<del>€'.($prod['priceLabel']['was'] ?? '').'</del>'
-                        . ' €'.($prod['priceLabel']['now'] ?? '')
-                        . '</div><div class="rightGrid">'
-                        . ($prod['discount']['label'] ?? '').''
-                        . '</div></div></a></form>';
-    }
-    
+            $_SESSION['orderable_array'][$key] = $prod; // array met producten en dan kan je op basis van de index iets kopen ipv het hele object
+                                                                                          
+            echo('<li class="mdc-image-list__item bonus-image-list__item ripple-surface" '
+                        // function buyProductDialog(title, price_was, price_now, unit_size, discount)
+                        . 'onclick="buyProductDialog(\''.addslashes($prod["description"]).'\', \''.$prod["priceLabel"]["was"].'\', \''.$prod["priceLabel"]["now"].'\', \''.$prod["unitSize"].'\', \''. ucfirst(strtolower($prod["discount"]["type"]["name"])).'\',\''.$key.')" >'
+                        . '<div class="mdc-image-list__image-aspect-container">'
+                            . '<img class="mdc-image-list__image" src="'.($prod["images"][0]["link"]["href"] ?? "").'">'
+                        . '</div>'
+                        . '<div class="mdc-image-list__supporting">'
+                            . '<span class="mdc-image-list__label">'.($prod["description"] ?? "").'</span>'
+                        . '</div>'
+                  . '</li>');
+        }
 
         ?>
-</div>
-    </body>
+</ul>
+</body>
 </html>
