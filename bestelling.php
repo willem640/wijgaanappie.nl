@@ -219,7 +219,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     ?>
 </div>
 <div class="submenu">
-    <button onclick="document.getElementById(\'place_order_'.$prod['id'].'\').submit();">
+    <form method="post" onsubmit="ga('send', 'event', 'Bestelling', 'Bestelling', 'Bestelling')">
+        <input id="confirm" type="submit" value="Bestellen" name="place_order">
+    </form>
 </div>
 <script>
 	$(".buttons button").click(function(e){
