@@ -192,13 +192,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     echo '  <div class="product-card">
                             <img src="assets/placeholder-card.jpg">
                             <div class="card-content">
-                            <h3 id="title">'.$order['description'].'</h3>
-                            <h4 id="price">€'.$order['priceLabel']['now'].'</h4>
-                            <h4 id="amount">'.$order['bestelling_amount'].' Stuks</h4>
+                            <h3 id="title">'.$prod['description'].'</h3>
+                            <h4 id="price">€'.$prod['priceLabel']['now'].'</h4>
+                            <h4 id="amount">'.$prod['bestelling_amount'].' Stuks</h4>
                             <div class="buttons">
-                            <form method="post" id="cancel_order_'.$order['id'].'">
-                            <input type="hidden" name="cancel_order" value="'.$order['id'].'">
-                            <button onclick="document.getElementById(\'cancel_order_'.$order['id'].'\').submit();" id="remove" style="float:left">Verwijder</button>
+                            <form method="post" id="cancel_order_'.$prod['id'].'">
+                            <input type="hidden" name="cancel_order" value="'.$prod['id'].'">
+                            <button onclick="document.getElementById(\'cancel_order_'.$prod['id'].'\').submit();" id="remove" style="float:left">Verwijder</button>
                             </form>
                             <button id="up" style="float:right">+</button>
                             <button id="down" style="float:right">-</button>
@@ -219,6 +219,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     ?>
 </div>
 </div>
+<script>
+	$(".buttons button").click(function(e){
+	
+	$(".ripple").remove();
+
+  // Setup
+  var posX = $(this).offset().left,
+      posY = $(this).offset().top,
+      buttonWidth = $(this).width(),
+      buttonHeight = $(this).height();
+
+  // Add the element
+  $(this).prepend("<span class='ripple'></span>");
+
+  // Make it round!
+  if (buttonWidth >= buttonHeight) {
+    buttonHeight = buttonWidth;
+  } else {
+    buttonWidth = buttonHeight;
+  }
+
+  // Get the center of the element
+  var x = e.pageX - posX - buttonWidth / 2;
+  var y = e.pageY - posY - buttonHeight / 2;
+
+  // Add the ripples CSS and start the animation
+  $(".ripple").css({
+    width: buttonWidth,
+    height: buttonHeight,
+    top: y + 'px',
+    left: x + 'px'
+  }).addClass("rippleEffect");
+	});
+</script>
 </body>
 
 </html>
