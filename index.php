@@ -63,7 +63,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		</a>
 	</div>
 	<div class="link">
-		<a href="bestel.php">
+		<a href="bestelling.php">
 			<?php include("assets/shopping_cart-24px.svg");?>
 			<p>Winkelmandje</p>
 		</a>
