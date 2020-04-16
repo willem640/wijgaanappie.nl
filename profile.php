@@ -144,46 +144,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		echo '<div id="card">';
 		echo '<h1>Je huidige bestelling</h1>';
 		echo '</div>';
-		
 	} else {
 		echo '<div id="card">';
 		echo '<h1>Je huidige bestelling</h1>';
-		$i=0;
-        $subtotal=0;
+                $subtotal=0;
 		$bez=0;
 		$total=0;
 		foreach($curr_order as $order){
-            $am=$order['bestelling_amount'] ?? 1;
-			echo '<div class="product-card">
-					  <img src="assets/placeholder-card.jpg">
-				      <div class="card-content">
-					  <h3 id="title">'.$order['description'].'</h3>
-					  <h4 id="price">€'.$order['priceLabel']['now'].'</h4>
-					  <h4 id="amount">'.$order['bestelling_amount'].' Stuks</h4>
-					  <div class="buttons">
-					  <form method="post" id="cancel_order_'.$order['id'].'">
-					  <input type="hidden" name="cancel_order" value="'.$order['id'].'">
-					  <button onclick="document.getElementById(\'cancel_order_'.$order['id'].'\').submit();" id="remove" style="float:left">Verwijder</button>
-					  </form>
-					  <button id="up" style="float:right">+</button>
-					  <button id="down" style="float:right">-</button>
-					  </div>
-					  </div>
-				  </div>';
-			/*echo '<tr>';
-			echo '<td>'.$order['description'].'</td>';
-			echo '<td>'.$order['priceLabel']['now'].'</td>';
-			echo '<td>'.$order['bestelling_amount'].'</td>'
-						. '<td><form method="post" id="cancel_order_'.$order['id'].'">'
-						. '<input type="hidden" name="cancel_order" value="'.$order['id'].'">'
-						. '<a onclick="document.getElementById(\'cancel_order_'.$order['id'].'\').submit();" href="#"><img style="width: 10vh" src="assets/cross.svg"></a></form></td></tr>';*/
-            $subtotal += $order['priceLabel']['now']*$am; // when items don't have an ID, the random value that is returned seems to be constant so it just works
-            $total=round(1.1*$subtotal,2);
-			$bez=$total-$subtotal;
-			$i++;
+                    $am=$order['bestelling_amount'] ?? 1;
+                    echo '  <div class="product-card">
+                            <img src="assets/placeholder-card.jpg">
+                            <div class="card-content">
+                            <h3 id="title">'.$order['description'].'</h3>
+                            <h4 id="price">€'.$order['priceLabel']['now'].'</h4>
+                            <h4 id="amount">'.$order['bestelling_amount'].' Stuks</h4>
+                            <div class="buttons">
+                            <form method="post" id="cancel_order_'.$order['id'].'">
+                            <input type="hidden" name="cancel_order" value="'.$order['id'].'">
+                            <button onclick="document.getElementById(\'cancel_order_'.$order['id'].'\').submit();" id="remove" style="float:left">Verwijder</button>
+                            </form>
+                            <button id="up" style="float:right">+</button>
+                            <button id="down" style="float:right">-</button>
+                            </div>
+                            </div>
+                            </div>';
+                    $subtotal += $order['priceLabel']['now']*$am; // when items don't have an ID, the random value that is returned seems to be constant so it just works
+                    $total=round(1.1*$subtotal,2);
+                    $bez=$total-$subtotal;
 		}
 		echo '<div class="prices">';
-        echo '<p>Subtotaal: €'.number_format($subtotal,2,"."," ").'</p>';
+                echo '<p>Subtotaal: €'.number_format($subtotal,2,"."," ").'</p>';
 		echo '<p>Bezorgkosten: €'.number_format($bez,2,"."," ").'</p>';
 		echo '<p>Totaal: €'.number_format($total,2,"."," ").'</p>';
 		echo '</div>';

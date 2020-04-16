@@ -179,48 +179,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="card">
     <?php
     if($logged_in){
-		
-        
         $cart = json_decode(DB::query('SELECT cart FROM users WHERE username = %s',$_SESSION['username'])[0]['cart'],true);
-		if(empty($cart)){
-			
-			echo '<h1>Uw winkelmandje is op dit moment leeg!</h1>';
-		
-		} else{
-		echo '<table id="products" style="width:100%">';
-        echo '<tr><th>Product</th><th>Afbeelding</th><th>Prijs</th><th>Aantal</th><th></th></tr>';	
-		$subtotal=0;
-		$bez=0;
-		$total=0;
-			foreach((array)$cart as $prod){
-				$am=$prod['bestelling_amount'];
-				echo '<tr><td>'.$prod['description'].'</td>'
-						. '<td style="width:10%"><img id="tableImg" src="'.$prod['images'][0]['link']['href'].'"></td>'
-						. '<td>€'.$prod['priceLabel']['now'].'</td>'
-						. '<td>'.$prod['bestelling_amount'].'</td>'
-						. '<td><form method="post" id="delete_'.$prod['id'].'">'
-						. '<input type="hidden" name="delete" value="'.$prod['id'].'">'
-						. '<a onclick="document.getElementById(\'delete_'.$prod['id'].'\').submit();" href="#"><img style="width: 10vh" src="assets/cross.svg"></a></form></td></tr>';
-				$subtotal += $prod['priceLabel']['now']*$am; // when items don't have an ID, the random value that is returned seems to be constant so it just works
-				$total=round(1.1*$subtotal,2);
-				$bez=$total-$subtotal;        
-			}
-			echo '<tr><td><b>Subtotaal:</b></td><td></td><td></td><td>€'.number_format($subtotal,2,"."," ").'</td><td></td></tr>';
-
-			echo '<tr><td><b>Bezorgkosten:</b></td><td></td><td></td><td>€'. number_format($bez,2,"."," ") .'</td><td></td></tr>';
-			echo '<tr><td><b>Totaal:</b></td><td></td><td></td><td>€'.number_format($total,2,"."," ").'</td><td></td></tr>';
-			echo '</table>'
-                           . '<center><p>De prijzen op de website dienen puur ter referentie en kunnen hoger of lager zijn dan hier aangegeven</p></center>';
-			echo '<form method="post" onsubmit="ga(\'send\', \'event\', \'Bestelling\', \'Bestelling\', \'Bestelling\')">'
-				. '<center><input id="confirm" type="submit" value="Bestellen" name="place_order"></center>'
-				. '</form><br><br><br><br>';
-		}
-       
+        if(empty($cart)){	
+                echo '<h1>Uw winkelmandje is op dit moment leeg!</h1>';
+        } else {
+            echo '<div class="card">';
+            $subtotal=0;
+            $bez=0;
+            $total=0;
+            foreach((array)$cart as $prod){
+                    $am=$prod['bestelling_amount'] ?? 1;
+                    echo '  <div class="product-card">
+                            <img src="assets/placeholder-card.jpg">
+                            <div class="card-content">
+                            <h3 id="title">'.$order['description'].'</h3>
+                            <h4 id="price">€'.$order['priceLabel']['now'].'</h4>
+                            <h4 id="amount">'.$order['bestelling_amount'].' Stuks</h4>
+                            <div class="buttons">
+                            <form method="post" id="cancel_order_'.$order['id'].'">
+                            <input type="hidden" name="cancel_order" value="'.$order['id'].'">
+                            <button onclick="document.getElementById(\'cancel_order_'.$order['id'].'\').submit();" id="remove" style="float:left">Verwijder</button>
+                            </form>
+                            <button id="up" style="float:right">+</button>
+                            <button id="down" style="float:right">-</button>
+                            </div>
+                            </div>
+                            </div>';
+                    $subtotal += $prod['priceLabel']['now']*$am; // when items don't have an ID, the random value that is returned seems to be constant so it just works
+                    $total=round(1.1*$subtotal,2);
+                    $bez=$total-$subtotal;   
+            }
+		echo '<div class="prices">';
+                echo '<p>Subtotaal: €'.number_format($subtotal,2,"."," ").'</p>';
+		echo '<p>Bezorgkosten: €'.number_format($bez,2,"."," ").'</p>';
+		echo '<p>Totaal: €'.number_format($total,2,"."," ").'</p>';
+		echo '</div>';
+        }
     }
-    
     ?>
 </div>
 </div>
-    </body>
+</body>
 
 </html>
