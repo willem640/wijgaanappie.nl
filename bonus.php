@@ -122,7 +122,7 @@ foreach($bonus['_embedded']['lanes'] as $lane){
                                                                                           
             echo('<li class="mdc-image-list__item bonus-image-list__item ripple-surface" '
                         // function buyProductDialog(title, price_was, price_now, unit_size, discount)
-                        . 'onclick="buyProductDialog(\''.addslashes($prod["description"]).'\', \''.$prod["priceLabel"]["was"].'\', \''.$prod["priceLabel"]["now"].'\', \''.$prod["unitSize"].'\', \''. ucfirst(strtolower($prod["discount"]["type"]["name"])).'\',\''.$key.')" >'
+                        . 'onclick="buyProductDialog(\''.addslashes($prod["description"]).'\', \''.$prod["priceLabel"]["was"].'\', \''.$prod["priceLabel"]["now"].'\', \''.$prod["unitSize"].'\', \''. ucfirst(strtolower($prod["discount"]["type"]["name"])).'\',\''.$key.'\')" >'
                         . '<div class="mdc-image-list__image-aspect-container">'
                             . '<img class="mdc-image-list__image" src="'.($prod["images"][0]["link"]["href"] ?? "").'">'
                         . '</div>'
