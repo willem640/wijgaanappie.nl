@@ -1,0 +1,35 @@
+@use "@material/theme" with (
+  $primary: #1976d2,
+  $secondary: #004ba0,
+);
+
+@use '@material/image-list/mdc-image-list';
+@use '@material/image-list';
+@use '@material/ripple';
+@use "@material/dialog/mdc-dialog";
+@use "@material/dialog";
+
+$list_columns: 3;
+.bonus-image-list{
+    @include image-list.shape-radius(16px);
+    @include image-list.standard-columns($list_columns);
+    
+    li.bonus-image-list__item{
+        margin: 8px;
+        width: calc(100%/#{$list_columns} - 2*8px);
+        padding:0;
+        overflow:hidden;
+        border-radius:16px;
+    }
+}
+
+.ripple-surface{
+    @include ripple.surface;
+    @include ripple.radius-bounded;
+    @include ripple.states-base-color(black);
+    @include ripple.states-opacities((hover: 0, focus: 0, press: .25));
+}
+
+.bonus-product-dialog{
+    @include dialog.min-width(80vw);
+}

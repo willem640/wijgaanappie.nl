@@ -82,7 +82,7 @@ echo '<table id="products">';
 echo '<tr><th>Product</th><th>Afbeelding</th><th>Prijs</th><th style="text-align:left;">Aantal</th><th></th></tr>';
 $max = 20;
 $i = 0;
-foreach($producten as $product){
+foreach($producten as $key => $product){
     if($i >= $max){
         $i = 0;
         break;
@@ -92,6 +92,7 @@ foreach($producten as $product){
     foreach((array)$response['_embedded']['lanes'] as $lane){
         if($lane['type'] == 'ProductDetailLane'){
             $prod = $lane['_embedded']['items'][0]['_embedded']['product'];
+            $_SESSION['orderable_array'][$key] = $prod;
             echo      '<tr><td>'.$prod['description'].'</td>'
                     . '<td style="width:10%"><img id="tableImg" src="'.$prod['images'][0]['link']['href'].'"></td>'
                     . '<td>€'.$prod['priceLabel']['now'].'</td>'
