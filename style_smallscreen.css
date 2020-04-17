@@ -588,6 +588,7 @@ input#fancy_a{
 	right: 0;
 	left: 0;
 	margin-left: 10vw;
+        text-align: center;
 }
 .submenu a, .submenu input {
 	height: 5vh;
