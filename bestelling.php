@@ -67,7 +67,7 @@ if (isset($_POST['delete']) && $_SESSION['loggedin'] === true) {
 }
 
 if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
-    echo "Button clicked";
+    echo '<script>console.log("Button input handled");</script>';
     //TODO: is robin going to the appie?
     $orders = json_decode(DB::query('SELECT cart FROM users WHERE username = %s', $_SESSION['username'])[0]['cart'], true);
     foreach ($orders as $key => $prod) {
