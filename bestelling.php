@@ -183,7 +183,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if(empty($cart)){	
                 echo '<h1>Uw winkelmandje is op dit moment leeg!</h1>';
         } else {
-            echo '<div class="card">';
+            echo '<h1>Je winkelmandje</h1>';
             $subtotal=0;
             $bez=0;
             $total=0;
