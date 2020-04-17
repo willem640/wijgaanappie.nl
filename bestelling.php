@@ -65,6 +65,20 @@ if (isset($_POST['delete']) && $_SESSION['loggedin'] === true) {
     DB::update('users', ['cart' => json_encode($orders)], 'username = %s', $_SESSION['username']);
     header('Location: bestelling.php');
 }
+
+if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
+    //TODO: is robin going to the appie?
+    $orders = json_decode(DB::query('SELECT cart FROM users WHERE username = %s', $_SESSION['username'])[0]['cart'], true);
+    foreach ($orders as $key => $prod) {
+        if ($prod['id'] === $_POST['add']) {
+            $prod['bestelling_amount']++;
+            break;
+        }
+    }
+    $orders = array_merge($orders); // reset keys
+    DB::update('users', ['cart' => json_encode($orders)], 'username = %s', $_SESSION['username']);
+    header('Location: bestelling.php');
+}
 ?>
 
 <!DOCTYPE HTML>
