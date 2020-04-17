@@ -71,13 +71,12 @@ if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
     $orders = json_decode(DB::query('SELECT cart FROM users WHERE username = %s', $_SESSION['username'])[0]['cart'], true);
     foreach ($orders as $key => $prod) {
         if ($prod['id'] === $_POST['add']) {
-            echo $prod['bestelling_amount'];
             $prod['bestelling_amount']++;
-            echo $prod['bestelling_amount'];
             break;
         }
     }
     $orders = array_merge($orders); // reset keys
+    var_dump($orders);
     DB::update('users', ['cart' => json_encode($orders)], 'username = %s', $_SESSION['username']);
     //header('Location: bestelling.php');
 }
