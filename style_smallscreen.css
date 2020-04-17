@@ -454,10 +454,6 @@ input#fancy_a{
 	text-shadow: 2px 2px #303030;
 	font-size: 2vh;
 	text-decoration: none;
-	padding-left: 2.5vw;
-	padding-right: 2.5vw;
-	padding-top: 1vw;
-	padding-bottom: 1vw;
 	transition: 0.4s;
 	margin: 2px 0;
 	border-style:solid;
@@ -584,7 +580,7 @@ input#fancy_a{
 }
 .submenu {
 	position: absolute;
-	bottom: -2.5vh;
+	bottom: -1.25vh;
 	right: 0;
 	left: 0;
         text-align: center;
