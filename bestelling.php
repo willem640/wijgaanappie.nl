@@ -214,11 +214,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <input type="hidden" name="delete" value="'.$prod['id'].'">
                             <button onclick="document.getElementById(\'delete'.$prod['id'].'\').submit();" id="remove" style="float:left">Verwijder</button>
                             </form>
-                            <form method="post" id="add'.prod['id'].'">
+                            <form method="post" id="add'.$prod['id'].'">
                                 <input type="hidden" name="add" value="'.$prod['id'].'">
                                 <button id="up" onclick="document.getElementById(\'add'.$prod['id'].'\').submit();" style="float:right">+</button>
                             </form>
-                            <form method="post" id="subs'.prod['id'].'">
+                            <form method="post" id="subs'.$prod['id'].'">
                                 <input type="hidden" name="subs" value="'.$prod['id'].'">
                                 <button id="down" onclick="document.getElementById(\'subs'.$prod['id'].'\').submit();" style="float:right">-</button>
                             </form>
