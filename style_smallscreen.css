@@ -356,10 +356,7 @@ a#banner_a, a#home, a#fancy_a{
 	text-shadow: 2px 2px #303030;
 	font-size: 2vh;
 	text-decoration: none;
-	padding-left: 2.5vw;
-	padding-right: 2.5vw;
-	padding-top: 1vw;
-	padding-bottom: 1vw;
+	padding: 1vw 2.5vw;
 	transition: 0.4s;
 	margin: 2px 0;
 	
@@ -453,6 +450,7 @@ input#fancy_a{
 	font-weight: demibold;
 	text-shadow: 2px 2px #303030;
 	font-size: 2vh;
+        padding: 1vw 2.5vw;
 	text-decoration: none;
 	transition: 0.4s;
 	margin: 2px 0;
