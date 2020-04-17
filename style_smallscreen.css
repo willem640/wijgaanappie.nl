@@ -443,6 +443,7 @@ input[type="search"]:focus{
     background-position-x: -3vh;
     padding-left: 1vw;
 }
+
 input#fancy_a{
 	color: #FFFFFF;
 	border-color:#1976d2;
@@ -575,6 +576,9 @@ input#fancy_a{
 	margin-bottom: 2svh;
 	height: 4vh;
 	width: 100%;
+}
+.submenu#winkelmandje {
+    bottom: -3vh;
 }
 .submenu {
 	position: absolute;
