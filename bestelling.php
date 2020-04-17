@@ -218,7 +218,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
     ?>
 
-<div class="submenu">
+<div class="submenu" id="winkelmandje">
     <form method="post" onsubmit="ga('send', 'event', 'Bestelling', 'Bestelling', 'Bestelling')">
         <input id="fancy_a" type="submit" value="Bestellen" name="place_order">
     </form>
