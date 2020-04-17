@@ -72,6 +72,8 @@ if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
     foreach ($orders as $key => $prod) {
         if ($prod['id'] === $_POST['add']) {
             echo $prod['bestelling_amount'];
+            $prod['bestelling_amount']++;
+            echo $prod['bestelling_amount'];
             break;
         }
     }
