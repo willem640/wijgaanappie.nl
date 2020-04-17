@@ -584,10 +584,9 @@ input#fancy_a{
 }
 .submenu {
 	position: absolute;
-	bottom: -1.25vh;
+	bottom: -2.5vh;
 	right: 0;
 	left: 0;
-	margin-left: 10vw;
         text-align: center;
 }
 .submenu a, .submenu input {
