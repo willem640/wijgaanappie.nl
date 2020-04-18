@@ -78,10 +78,9 @@ if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
             $prod['bestelling_amount']++;
             break;
         }
-        print_r($prod);
     }
     $orders = array_merge($orders); // reset keys
-    //var_dump($orders);
+    var_dump($orders);
     DB::update('users', ['cart' => json_encode($orders)], 'username = %s', $_SESSION['username']);
     //header('Location: bestelling.php');
 }
