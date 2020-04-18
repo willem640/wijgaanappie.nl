@@ -199,9 +199,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <input type="hidden" name="cancel_order" value="'.$order['id'].'">
                             <button onclick="document.getElementById(\'cancel_order_'.$order['id'].'\').submit();" id="remove" style="float:left">Verwijder</button>
                             </form>
-                            <form method="post" id="add'.$prod['id'].'">
-                                <input type="hidden" name="add" value="'.$prod['id'].'">
-                                <button id="up" onclick="document.getElementById(\'add'.$prod['id'].'\').submit();" style="float:right">+</button>
+                            <form method="post" id="add'.$order['id'].'">
+                                <input type="hidden" name="add" value="'.$order['id'].'">
+                                <button id="up" onclick="document.getElementById(\'add'.$order['id'].'\').submit();" style="float:right">+</button>
                             </form>
                             <form method="post" id="subs'.$prod['id'].'">
                                 <input type="hidden" name="subs" value="'.$prod['id'].'">
