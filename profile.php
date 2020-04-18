@@ -30,7 +30,6 @@ if (isset($_POST['cancel_order']) && $_SESSION['loggedin'] === true) {
 if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
     //TODO: is robin going to the appie?
     $orders = json_decode(DB::query('SELECT contents FROM current_orders WHERE username = %s', $_SESSION['username'])[0]['contents'], true);
-    var_dump($orders);
     foreach ($orders as $key => $prod) {
         if ($prod['id'] === $_POST['add']) {
             $orders[$key]['bestelling_amount']++;
@@ -38,8 +37,9 @@ if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
         }
     }
     $orders = array_merge($orders); // reset keys
-    DB::update('current_orders', ['contents' => json_encode($orders)], 'username = %s', $_SESSION['username']);
     var_dump($orders);
+    DB::update('current_orders', ['contents' => json_encode($orders)], 'username = %s', $_SESSION['username']);
+    
 //header('Location: profile.php');
 }
 
