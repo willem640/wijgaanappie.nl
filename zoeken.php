@@ -98,7 +98,7 @@ foreach($producten as $key => $product){
                     . '<td>€'.$prod['priceLabel']['now'].'</td>'
                     . '<td><form id="form_'.$prod['id'].'" method="post" action="bestelling.php">'
                     . '<input id="aantal" type="number" name="amount" min=1 value="1" placeholder="aantal">'
-					. '<input name="product" type="hidden" value=\''.str_replace("'",'',json_encode($prod)).'\'>'
+					. '<input name="product" type="hidden" value=\''.str_replace("'",'',$key).'\'>'
                     . '<a id="fancy_a" onclick="document.getElementById(\'form_'.$prod['id'].'\').submit();">Bestellen</a></form><td><tr>';
         }
     }
