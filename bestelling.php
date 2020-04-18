@@ -8,7 +8,6 @@ require_once 'simple_html_dom.php';
 if ($_SESSION['loggedin'] === true && !empty($_POST['product'])) {
     if(!isset($_SESSION['orderable_array'][$_POST['product']])){
         //http_response_code(422); // input klopt maar de server kan het niet processen
-        var_dump($prod);
         die();
     }
     $prod = $_SESSION['orderable_array'][$_POST['product']];
