@@ -38,7 +38,7 @@ if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
     }
     $orders = array_merge($orders); // reset keys
     DB::update('users', ['cart' => json_encode($orders)], 'username = %s', $_SESSION['username']);
-    header('Location: bestelling.php');
+    header('Location: profile.php');
 }
 
 if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
@@ -52,7 +52,7 @@ if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
     }
     $orders = array_merge($orders); // reset keys
     DB::update('users', ['cart' => json_encode($orders)], 'username = %s', $_SESSION['username']);
-    header('Location: bestelling.php');
+    header('Location: profile.php');
 }
 ?>
 
