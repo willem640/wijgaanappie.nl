@@ -78,7 +78,7 @@ if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
             $prod['bestelling_amount']++;
             break;
         }
-        echo $prod['bestelling_amount'];
+        print_r($prod);
     }
     $orders = array_merge($orders); // reset keys
     //var_dump($orders);
