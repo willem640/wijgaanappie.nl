@@ -33,7 +33,10 @@ if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
     echo $orders[0]['bestelling_amount'];
     foreach ($orders as $key => $prod) {
         if ($prod['id'] === $_POST['add']) {
+            echo $key;
+            echo $orders[$key]['bestelling_amount'];
             $orders[$key]['bestelling_amount']++;
+            echo $orders[$key]['bestelling_amount'];
             break;
         }
     }
