@@ -29,7 +29,7 @@ if (isset($_POST['cancel_order']) && $_SESSION['loggedin'] === true) {
 }
 if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
     //TODO: is robin going to the appie?
-    $orders = json_decode(DB::query('SELECT cart FROM users WHERE username = %s', $_SESSION['username'])[0]['cart'], true);
+    $orders = json_decode(DB::query('SELECT contents FROM current_orders WHERE username = %s', $_SESSION['username'])[0]['contents'], true);
     foreach ($orders as $key => $prod) {
         if ($prod['id'] === $_POST['add']) {
             $orders[$key]['bestelling_amount']++;
@@ -37,13 +37,13 @@ if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
         }
     }
     $orders = array_merge($orders); // reset keys
-    DB::update('users', ['cart' => json_encode($orders)], 'username = %s', $_SESSION['username']);
+    DB::update('current_orders', ['contents' => json_encode($orders)], 'username = %s', $_SESSION['username']);
     header('Location: profile.php');
 }
 
 if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
     //TODO: is robin going to the appie?
-    $orders = json_decode(DB::query('SELECT cart FROM users WHERE username = %s', $_SESSION['username'])[0]['cart'], true);
+    $orders = json_decode(DB::query('SELECT contents FROM current_orders WHERE username = %s', $_SESSION['username'])[0]['contents'], true);
     foreach ($orders as $key => $prod) {
         if ($prod['id'] === $_POST['subs']) {
             $orders[$key]['bestelling_amount']--;
@@ -51,7 +51,7 @@ if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
         }
     }
     $orders = array_merge($orders); // reset keys
-    DB::update('users', ['cart' => json_encode($orders)], 'username = %s', $_SESSION['username']);
+    DB::update('current_orders', ['contents' => json_encode($orders)], 'username = %s', $_SESSION['username']);
     header('Location: profile.php');
 }
 ?>
