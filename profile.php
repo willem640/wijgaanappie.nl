@@ -32,6 +32,7 @@ if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
     $orders = json_decode(DB::query('SELECT contents FROM current_orders WHERE username = %s', $_SESSION['username'])[0]['contents'], true);
     echo $orders[0]['bestelling_amount'];
     foreach ($orders as $key => $prod) {
+        echo "Reached here";
         if ($prod['id'] === $_POST['add']) {
             echo $key;
             echo $orders[$key]['bestelling_amount'];
