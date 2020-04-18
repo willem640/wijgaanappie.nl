@@ -14,21 +14,21 @@ require_once 'header_material.php';?>
                 mdc.ripple.MDCRipple.attachTo(ripple_surfaces[i]);
             }
             dialog = new mdc.dialog.MDCDialog(document.querySelector('.bonus-product-dialog'));
-        }
+        };
         function buyProductDialog(title, price_was, price_now, unit_size, discount, index){
             $('#bonus-product-dialog-title')[0].innerHTML = title;
             if(price_was === ''){
                 $('#bonus-product-dialog-content')[0].innerHTML = 
                     `Voor: ${price_now}<br>`.concat(
                     `Korting: ${discount}<br>`,
-                    `${unit_size}`)
+                    `${unit_size}`);
             } else {
                 $('#bonus-product-dialog-content')[0].innerHTML = 
-                    `Van: ${price_was}<br>`.concat(
-                    `Voor: ${price_now}<br>`,
+                    `Van: €${price_was}<br>`.concat(
+                    `Voor: €${price_now}<br>`,
                     `Korting: ${discount}<br>`,
                     `${unit_size}`)
-                }
+                };
             dialog.open();
         }
         </script>
@@ -126,9 +126,10 @@ foreach($bonus['_embedded']['lanes'] as $lane){
                         . '<div class="mdc-image-list__image-aspect-container">'
                             . '<img class="mdc-image-list__image" src="'.($prod["images"][0]["link"]["href"] ?? "").'">'
                         . '</div>'
-                        . '<div class="mdc-image-list__supporting">'
-                            . '<span class="mdc-image-list__label">'.($prod["description"] ?? "").'</span>'
+                        . '<div class="mdc-image-list__supporting bonus-image-list__supporting">'
+                            . '<span class="mdc-image-list__label bonus-image-list__label">'.($prod["description"] ?? "").'</span>'
                         . '</div>'
+                        . '<div class="price-label">€'.$prod["priceLabel"]["now"].'</div>'
                   . '</li>');
         }
 

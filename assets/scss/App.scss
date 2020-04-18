@@ -2,26 +2,53 @@
   $primary: #1976d2,
   $secondary: #004ba0,
 );
-
-@use '@material/image-list/mdc-image-list';
+$primary: #1976d2;
+$secondary: #004ba0;
 @use '@material/image-list';
 @use '@material/ripple';
-@use "@material/dialog/mdc-dialog";
 @use "@material/dialog";
+@use "@material/typography";
+
+
 
 $list_columns: 3;
 .bonus-image-list{
     @include image-list.shape-radius(16px);
     @include image-list.standard-columns($list_columns);
-    
     li.bonus-image-list__item{
         margin: 8px;
         width: calc(100%/#{$list_columns} - 2*8px);
         padding:0;
         overflow:hidden;
         border-radius:16px;
+        
+        .price-label{
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 2.5rem;
+            //trbl
+            padding: 0.5rem 0.6rem 0 0.6rem;
+            border-radius: 0 0 0 16px;
+            font-family: Roboto, sans-serif;
+            background-color: #2ba0b3;
+            @include typography.typography(body1);
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .bonus-image-list__supporting{
+            height:72px;
+            padding-top: 0; /* text spacing is controlled with margin in text element*/
+            span.bonus-image-list__label{
+                height: calc(72px - ((72px - 2rem)/2));
+                font-size: 2rem;
+                margin-top: calc((72px - 2rem)/2);
+            }
+        }
     }
 }
+
 
 .ripple-surface{
     @include ripple.surface;
