@@ -30,25 +30,15 @@ if (isset($_POST['cancel_order']) && $_SESSION['loggedin'] === true) {
 if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
     //TODO: is robin going to the appie?
     $orders = json_decode(DB::query('SELECT contents FROM current_orders WHERE username = %s', $_SESSION['username'])[0]['contents'], true);
-    echo $orders[0]['bestelling_amount'];
     foreach ($orders as $key => $prod) {
-        echo "Reached here";
-        var_dump($prod);
-        var_dump($POST['add']);
         if ($prod['id'] === $_POST['add']) {
-            echo $key;
-            echo $orders[$key]['bestelling_amount'];
             $orders[$key]['bestelling_amount']++;
-            echo $orders[$key]['bestelling_amount'];
             break;
         }
     }
-    echo $orders[0]['bestelling_amount'];
     $orders = array_merge($orders); // reset keys
-    echo $orders[0]['bestelling_amount'];
     DB::update('current_orders', ['contents' => json_encode($orders)], 'username = %s', $_SESSION['username']);
-    
-//header('Location: profile.php');
+    header('Location: profile.php');
 }
 
 if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
@@ -203,9 +193,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <input type="hidden" name="add" value="'.$order['id'].'">
                                 <button id="up" onclick="document.getElementById(\'add'.$order['id'].'\').submit();" style="float:right">+</button>
                             </form>
-                            <form method="post" id="subs'.$prod['id'].'">
-                                <input type="hidden" name="subs" value="'.$prod['id'].'">
-                                <button id="down" onclick="document.getElementById(\'subs'.$prod['id'].'\').submit();" style="float:right">-</button>
+                            <form method="post" id="subs'.$order['id'].'">
+                                <input type="hidden" name="subs" value="'.$order['id'].'">
+                                <button id="down" onclick="document.getElementById(\'subs'.$order['id'].'\').submit();" style="float:right">-</button>
                             </form>
                             </div>
                             </div>
