@@ -75,7 +75,7 @@ if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
     $orders = json_decode(DB::query('SELECT cart FROM users WHERE username = %s', $_SESSION['username'])[0]['cart'], true);
     foreach ($orders as $key => $prod) {
         if ($prod['id'] === $_POST['add']) {
-            $prod['bestelling_amount']++;
+            $orders[$key]['bestelling_amount']++;
             break;
         }
     }
