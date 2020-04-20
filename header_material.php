@@ -1,4 +1,5 @@
 <?php
+
 $header = "
 <!-- material.io stylesheet and js library -->
 <link href=\"node_modules/material-components-web/dist/material-components-web.min.css\" rel=\"stylesheet\">
@@ -34,13 +35,13 @@ height=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"></iframe></nos
 	<a class=\"right\" id=\"banner_a\" href=\"bonus.php\">Bonus</a>
 	<a class=\"right\" id=\"banner_a\" href=\"bestelling.php\">Bestel</a>
 	<a class=\"right\" id=\"banner_a\" href=\"contact.php\">Contact</a>";
-$logged_in=(isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : false);
-if($logged_in){
-    $header.='<a class="right" id="banner_a" href="profile.php">Profiel</a>';
+$logged_in = (isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : false);
+if ($logged_in) {
+    $header .= '<a class="right" id="banner_a" href="profile.php">Profiel</a>';
 } else {
-    $header.='<a class="right" id="banner_a" href="login.php">Inloggen</a>';
+    $header .= '<a class="right" id="banner_a" href="login.php">Inloggen</a>';
 }
- $header.="
+$header .= "
 </div>
 <div class=\"banner-mobile\">
   <div class=\"dropdown\">
@@ -54,12 +55,12 @@ if($logged_in){
       <li><a id=\"mobile_banner_a\" href=\"bonus.php\">Bonus</a>
       <li><a id=\"mobile_banner_a\" href=\"bestelling.php\">Bestel</a>
       <li><a id=\"mobile_banner_a\" href=\"contact.php\">Contact</a>";
-if($logged_in){
-    $header.='<li><a id="mobile_banner_a" href="profile.php">Profiel</a>';
+if ($logged_in) {
+    $header .= '<li><a id="mobile_banner_a" href="profile.php">Profiel</a>';
 } else {
-    $header.='<li><a id="mobile_banner_a" href="login.php">Inloggen</a>';
+    $header .= '<li><a id="mobile_banner_a" href="login.php">Inloggen</a>';
 }
-$header.="
+$header .= "
 	</ul>
     </div>
   </div>
