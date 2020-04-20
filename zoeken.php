@@ -120,11 +120,13 @@ require_once 'setup.php';
         });
     </script>
     <div class="wrapper">
+        <!-- TODO Search widget material design maken, kan evt. met zelfde layout als inlog inputs-->
         <div id="card">
             <form method="get">
                 <input type="search" name="query" placeholder="Zoek hier naar uw product...">
             </form>
             <?php
+            /* TODO Zoekresultaten als cards weergeven, wrs in 2x2 grids net zoals op bonus pagina */
             require_once 'setup.php';
             require_once 'simple_html_dom.php';
             if (!empty($_GET['query'])) {
