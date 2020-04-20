@@ -19,6 +19,10 @@ $secondary: #004ba0; // global variables outside of the theme omdat theme soms n
 @use "@material/menu";
 @use "@material/select";
 @use "@material/line-ripple";
+@use "@material/icon-button";
+
+
+
 
 
 
@@ -91,6 +95,10 @@ $list_columns: 3;
                 font-size: 3rem;
                 line-height: 4.5rem;
                 padding: 8px 48px 24px;
+                
+                .mdc-icon-button{
+                    @include icon-button.icon-size(48px);
+                }
             }
             
             footer.mdc-dialog__actions{
@@ -114,16 +122,32 @@ $list_columns: 3;
     width: 100%;
 }
 
+
 .sort-select{
     @include select.focused-bottom-line-color($primary);
     @include select.focused-label-color($primary);
     @include select.focused-outline-color($primary);
+    @include select.container-fill-color(gainsboro);
     .mdc-select__anchor{
 
     }
 }
 
-        .bonus-sort-select-line-ripple{
-            @include line-ripple.active-color($primary);
-            @include line-ripple.inactive-color($primary);
-        }
+.bonus-sort-select-line-ripple{
+    @include line-ripple.active-color($primary);
+    @include line-ripple.inactive-color($primary);
+}
+
+.mdc-icon-button{
+    @include icon-button.core-styles;
+    @include ripple.surface;
+    @include ripple.radius-bounded;
+    @include ripple.states-base-color(black);
+    @include ripple.states-opacities((hover: 0, focus: 0, press: .4));
+}
+
+#bonus-product-dialog-content-stuks-buttons-stuks{
+    display:inline;
+    padding-top: 8px;
+    line-height: 0;
+}

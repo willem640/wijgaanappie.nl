@@ -10,15 +10,17 @@ require_once 'header_material.php';
 <link rel='stylesheet' media='only screen and (max-width: 1080px)' href='style_smallscreen.css' />
 <link type=\"text/css\" rel=\"stylesheet\" media=\"only screen and (min-width: 1080px)\" href=\"style.css\">
 <script type="text/javascript">
+    var num_products = 1;
     var dialog;
     var select;
+    var icon_buttons_dialog = [];
     window.onload = function () {
         var ripple_surfaces = $('.ripple-surface');
         for (var i = 0; i < ripple_surfaces.length; ++i) {
             mdc.ripple.MDCRipple.attachTo(ripple_surfaces[i]);
         }
-        dialog = new mdc.dialog.MDCDialog(document.querySelector('.bonus-product-dialog'));
-        select = new mdc.select.MDCSelect(document.querySelector('.sort-select'));
+        dialog = new mdc.dialog.MDCDialog($('.bonus-product-dialog')[0]);
+        select = new mdc.select.MDCSelect($('.sort-select')[0]);
         const url_parameters = new URLSearchParams(window.location.search);
         if (url_parameters.has('sort')) {
             current_sort = url_parameters.get('sort');
@@ -35,21 +37,49 @@ require_once 'header_material.php';
         });
     };
     function buyProductDialog(title, price_was, price_now, unit_size, discount, index) {
+
         $('#bonus-product-dialog-title')[0].innerHTML = title;
         if (price_was === '') {
             $('#bonus-product-dialog-content')[0].innerHTML =
                     `Voor: ${price_now}<br>`.concat(
                             `Korting: ${discount}<br>`,
-                            `${unit_size}`);
+                            `${unit_size}
+                                `);
         } else {
             $('#bonus-product-dialog-content')[0].innerHTML =
                     `Van: €${price_was}<br>`.concat(
                             `Voor: €${price_now}<br>`,
                             `Korting: ${discount}<br>`,
-                            `${unit_size}`)
-        }
-        ;
+                            `${unit_size}`);
+        };
+        setProductAmount(1);
         dialog.open();
+        if(!icon_buttons_dialog.length){
+            var icon_buttons_html = $('.mdc-icon-button');
+            for(var i = 0; i < icon_buttons_html.length; ++i){
+                icon_buttons_dialog[i] = new mdc.ripple.MDCRipple(icon_buttons_html[i]);
+                icon_buttons_dialog[i].unbounded = true;
+            }
+        }
+    }
+    
+    function setProductAmount(new_num_products){
+        if(new_num_products <= 1){
+            $('#bonus-product-dialog-content-stuks-buttons-stuks')[0].innerHTML = 1 + " Stuks";
+            num_products = 1;
+        } else {
+            $('#bonus-product-dialog-content-stuks-buttons-stuks')[0].innerHTML = new_num_products + " Stuks";
+            num_products = new_num_products;
+        }
+        return num_products;
+    }
+    
+    function addProduct(){
+        setProductAmount(num_products + 1);
+    }
+    
+    function removeProduct(){
+        setProductAmount(num_products - 1);
     }
 </script>
 
@@ -65,6 +95,9 @@ require_once 'header_material.php';
             </h2>
             <div class="mdc-dialog__content" id="bonus-product-dialog-content">
 
+            </div>
+            <div class="mdc-dialog__content" id="bonus-product-dialog-content-stuks-buttons">
+                <button class="mdc-icon-button material-icons" onclick="removeProduct()">remove</button> <div id="bonus-product-dialog-content-stuks-buttons-stuks">1 Stuks</div> <button class="mdc-icon-button material-icons" onclick="addProduct()">add</button>
             </div>
             <footer class="mdc-dialog__actions">
                 <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
@@ -109,6 +142,7 @@ require_once 'header_material.php';
                 </ul>
             </div>
         </div>
+        
         <ul class="mdc-image-list bonus-image-list mdc-image-list--with-text-protection">
             <?php
             require_once 'setup.php';
