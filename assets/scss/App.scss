@@ -28,13 +28,20 @@ $list_columns: 3;
             right: 0;
             height: 2.5rem;
             //trbl
+            //margin:auto;
             padding: 0.5rem 0.6rem 0 0.6rem;
             border-radius: 0 0 0 16px;
             font-family: Roboto, sans-serif;
-            background-color: #2ba0b3;
-            @include typography.typography(body1);
-            font-size: 2rem;
+            background-color: /*#2ba0b3$primary*/#63a4ff;
+            display:block;
+
             color: white;
+            span {
+                vertical-align: middle;
+                @include typography.typography(body1);
+                font-size: 2rem;
+                display: block;
+            }
         }
         
         .bonus-image-list__supporting{
@@ -59,4 +66,5 @@ $list_columns: 3;
 
 .bonus-product-dialog{
     @include dialog.min-width(80vw);
+    
 }

@@ -1,6 +1,7 @@
 <?php session_start(); 
 require_once 'header_material.php';?>
 
+
 <!DOCTYPE html>
 <html>
 <?php echo $header;?>
@@ -73,8 +74,9 @@ require_once 'header_material.php';?>
   </div>
   <div class="mdc-dialog__scrim"></div>
 </div>
-
-<ul class="mdc-image-list bonus-image-list mdc-image-list--with-text-protection">
+<div class="wrapper" style="width:96%; left:2%"> 
+<div id="card" style="background-color: gainsboro">
+    <ul class="mdc-image-list bonus-image-list mdc-image-list--with-text-protection">
 <?php
 require_once 'setup.php';
 require_once 'simple_html_dom.php';
@@ -129,11 +131,13 @@ foreach($bonus['_embedded']['lanes'] as $lane){
                         . '<div class="mdc-image-list__supporting bonus-image-list__supporting">'
                             . '<span class="mdc-image-list__label bonus-image-list__label">'.($prod["description"] ?? "").'</span>'
                         . '</div>'
-                        . '<div class="price-label">€'.$prod["priceLabel"]["now"].'</div>'
+                        . '<div class="price-label"><span>€'.$prod["priceLabel"]["now"].'</span></div>'
                   . '</li>');
         }
 
         ?>
 </ul>
+</div>
+</div>
 </body>
 </html>
