@@ -494,6 +494,7 @@ input#fancy_a{
 	margin-top: 1vh;
 	border-radius: 1vh;
 	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        position: relative;
 }
 .status h1 {
 	text-align: center;
@@ -511,13 +512,13 @@ input#fancy_a{
 .status_circle {
 	border-radius: 50%;
 	position: absolute;
-	top: 38.5vh;
-	right: 1vw;
+	top: .5vh;
+	right: .5vh;
 	width: 5vw;
 	height: 5vw;
 	-webkit-transition: box-shadow 1s linear;
        -moz-transition: box-shadow 1s linear;
-            transition: box-shadow 1s linear;
+            transition: box-shadow 1s linear;  
 }
 .status_circle svg {
 	position: absolute;

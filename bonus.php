@@ -5,16 +5,33 @@ require_once 'header_material.php';?>
 <!DOCTYPE html>
 <html>
 <?php echo $header;?>
+    </style>
         <link rel='stylesheet' media='only screen and (max-width: 1080px)' href='style_smallscreen.css' />
         <link type=\"text/css\" rel=\"stylesheet\" media=\"only screen and (min-width: 1080px)\" href=\"style.css\">
         <script type="text/javascript">
         var dialog;
+        var select;
         window.onload = function() {
             var ripple_surfaces = $('.ripple-surface');
             for(var i = 0; i < ripple_surfaces.length; ++i){
                 mdc.ripple.MDCRipple.attachTo(ripple_surfaces[i]);
             }
             dialog = new mdc.dialog.MDCDialog(document.querySelector('.bonus-product-dialog'));
+            select = new mdc.select.MDCSelect(document.querySelector('.sort-select'));
+            const url_parameters = new URLSearchParams(window.location.search);    
+            if(url_parameters.has('sort')){
+                current_sort = url_parameters.get('sort');
+                current_sort_index = $('div.bonus-sort-select ul li[data-value="' + current_sort +'"]')
+                        .index();
+                select.selectedIndex = current_sort_index;
+            } else {
+                
+            }
+            
+        
+        select.listen('MDCSelect:change', () => {
+                document.location.href = window.location.pathname + '?sort=' + select.value;
+            });
         };
         function buyProductDialog(title, price_was, price_now, unit_size, discount, index){
             $('#bonus-product-dialog-title')[0].innerHTML = title;
@@ -33,27 +50,14 @@ require_once 'header_material.php';?>
             dialog.open();
         }
         </script>
-        <form method="get">
-            <select id="top" name="sort" onchange="if(this.value != 0) { this.form.submit(); }">
-                <?php
-                
-                echo '<option value="alphabetical" '.(($_GET['sort'] != "alphabetical")?: 'selected' ).'>A-z</option>';
-                echo '<option value="reverse alphabetical" '.(($_GET['sort'] != "reverse alphabetical")?: 'selected' ).'>Z-a</option>';
-                echo '<option value="price" '.(($_GET['sort'] != "price")?: 'selected' ).'>Op prijs(oplopend)</option>';
-                echo '<option value="reverse price" '.(($_GET['sort'] != "reverse price")?: 'selected' ).'>Op prijs(aflopend)</option>';
-                
-                    ?>
-            </select>
-        </form>
-        <div class="spacer"></div>
         
 <div class="mdc-dialog bonus-product-dialog">
   <div class="mdc-dialog__container">
     <div class="mdc-dialog__surface"
       role="alertdialog"
       aria-modal="true"
-      aria-labelledby="my-dialog-title"
-      aria-describedby="my-dialog-content">
+      aria-labelledby="bonus-dialog-title"
+      aria-describedby="bonus-dialog-content">
         <h2 class="mdc-dialog__title" id="bonus-product-dialog-title">
             
         </h2>
@@ -63,11 +67,11 @@ require_once 'header_material.php';?>
       <footer class="mdc-dialog__actions">
         <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
           <div class="mdc-button__ripple"></div>
-          <span class="mdc-button__label">No</span>
+          <span class="mdc-button__label">Annuleren</span>
         </button>
-        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+        <button type="button" class="mdc-button mdc-dialog__button mdc-button--raised" data-mdc-dialog-action="yes">
           <div class="mdc-button__ripple"></div>
-          <span class="mdc-button__label">Yes</span>
+          <span class="mdc-button__label">Bestellen</span>
         </button>
       </footer>
     </div>
@@ -76,6 +80,33 @@ require_once 'header_material.php';?>
 </div>
 <div class="wrapper" style="width:96%; left:2%"> 
 <div id="card" style="background-color: gainsboro">
+    
+  <div class="mdc-select sort-select">
+  <div class="mdc-select__anchor bonus-sort-select">
+    <i class="mdc-select__dropdown-icon"></i>
+    <div class="mdc-select__selected-text" id="select-sort-selected-text"></div>
+    <span class="mdc-floating-label">Sorteer</span>
+    <div class="mdc-line-ripple bonus-sort-select-line-ripple"></div>
+  </div>
+
+  <div class="mdc-select__menu mdc-menu mdc-menu-surface bonus-sort-select">
+    <ul class="mdc-list">
+        
+      <li class="mdc-list-item" data-value="alphabetical">
+        Alfabetisch (A-z)
+      </li>
+      <li class="mdc-list-item" data-value="reverse alphabetical">
+        Omgekeerd Alfabetisch (z-A)
+      </li>
+      <li class="mdc-list-item" data-value="price">
+        Op prijs (oplopend)
+      </li>
+      <li class="mdc-list-item" data-value="reverse price">
+        Op prijs (aflopend)
+      </li>
+    </ul>
+  </div>
+</div>
     <ul class="mdc-image-list bonus-image-list mdc-image-list--with-text-protection">
 <?php
 require_once 'setup.php';

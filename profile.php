@@ -27,7 +27,33 @@ if (isset($_POST['cancel_order']) && $_SESSION['loggedin'] === true) {
     $orders = array_merge($orders); // reset keys
     DB::update('current_orders', ['contents' => json_encode($orders)], 'username = %s', $_SESSION['username']);
 }
-    //header('Location: profile.php');
+if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
+    //TODO: is robin going to the appie?
+    $orders = json_decode(DB::query('SELECT contents FROM current_orders WHERE username = %s', $_SESSION['username'])[0]['contents'], true);
+    foreach ($orders as $key => $prod) {
+        if ($prod['id'] === $_POST['add']) {
+            $orders[$key]['bestelling_amount']++;
+            break;
+        }
+    }
+    $orders = array_merge($orders); // reset keys
+    DB::update('current_orders', ['contents' => json_encode($orders)], 'username = %s', $_SESSION['username']);
+    header('Location: profile.php');
+}
+
+if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
+    //TODO: is robin going to the appie?
+    $orders = json_decode(DB::query('SELECT contents FROM current_orders WHERE username = %s', $_SESSION['username'])[0]['contents'], true);
+    foreach ($orders as $key => $prod) {
+        if ($prod['id'] === $_POST['subs']) {
+            $orders[$key]['bestelling_amount']--;
+            break;
+        }
+    }
+    $orders = array_merge($orders); // reset keys
+    DB::update('current_orders', ['contents' => json_encode($orders)], 'username = %s', $_SESSION['username']);
+    header('Location: profile.php');
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -163,8 +189,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <input type="hidden" name="cancel_order" value="'.$order['id'].'">
                             <button onclick="document.getElementById(\'cancel_order_'.$order['id'].'\').submit();" id="remove" style="float:left">Verwijder</button>
                             </form>
-                            <button id="up" style="float:right">+</button>
-                            <button id="down" style="float:right">-</button>
+                            <form method="post" id="add'.$order['id'].'">
+                                <input type="hidden" name="add" value="'.$order['id'].'">
+                                <button id="up" onclick="document.getElementById(\'add'.$order['id'].'\').submit();" style="float:right">+</button>
+                            </form>
+                            <form method="post" id="subs'.$order['id'].'">
+                                <input type="hidden" name="subs" value="'.$order['id'].'">
+                                <button id="down" onclick="document.getElementById(\'subs'.$order['id'].'\').submit();" style="float:right">-</button>
+                            </form>
                             </div>
                             </div>
                             </div>';

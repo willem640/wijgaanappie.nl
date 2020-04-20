@@ -1,3 +1,13 @@
+@keyframes mdc-select-float-native-control {
+  0% {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 .bonus-image-list .mdc-image-list__image {
   border-radius: 16px;
 }
@@ -142,6 +152,110 @@
 
 .bonus-product-dialog .mdc-dialog__surface {
   min-width: 80vw;
+}
+.bonus-product-dialog .mdc-dialog__surface {
+  border-radius: 16px;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface h2.mdc-dialog__title {
+  font-size: 3.5rem;
+  line-height: 3rem;
+  padding: 32px 48px 24px 48px;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface .mdc-dialog__content {
+  font-size: 3rem;
+  line-height: 4.5rem;
+  padding: 8px 48px 24px;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button {
+  height: 4rem;
+  font-size: 1.75rem;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button:not(:disabled) {
+  background-color: #fff;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button:not(:disabled) {
+  color: rgba(0, 0, 0, 0.87);
+  /* @alternate */
+  color: var(--mdc-theme-text-primary-on-light, rgba(0, 0, 0, 0.87));
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button .mdc-button__ripple::before, .bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button .mdc-button__ripple::after {
+  background-color: rgba(0, 0, 0, 0.87);
+  /* @alternate */
+  background-color: var(--mdc-theme-text-primary-on-light, rgba(0, 0, 0, 0.87));
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button:hover .mdc-button__ripple::before {
+  opacity: 0.04;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button.mdc-ripple-upgraded--background-focused .mdc-button__ripple::before, .bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button:not(.mdc-ripple-upgraded):focus .mdc-button__ripple::before {
+  transition-duration: 75ms;
+  opacity: 0.12;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button:not(.mdc-ripple-upgraded) .mdc-button__ripple::after {
+  transition: opacity 150ms linear;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button:not(.mdc-ripple-upgraded):active .mdc-button__ripple::after {
+  transition-duration: 75ms;
+  opacity: 0.12;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button.mdc-ripple-upgraded {
+  --mdc-ripple-fg-opacity: 0.12;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button.mdc-button--raised:not(:disabled) {
+  background-color: #1976d2;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button.mdc-button--raised:not(:disabled) {
+  color: white;
+  /* @alternate */
+  color: var(--mdc-theme-text-primary-on-dark, white);
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button.mdc-button--raised .mdc-button__ripple::before, .bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button.mdc-button--raised .mdc-button__ripple::after {
+  background-color: white;
+  /* @alternate */
+  background-color: var(--mdc-theme-text-primary-on-dark, white);
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button.mdc-button--raised:hover .mdc-button__ripple::before {
+  opacity: 0.08;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button.mdc-button--raised.mdc-ripple-upgraded--background-focused .mdc-button__ripple::before, .bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button.mdc-button--raised:not(.mdc-ripple-upgraded):focus .mdc-button__ripple::before {
+  transition-duration: 75ms;
+  opacity: 0.24;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button.mdc-button--raised:not(.mdc-ripple-upgraded) .mdc-button__ripple::after {
+  transition: opacity 150ms linear;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button.mdc-button--raised:not(.mdc-ripple-upgraded):active .mdc-button__ripple::after {
+  transition-duration: 75ms;
+  opacity: 0.24;
+}
+.bonus-product-dialog .mdc-dialog__container .mdc-dialog__surface footer.mdc-dialog__actions button.mdc-button--raised.mdc-ripple-upgraded {
+  --mdc-ripple-fg-opacity: 0.24;
+}
+
+.bonus-sort-select {
+  width: 100%;
+}
+
+.sort-select:not(.mdc-select--disabled).mdc-select--focused .mdc-line-ripple::after {
+  border-bottom-color: #1976d2;
+}
+.sort-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+  color: #1976d2;
+}
+.sort-select:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__leading,
+.sort-select:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__notch,
+.sort-select:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__trailing {
+  border-width: 2px;
+}
+.sort-select:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__leading,
+.sort-select:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__notch,
+.sort-select:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__trailing {
+  border-color: #1976d2;
+}
+.bonus-sort-select-line-ripple::after {
+  border-bottom-color: #1976d2;
+}
+.bonus-sort-select-line-ripple::before {
+  border-bottom-color: #1976d2;
 }
 
 /*# sourceMappingURL=App.css.map */

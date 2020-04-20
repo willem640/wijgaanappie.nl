@@ -1,13 +1,25 @@
 @use "@material/theme" with (
   $primary: #1976d2,
   $secondary: #004ba0,
+  $background: #fff,
+  $on-primary: #1976d2,
+  $on-secondary: #004ba0,
 );
 $primary: #1976d2;
-$secondary: #004ba0;
+$secondary: #004ba0; // global variables outside of the theme omdat theme soms niet werkt in mixins
+
+
 @use '@material/image-list';
 @use '@material/ripple';
 @use "@material/dialog";
 @use "@material/typography";
+@use "@material/button";
+@use "@material/list";
+@use "@material/menu-surface";
+@use "@material/menu";
+@use "@material/select";
+@use "@material/line-ripple";
+
 
 
 
@@ -66,5 +78,52 @@ $list_columns: 3;
 
 .bonus-product-dialog{
     @include dialog.min-width(80vw);
+    @include dialog.shape-radius(16px);
+    .mdc-dialog__container{
+        .mdc-dialog__surface{
+            h2.mdc-dialog__title{
+                font-size: 3.5rem;
+                line-height: 3rem;
+                padding: 32px 48px 24px 48px;
+            }
+            
+            .mdc-dialog__content{
+                font-size: 3rem;
+                line-height: 4.5rem;
+                padding: 8px 48px 24px;
+            }
+            
+            footer.mdc-dialog__actions{
+                button{
+                    @include button.filled-accessible(#fff);
+                    @include button.height(4rem);
+                    font-size: 1.75rem;
+                }
+                button.mdc-button--raised{
+                    @include button.filled-accessible($primary);
+                }
+               
+            }
+        }
+    }
     
 }
+
+
+.bonus-sort-select {
+    width: 100%;
+}
+
+.sort-select{
+    @include select.focused-bottom-line-color($primary);
+    @include select.focused-label-color($primary);
+    @include select.focused-outline-color($primary);
+    .mdc-select__anchor{
+
+    }
+}
+
+        .bonus-sort-select-line-ripple{
+            @include line-ripple.active-color($primary);
+            @include line-ripple.inactive-color($primary);
+        }
