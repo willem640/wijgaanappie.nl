@@ -126,10 +126,47 @@ $list_columns: 3;
 .sort-select{
     @include select.focused-bottom-line-color($primary);
     @include select.focused-label-color($primary);
-    @include select.focused-outline-color($primary);
-    @include select.container-fill-color(gainsboro);
     .mdc-select__anchor{
-
+        height: 112px;
+        
+        .mdc-select__dropdown-icon{
+            right: 16px;
+            bottom: 24px;
+            width: 48px;
+            height: 48px;
+            background: url("data:image/svg+xml,%3Csvg%20width%3D%2210px%22%20height%3D%225px%22%20viewBox%3D%227%2010%2010%205%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3Cpolygon%20id%3D%22Shape%22%20stroke%3D%22none%22%20fill%3D%22%23000%22%20fill-rule%3D%22evenodd%22%20opacity%3D%220.54%22%20points%3D%227%2010%2012%2015%2017%2010%22%3E%3C%2Fpolygon%3E%0A%3C%2Fsvg%3E") no-repeat center;
+            background-size: 20px 40px;
+        }
+        
+        .mdc-floating-label{
+            height: 112px;
+            font-size: calc(2*var(--mdc-typography-subtitle1-font-size, 1rem));
+            line-height: 2rem;
+            left: 32px;
+            top: 42px;
+            
+        }
+        .mdc-floating-label--float-above{
+            -webkit-transform: translateY(-30%) scale(0.75);
+            transform: translateY(-30%) scale(0.75);
+        }
+        .mdc-select__selected-text{
+            height: 112px;
+            padding-left: 32px;
+            padding-right: 104px;
+            padding-top: 40px;
+            padding-bottom: 8px;
+            font-size: calc(2*var(--mdc-typography-subtitle1-font-size, 1rem));
+        }
+    }
+    .mdc-select__menu{
+        .mdc-list{
+            .mdc-list-item{
+                height: 96px;
+                font-size: calc(2*var(--mdc-typography-subtitle1-font-size, 1rem));
+                padding: 0 32px;
+            }
+        }
     }
 }
 
@@ -143,7 +180,7 @@ $list_columns: 3;
     @include ripple.surface;
     @include ripple.radius-bounded;
     @include ripple.states-base-color(black);
-    @include ripple.states-opacities((hover: 0, focus: 0, press: .4));
+    @include ripple.states-opacities((hover: 0, focus: 0, press: .25));
 }
 
 #bonus-product-dialog-content-stuks-buttons-stuks{

@@ -28,9 +28,11 @@ require_once 'header_material.php';
                     .index();
             select.selectedIndex = current_sort_index;
         } else {
-
+            select.selectedIndex = 0;
         }
-
+        dialog.listen('MDCDialog:closed',function(action) {
+            console.log(action.detail.action);
+        });
 
         select.listen('MDCSelect:change', () => {
             document.location.href = window.location.pathname + '?sort=' + select.value;
@@ -100,11 +102,11 @@ require_once 'header_material.php';
                 <button class="mdc-icon-button material-icons" onclick="removeProduct()">remove</button> <div id="bonus-product-dialog-content-stuks-buttons-stuks">1 Stuks</div> <button class="mdc-icon-button material-icons" onclick="addProduct()">add</button>
             </div>
             <footer class="mdc-dialog__actions">
-                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
                     <div class="mdc-button__ripple"></div>
                     <span class="mdc-button__label">Annuleren</span>
                 </button>
-                <button type="button" class="mdc-button mdc-dialog__button mdc-button--raised" data-mdc-dialog-action="yes">
+                <button type="button" class="mdc-button mdc-dialog__button mdc-button--raised" data-mdc-dialog-action="order" data-mdc-dialog-button-default>
                     <div class="mdc-button__ripple"></div>
                     <span class="mdc-button__label">Bestellen</span>
                 </button>
@@ -117,7 +119,7 @@ require_once 'header_material.php';
     <div id="card" style="background-color: gainsboro">
 
         <div class="mdc-select sort-select">
-            <div class="mdc-select__anchor bonus-sort-select">
+            <div class="mdc-select__anchor bonus-sort-select ripple-surface">
                 <i class="mdc-select__dropdown-icon"></i>
                 <div class="mdc-select__selected-text" id="select-sort-selected-text"></div>
                 <span class="mdc-floating-label">Sorteer</span>
@@ -127,16 +129,16 @@ require_once 'header_material.php';
             <div class="mdc-select__menu mdc-menu mdc-menu-surface bonus-sort-select">
                 <ul class="mdc-list">
 
-                    <li class="mdc-list-item" data-value="alphabetical">
+                    <li class="mdc-list-item ripple-surface" data-value="alphabetical">
                         Alfabetisch (A-z)
                     </li>
-                    <li class="mdc-list-item" data-value="reverse alphabetical">
+                    <li class="mdc-list-item ripple-surface" data-value="reverse alphabetical">
                         Omgekeerd Alfabetisch (z-A)
                     </li>
-                    <li class="mdc-list-item" data-value="price">
+                    <li class="mdc-list-item ripple-surface" data-value="price">
                         Op prijs (oplopend)
                     </li>
-                    <li class="mdc-list-item" data-value="reverse price">
+                    <li class="mdc-list-item ripple-surface" data-value="reverse price">
                         Op prijs (aflopend)
                     </li>
                 </ul>
