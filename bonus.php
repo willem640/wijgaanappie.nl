@@ -11,9 +11,12 @@ require_once 'header_material.php';
 <link type=\"text/css\" rel=\"stylesheet\" media=\"only screen and (min-width: 1080px)\" href=\"style.css\">
 <script type="text/javascript">
     var num_products = 1;
+    var current_product_index = 0;
     var dialog;
     var select;
     var icon_buttons_dialog = [];
+    var success_snackbar;
+    var error_snackbar;
     window.onload = function () {
         var ripple_surfaces = $('.ripple-surface');
         for (var i = 0; i < ripple_surfaces.length; ++i) {
@@ -21,6 +24,8 @@ require_once 'header_material.php';
         }
         dialog = new mdc.dialog.MDCDialog($('.bonus-product-dialog')[0]);
         select = new mdc.select.MDCSelect($('.sort-select')[0]);
+        success_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-success')[0]);
+        error_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-error')[0]);
         const url_parameters = new URLSearchParams(window.location.search);
         if (url_parameters.has('sort')) {
             current_sort = url_parameters.get('sort');
@@ -31,7 +36,9 @@ require_once 'header_material.php';
             select.selectedIndex = 0;
         }
         dialog.listen('MDCDialog:closed',function(action) {
-            console.log(action.detail.action);
+            if(action.detail.action === 'order'){
+                orderProduct(current_product_index, num_products);
+            }
         });
 
         select.listen('MDCSelect:change', () => {
@@ -39,7 +46,7 @@ require_once 'header_material.php';
         });
     };
     function buyProductDialog(title, price_was, price_now, unit_size, discount, index) {
-
+        current_product_index = index;
         $('#bonus-product-dialog-title')[0].innerHTML = title;
         if (price_was === '') {
             $('#bonus-product-dialog-content')[0].innerHTML =
@@ -83,6 +90,32 @@ require_once 'header_material.php';
     function removeProduct(){
         setProductAmount(num_products - 1);
     }
+    
+    function orderProduct(index, amount){
+        $.ajax({
+            type: "POST",
+            url: '/bestelling.php',
+            data: { product: index, amount: amount},
+            success: buyProductPostSuccess,
+            error: buyProductPostError,
+            dataType: 'text'
+        });
+    }
+    
+    function buyProductPostSuccess(data_returned, text_status, xhr){
+        success_snackbar.open();
+    }
+    
+    function buyProductPostError(xhr, text_status, error_thrown){
+        $('#bonus-snackbar-order-error div div.mdc-snackbar__label')[0].innerHTML
+            = 'Product niet besteld: ' + xhr.responseText;
+        error_snackbar.open();
+    }
+    
+    function retryOrder(){
+        orderProduct(current_product_index, num_products);
+    }
+    
 </script>
 
 <div class="mdc-dialog bonus-product-dialog">
@@ -115,6 +148,33 @@ require_once 'header_material.php';
     </div>
     <div class="mdc-dialog__scrim"></div>
 </div>
+<div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-order-success">
+  <div class="mdc-snackbar__surface">
+    <div class="mdc-snackbar__label"
+         role="status"
+         aria-live="polite">
+      Product besteld
+    </div>
+  </div>
+</div>
+
+<div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-order-error">
+  <div class="mdc-snackbar__surface">
+    <div class="mdc-snackbar__label"
+         role="status"
+         aria-live="polite">
+      Product niet besteld.
+    </div>
+    <div class="mdc-snackbar__actions">
+      <button type="button" class="mdc-button mdc-snackbar__action ripple-surface" onclick="retryOrder()">
+        <div class="mdc-button__ripple"></div>
+        <span class="mdc-button__label">Opnieuw</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
 <div class="wrapper" style="width:96%; left:2%"> 
     <div id="card" style="background-color: gainsboro">
 

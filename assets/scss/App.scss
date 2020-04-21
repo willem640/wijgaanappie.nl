@@ -20,6 +20,7 @@ $secondary: #004ba0; // global variables outside of the theme omdat theme soms n
 @use "@material/select";
 @use "@material/line-ripple";
 @use "@material/icon-button";
+@use '@material/snackbar';
 
 
 
@@ -178,7 +179,7 @@ $list_columns: 3;
 .mdc-icon-button{
     @include icon-button.core-styles;
     @include ripple.surface;
-    @include ripple.radius-bounded;
+    @include ripple.radius-unbounded;
     @include ripple.states-base-color(black);
     @include ripple.states-opacities((hover: 0, focus: 0, press: .25));
 }
@@ -187,4 +188,30 @@ $list_columns: 3;
     display:inline;
     padding-top: 8px;
     line-height: 0;
+}
+
+.bonus-snackbar-after-order{
+    @include snackbar.min-width(100%);
+    @include snackbar.fill-color(#fff);
+    @include snackbar.label-ink-color(#000);
+    .mdc-snackbar__surface{
+        .mdc-snackbar__label{
+            font-size: calc(2*var(--mdc-typography-body2-font-size, 0.875rem));
+            line-height: calc(2*var(--mdc-typography-body2-line-height, 1.25rem));
+            padding: 28px 16px 28px 32px;
+    
+        }
+        .mdc-snackbar__actions{
+            button.mdc-snackbar__action{
+                padding: 0 16px 0 16px;
+                font-size: calc(2*var(--mdc-typography-button-font-size, 0.875rem));
+                border-radius: 8px;
+                overflow: hidden;
+                height: 72px;
+                @include button.filled-accessible(#fff);
+                @include button.ink-color(#004ba0);
+               
+            }
+        }
+    }
 }
