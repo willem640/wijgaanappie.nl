@@ -4,13 +4,14 @@ require_once 'setup.php';
 require_once 'simple_html_dom.php';
 
 if (!isset($_SESSION['loggedin']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    header('HTTP/1.1 403 Not logged in');
+    header('HTTP/1.1 403 Not Logged In');
     echo('Je bent niet ingelogd');
     die();
 }
 if (isset($_POST['product'])) {
     if (!isset($_SESSION['orderable_array'][$_POST['product']])) {
-        http_response_code(422); // input klopt maar de server kan het niet processen
+        header('HTTP/1.1 422 Unprocessable Entity'); // input klopt maar de server kan het niet processen
+        echo('Product bestaat niet');
         die();
     }
     $prod = $_SESSION['orderable_array'][$_POST['product']];
