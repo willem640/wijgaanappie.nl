@@ -4,6 +4,7 @@ require_once 'setup.php';
 
 <!DOCTYPE html>
 <html>
+    <!-- Test -->
     <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153875032-1"></script>
