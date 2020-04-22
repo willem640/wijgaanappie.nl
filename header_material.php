@@ -6,7 +6,7 @@ $header = "
 <script src=\"node_modules/material-components-web/dist/material-components-web.min.js\"></script>    
 
 <!-- small screen stylesheet -->
-<link rel='stylesheet' media='only screen and (max-width: 1080px)' href='style_smallscreen.css' />
+<link rel='stylesheet' href='style_smallscreen.css' />
 
 
 <!-- google material icons -->
