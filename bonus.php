@@ -29,7 +29,7 @@
         <meta charset="utf-8">
         <meta name="google-site-verification" content="uvDiVjrbFuwiF-ME9NPjbmsZsRXQGzNzGdJUElgM7DQ" />
         <link rel='stylesheet' media='only screen and (max-width: 1080px)' href='style_smallscreen.css' />
-        <link type="text/css" rel="stylesheet" media="only screen and (min-width: 1080px)" href="style.css">
+        <link type=\"text/css\" rel=\"stylesheet\" media=\"only screen and (min-width: 1080px)\" href=\"style.css\">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     <body>
