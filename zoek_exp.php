@@ -14,7 +14,7 @@ $query=DB::query("SELECT * FROM products WHERE MATCH(title) AGAINST(%s) ORDER BY
 </form>
 
 <?php
-echo 'Resulaten Aantal Gevonden: ' . len($query);
+echo 'Resulaten Aantal Gevonden: ' . count($query);
 echo '<ul>';
 foreach($query as $result){
     $url="https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link'])-17);
