@@ -94,7 +94,7 @@
             var success_snackbar;
             var error_snackbar;
             var nologin_snackbar;
-            window.onload = function () {
+            $(document).ready(function () {
                 var ripple_surfaces = $('.ripple-surface');
                 for (var i = 0; i < ripple_surfaces.length; ++i) {
                     mdc.ripple.MDCRipple.attachTo(ripple_surfaces[i]);
@@ -122,7 +122,7 @@
                 select.listen('MDCSelect:change', () => {
                     document.location.href = window.location.pathname + '?sort=' + select.value;
                 });
-            };
+            });
             function buyProductDialog(title, price_was, price_now, unit_size, discount, index) {
                 current_product_index = index;
                 $('#bonus-product-dialog-title')[0].innerHTML = title;
@@ -215,7 +215,7 @@
 
                     </div>
                     <div class="mdc-dialog__content" id="bonus-product-dialog-content-stuks-buttons">
-                        <button class="mdc-icon-button material-icons" onclick="removeProduct()">remove</button> <div id="bonus-product-dialog-content-stuks-buttons-stuks">1 Stuks</div> <button class="mdc-icon-button material-icons" onclick="addProduct()">add</button>
+                        <button class="mdc-icon-button material-icons-round" onclick="removeProduct()">remove</button> <div id="bonus-product-dialog-content-stuks-buttons-stuks">1 Stuks</div> <button class="mdc-icon-button material-icons-round" onclick="addProduct()">add</button>
                     </div>
                     <footer class="mdc-dialog__actions">
                         <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
