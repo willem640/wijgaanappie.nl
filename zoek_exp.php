@@ -9,7 +9,7 @@ $query=DB::query("SELECT * FROM products WHERE MATCH(title) AGAINST(%s) ORDER BY
 var_dump($query);
 ?>
 
-<form>
+<form method="get" action="zoek_exp.php">
     <input type="text" name="zoek"/>
     <input type="submit"/>
 </form>
