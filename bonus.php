@@ -93,6 +93,7 @@
             var icon_buttons_dialog = [];
             var success_snackbar;
             var error_snackbar;
+            var nologin_snackbar;
             window.onload = function () {
                 var ripple_surfaces = $('.ripple-surface');
                 for (var i = 0; i < ripple_surfaces.length; ++i) {
@@ -102,6 +103,7 @@
                 select = new mdc.select.MDCSelect($('.sort-select')[0]);
                 success_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-success')[0]);
                 error_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-error')[0]);
+                nologin_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-not-logged-in')[0]);
                 const url_parameters = new URLSearchParams(window.location.search);
                 if (url_parameters.has('sort')) {
                     current_sort = url_parameters.get('sort');
@@ -184,9 +186,13 @@
             }
 
             function buyProductPostError(xhr, text_status, error_thrown) {
-                $('#bonus-snackbar-order-error div div.mdc-snackbar__label')[0].innerHTML
-                        = 'Product niet besteld: ' + xhr.responseText;
-                error_snackbar.open();
+                if(xhr.status == 403){
+                    nologin_snackbar.open();
+                } else {
+                    $('#bonus-snackbar-order-error div div.mdc-snackbar__label')[0].innerHTML
+                            = 'Product niet besteld: ' + xhr.responseText;
+                    error_snackbar.open();
+                }
             }
 
             function retryOrder() {
@@ -245,7 +251,22 @@
                 <div class="mdc-snackbar__actions">
                     <button type="button" class="mdc-button mdc-snackbar__action ripple-surface" onclick="retryOrder()">
                         <div class="mdc-button__ripple"></div>
-                        <span class="mdc-button__label">Opnieuw</span>
+                        <span class="mdc-button__label" id="bonus-post-error__label">Opnieuw</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+                <div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-not-logged-in">
+            <div class="mdc-snackbar__surface">
+                <div class="mdc-snackbar__label"
+                     role="status"
+                     aria-live="polite">
+                    Om een product te bestellen moet je eerst ingelogd zijn. 
+                </div>
+                <div class="mdc-snackbar__actions">
+                    <button type="button" class="mdc-button mdc-snackbar__action ripple-surface" onclick="window.location.href = 'login.php?return=bonus.php'">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label" id="bonus-post-error__label">Inloggen</span>
                     </button>
                 </div>
             </div>
