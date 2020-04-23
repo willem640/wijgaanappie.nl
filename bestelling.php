@@ -26,10 +26,15 @@ if (isset($_POST['product'])) {
     }
     $cart[] = $prod;
     inCart:
-    array_filter($cart, function ($var) {
-        return count($var) !== 0;
-    }); // filter empty arrays
-    array_filter($cart);
+    $cart = array_filter($cart, function ($var) {
+        if (count($var) === 0){
+            return false;
+        } else {
+            return $var['bestelling_amount'] >= 1;
+        };
+    });     // filter empty arrays and negative indices
+
+    $cart = array_filter($cart);
 
     DB::update('users', ['cart' => json_encode($cart)], 'username = %s', $_SESSION['username']);
     header('Location: bestelling.php');

@@ -11,7 +11,7 @@ $header = "
 <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
 
 <!-- google material icons -->
-<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\">
+<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp\">
 
 <!-- main stylesheet with material.io class definitions, compiled Sass from assets/scss -->
 <link rel=\"stylesheet\" type=\"text/css\" href=\"assets/css/App.css\">

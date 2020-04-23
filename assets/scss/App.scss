@@ -30,24 +30,23 @@ $secondary: #004ba0; // global variables outside of the theme omdat theme soms n
 
 $list_columns: 3;
 .bonus-image-list{
-    @include image-list.shape-radius(16px);
+    @include image-list.shape-radius(8px);
     @include image-list.standard-columns($list_columns);
     li.bonus-image-list__item{
-        margin: 8px;
-        width: calc(100%/#{$list_columns} - 2*8px);
+        margin: 4px;
+        width: calc(100%/#{$list_columns} - 2*4px);
         padding:0;
-        overflow:hidden;
-        border-radius:16px;
+        border-radius:8px;
         
         .price-label{
             position: absolute;
             top: 0;
             right: 0;
-            height: 2.5rem;
+            height: 1.5rem;
             //trbl
             //margin:auto;
-            padding: 0.5rem 0.6rem 0 0.6rem;
-            border-radius: 0 0 0 16px;
+            padding: 0.25rem 0.3rem 0 0.3rem;
+            border-radius: 0 0 0 8px;
             font-family: Roboto, sans-serif;
             background-color: /*#2ba0b3$primary*/#63a4ff;
             display:block;
@@ -56,19 +55,14 @@ $list_columns: 3;
             span {
                 vertical-align: middle;
                 @include typography.typography(body1);
-                font-size: 2rem;
+                font-size: 1rem;
                 display: block;
             }
         }
         
         .bonus-image-list__supporting{
-            height:72px;
-            padding-top: 0; /* text spacing is controlled with margin in text element*/
-            span.bonus-image-list__label{
-                height: calc(72px - ((72px - 2rem)/2));
-                font-size: 2rem;
-                margin-top: calc((72px - 2rem)/2);
-            }
+            padding: 0 8px;
+            height:32px;
         }
     }
 }
@@ -79,34 +73,28 @@ $list_columns: 3;
     @include ripple.radius-bounded;
     @include ripple.states-base-color(black);
     @include ripple.states-opacities((hover: 0, focus: 0, press: .25));
+    overflow: hidden;
 }
 
 .bonus-product-dialog{
     @include dialog.min-width(80vw);
-    @include dialog.shape-radius(16px);
+    @include dialog.shape-radius(8px);
     .mdc-dialog__container{
         .mdc-dialog__surface{
-            h2.mdc-dialog__title{
-                font-size: 3.5rem;
-                line-height: 3rem;
-                padding: 32px 48px 24px 48px;
-            }
             
             .mdc-dialog__content{
-                font-size: 3rem;
-                line-height: 4.5rem;
-                padding: 8px 48px 24px;
-                
-                .mdc-icon-button{
-                    @include icon-button.icon-size(48px);
-                }
+                padding-right: 24px;
+                padding-bottom: 0px;
+                padding-left: 24px;
+            }
+            
+            .mdc-dialog__content#bonus-product-dialog-content-stuks-buttons{
+                padding-top:0;
             }
             
             footer.mdc-dialog__actions{
                 button{
                     @include button.filled-accessible(#fff);
-                    @include button.height(4rem);
-                    font-size: 1.75rem;
                 }
                 button.mdc-button--raised{
                     @include button.filled-accessible($primary);
@@ -127,48 +115,6 @@ $list_columns: 3;
 .sort-select{
     @include select.focused-bottom-line-color($primary);
     @include select.focused-label-color($primary);
-    .mdc-select__anchor{
-        height: 112px;
-        
-        .mdc-select__dropdown-icon{
-            right: 16px;
-            bottom: 24px;
-            width: 48px;
-            height: 48px;
-            background: url("data:image/svg+xml,%3Csvg%20width%3D%2210px%22%20height%3D%225px%22%20viewBox%3D%227%2010%2010%205%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3Cpolygon%20id%3D%22Shape%22%20stroke%3D%22none%22%20fill%3D%22%23000%22%20fill-rule%3D%22evenodd%22%20opacity%3D%220.54%22%20points%3D%227%2010%2012%2015%2017%2010%22%3E%3C%2Fpolygon%3E%0A%3C%2Fsvg%3E") no-repeat center;
-            background-size: 20px 40px;
-        }
-        
-        .mdc-floating-label{
-            height: 112px;
-            font-size: calc(2*var(--mdc-typography-subtitle1-font-size, 1rem));
-            line-height: 2rem;
-            left: 32px;
-            top: 42px;
-            
-        }
-        .mdc-floating-label--float-above{
-            -webkit-transform: translateY(-30%) scale(0.75);
-            transform: translateY(-30%) scale(0.75);
-        }
-        .mdc-select__selected-text{
-            height: 112px;
-            padding-left: 32px;
-            padding-right: 104px;
-            padding-top: 40px;
-            padding-bottom: 8px;
-            font-size: calc(2*var(--mdc-typography-subtitle1-font-size, 1rem));
-        }
-    }
-    .mdc-select__menu{
-        .mdc-list{
-            .mdc-list-item{
-                height: 96px;
-                font-size: calc(2*var(--mdc-typography-subtitle1-font-size, 1rem));
-                padding: 0 32px;
-            }
-        }
-    }
 }
 
 .bonus-sort-select-line-ripple{
@@ -195,19 +141,8 @@ $list_columns: 3;
     @include snackbar.fill-color(#fff);
     @include snackbar.label-ink-color(#000);
     .mdc-snackbar__surface{
-        .mdc-snackbar__label{
-            font-size: calc(2*var(--mdc-typography-body2-font-size, 0.875rem));
-            line-height: calc(2*var(--mdc-typography-body2-line-height, 1.25rem));
-            padding: 28px 16px 28px 32px;
-    
-        }
         .mdc-snackbar__actions{
             button.mdc-snackbar__action{
-                padding: 0 16px 0 16px;
-                font-size: calc(2*var(--mdc-typography-button-font-size, 0.875rem));
-                border-radius: 8px;
-                overflow: hidden;
-                height: 72px;
                 @include button.filled-accessible(#fff);
                 @include button.ink-color(#004ba0);
                
