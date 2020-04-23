@@ -16,7 +16,8 @@ $query=DB::query("SELECT * FROM products WHERE MATCH(title) AGAINST(%s) ORDER BY
 
 echo '<ul>';
 foreach($query as $result){
-    echo '<li>' . $result['title'] . ' ' . $result['priceNow'] . ' ' . $result['unitSize'] . '</li>';
+    $url="https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link'])-17);
+    echo '<li>' . $result['title'] . ' ' . $result['priceNow'] . ' ' . $result['unitSize'] . $url .'</li>';
 }
 echo '</ul>';
 ?>
