@@ -19,7 +19,7 @@ echo '<ul>';
 foreach($query as $result){
     $url="https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link'])-17);
     $json= json_decode(file_get_contents($url), true);
-    var_dump($json['_embedded']['items']);
+    var_dump($json['_embedded']);
     echo '<li>' . $result['title'] . ' ' . $result['priceNow'] . ' ' . $result['unitSize'] . $url .'</li>';
 }
 echo '</ul>';
