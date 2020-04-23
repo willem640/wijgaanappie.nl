@@ -20,9 +20,10 @@ foreach($query as $result){
     $url="https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link'])-17);
     $json= json_decode(file_get_contents($url), true);
     echo '<pre>';
-    print_r($json['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product']['images'][0]['link']);
+    $img_src=$json['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product']['images'][0]['link']['href'];
+    print_r($json['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product']['images'][0]['link']['href']);
     echo '</pre>';
-    echo '<li>' . $result['title'] . ' ' . $result['priceNow'] . ' ' . $result['unitSize'] . $url .'</li>';
+    echo '<li>' . $result['title'] . ' ' . $result['priceNow'] . ' ' . $result['unitSize'] . $url . '<img src="' . $img_src . '">' . '</li>';
 }
 echo '</ul>';
 ?>
