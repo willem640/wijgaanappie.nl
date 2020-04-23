@@ -1,6 +1,6 @@
 
 <?php
-$search=(isset($_GET['zoek']) ?? '');
+$search=$_GET['zoek'] ?? '';
 var_dump($_GET);
 echo $search;
 session_start();
