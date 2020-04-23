@@ -26,7 +26,7 @@ if (isset($_POST['product'])) {
     }
     $cart[] = $prod;
     inCart:
-    array_filter($cart, function ($var) {
+    $cart = array_filter($cart, function ($var) {
         if (count($var) === 0){
             return false;
         } else {
@@ -34,7 +34,7 @@ if (isset($_POST['product'])) {
         };
     });     // filter empty arrays and negative indices
 
-    array_filter($cart);
+    $cart = array_filter($cart);
 
     DB::update('users', ['cart' => json_encode($cart)], 'username = %s', $_SESSION['username']);
     header('Location: bestelling.php');
