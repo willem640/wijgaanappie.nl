@@ -18,7 +18,7 @@ $query=DB::query("SELECT * FROM products WHERE MATCH(title) AGAINST(%s) ORDER BY
 echo '<ul>';
 foreach($query as $result){
     $url="https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link'])-17);
-    $json= file_get_contents($url, true);
+    $json= json_decode(file_get_contents($url), true);
     var_dump($json);
     echo '<li>' . $result['title'] . ' ' . $result['priceNow'] . ' ' . $result['unitSize'] . $url .'</li>';
 }
