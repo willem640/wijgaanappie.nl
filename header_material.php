@@ -6,8 +6,9 @@ $header = "
 <script src=\"node_modules/material-components-web/dist/material-components-web.min.js\"></script>    
 
 <!-- small screen stylesheet -->
-<link rel='stylesheet' href='style_smallscreen.css' />
+<link rel=\"stylesheet\" href=\"style_smallscreen.css\">
 
+<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
 
 <!-- google material icons -->
 <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\">
@@ -26,4 +27,4 @@ $header = "
 </script>
     <meta charset=\"utf-8\">
     <meta name=\"google-site-verification\" content=\"uvDiVjrbFuwiF-ME9NPjbmsZsRXQGzNzGdJUElgM7DQ\" />
-		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>";
+    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>";
