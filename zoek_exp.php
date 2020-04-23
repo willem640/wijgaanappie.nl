@@ -1,7 +1,7 @@
 
 <?php
-$search=(isset($_POST['zoek']) ?? '');
-var_dump($_POST);
+$search=(isset($_GET['zoek']) ?? '');
+var_dump($_GET);
 echo $search;
 session_start();
 require_once 'setup.php';
