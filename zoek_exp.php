@@ -16,11 +16,19 @@ $query=DB::query("SELECT * FROM products WHERE MATCH(title) AGAINST(%s) ORDER BY
 <?php
 echo 'Resulaten Aantal Gevonden: ' . count($query);
 echo '<ul>';
+$mh = curl_multi_init();
 foreach($query as $result){
     $url="https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link'])-17);
-    $json= json_decode(file_get_contents($url), true);
-    $img_src=$json['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product']['images'][0]['link']['href'];
-    echo '<li>' . $result['title'] . ' ' . $result['priceNow'] . ' ' . $result['unitSize'] . $url . $img_src . '</li>';
+    $ch=curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_multi_add_handle($mh, $ch);
 }
+do {
+    $status= curl_multi_exec($mh, $active);
+    if($active){
+    curl_multi_select($mh);
+    }
+} while ($active && $status == CURLM_OK);
+curl_multi_close($mh);
 echo '</ul>';
 ?>
