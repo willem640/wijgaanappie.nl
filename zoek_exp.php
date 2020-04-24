@@ -5,7 +5,7 @@ echo $search;
 session_start();
 require_once 'setup.php';
 require_once 'simple_html_dom.php';
-$query=DB::query("SELECT * FROM products WHERE MATCH(title) AGAINST(%s) ORDER BY MATCH(title) AGAINST(%s) DESC", $search, $search);
+$query=DB::query("SELECT * FROM products-with-noprice WHERE MATCH(title) AGAINST(%s) ORDER BY MATCH(title) AGAINST(%s) DESC", $search, $search);
 ?>
 
 <form method="get" action="zoek_exp.php">
