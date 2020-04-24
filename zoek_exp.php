@@ -36,7 +36,8 @@ do {
 } while ($active && $status == CURLM_OK);
 
 foreach($curlHandles as $url=>$ch){
-    $content=json_decode(curl_multi_getcontent($ch));
+    $content=json_decode(curl_multi_getcontent($ch), true);
+    $img_src=$content['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product']['images'][0]['link']['href'];
     echo '<pre>';
     print_r($content);
     echo '</pre>';
