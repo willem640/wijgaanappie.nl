@@ -19,6 +19,7 @@ echo '<ul>';
 $mh = curl_multi_init();
 $curlHandles=array();
 foreach($query as $result){
+    echo '<li>'.$result['title'].'</li>';
     $url="https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link'])-17);
     $ch=curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
