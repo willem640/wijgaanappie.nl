@@ -26,6 +26,7 @@ foreach($query as $result){
 }
 do {
     $status= curl_multi_exec($mh, $active);
+    var_dump($status);
     if($active){
     curl_multi_select($mh);
     }
