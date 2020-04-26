@@ -215,6 +215,7 @@ require_once 'simple_html_dom.php';
                 $prod = $content['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product'];
                 $_SESSION['orderable_array'][$key] = $prod;
                 var_export($prod);
+                echo '<br>'.$url;
                 ++$key;
                 echo '<div class="mdc-card search-result-card">'
                .' <div class="mdc-card__primary-action" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["type"]["name"])) . '\',\'' . $key . '\')">'
