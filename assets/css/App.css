@@ -522,4 +522,51 @@
   color: #004ba0;
 }
 
+.search-result-card {
+  margin-bottom: 16px;
+}
+.search-result-card .mdc-card__primary-action p {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: Roboto, sans-serif;
+  /* @alternate */
+  font-family: var(--mdc-typography-body1-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));
+  font-size: 1rem;
+  /* @alternate */
+  font-size: var(--mdc-typography-body1-font-size, 1rem);
+  line-height: 1.5rem;
+  /* @alternate */
+  line-height: var(--mdc-typography-body1-line-height, 1.5rem);
+  font-weight: 400;
+  /* @alternate */
+  font-weight: var(--mdc-typography-body1-font-weight, 400);
+  letter-spacing: 0.03125em;
+  /* @alternate */
+  letter-spacing: var(--mdc-typography-body1-letter-spacing, 0.03125em);
+  text-decoration: inherit;
+  /* @alternate */
+  text-decoration: var(--mdc-typography-body1-text-decoration, inherit);
+  text-transform: inherit;
+  /* @alternate */
+  text-transform: var(--mdc-typography-body1-text-transform, inherit);
+  padding: 16px;
+}
+.search-result-card .mdc-card__primary-action .search-result-card__media {
+  background-image: url("https://static.ah.nl/static/product/AHI_43545239363332303137_1_LowRes_JPG.JPG");
+  background-size: cover;
+  height: 200px;
+  margin: 8px;
+}
+.search-result-card .mdc-card__primary-action .search-result-card__title {
+  margin-block-start: 0.8rem;
+  margin-block-end: 0.8rem;
+  padding-left: 16px;
+}
+.search-result-card .mdc-card__primary-action .search-result-card__content {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-top: 0;
+  color: gray;
+}
+
 /*# sourceMappingURL=App.css.map */

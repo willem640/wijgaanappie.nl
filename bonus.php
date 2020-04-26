@@ -123,6 +123,7 @@
                     document.location.href = window.location.pathname + '?sort=' + select.value;
                 });
             });
+            
             function buyProductDialog(title, price_was, price_now, unit_size, discount, index) {
                 current_product_index = index;
                 $('#bonus-product-dialog-title')[0].innerHTML = title;

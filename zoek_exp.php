@@ -1,20 +1,19 @@
 <?php
 session_start();
-$search=$_GET['zoek'] ?? '';
-echo $search;
+require_once 'header_material.php';
 require_once 'setup.php';
 require_once 'simple_html_dom.php';
-$query=DB::query("SELECT * FROM `products-with-noprice` WHERE MATCH(title) AGAINST(%s) ORDER BY MATCH(title) AGAINST(%s) DESC", $search, $search);
 ?>
-
 <form method="get" action="zoek_exp.php">
-    <input type="text" name="zoek"/>
+    <input type="text" name="query"/>
     <input type="submit"/>
 </form>
 
 <?php
 echo 'Resulaten Aantal Gevonden: ' . count($query);
 echo '<ul>';
+$search=$_GET['query'] ?? '';
+$query=DB::query("SELECT * FROM `products-with-noprice` WHERE MATCH(title) AGAINST(%s) ORDER BY MATCH(title) AGAINST(%s) DESC", $search, $search);
 $mh = curl_multi_init();
 foreach($query as $result){
     echo '<li>'.$result['title'].'</li>';
@@ -37,12 +36,10 @@ do {
 foreach($curlHandles as $url=>$ch){
     $content=json_decode(curl_multi_getcontent($ch), true);
     $prod=$content['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product'];
-    $products[]=$prod;
     echo '<pre>';
     echo '<img src="'.$prod['images'][0]['link'].'">';
     echo '</pre>';
 }
-var_export($products);
 curl_multi_close($mh);
 echo '</ul>';
 ?>
