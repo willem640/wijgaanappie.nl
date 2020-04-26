@@ -1,8 +1,7 @@
-
 <?php
+session_start();
 $search=$_GET['zoek'] ?? '';
 echo $search;
-session_start();
 require_once 'setup.php';
 require_once 'simple_html_dom.php';
 $query=DB::query("SELECT * FROM `products-with-noprice` WHERE MATCH(title) AGAINST(%s) ORDER BY MATCH(title) AGAINST(%s) DESC", $search, $search);
