@@ -198,6 +198,9 @@
             function retryOrder() {
                 orderProduct(current_product_index, num_products);
             }
+            function undoOrder(){
+                orderProduct(current_product_index, -num_products);
+            } //TODO: implement undo button
 
         </script>
 
