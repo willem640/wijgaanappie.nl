@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once 'header_material.php';
-require_once 'sample_array_of_products.php';
 require_once 'setup.php';
 require_once 'simple_html_dom.php';
 ?>
