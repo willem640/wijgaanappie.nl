@@ -193,7 +193,7 @@ require_once 'simple_html_dom.php';
         <div class="wrapper">
             <?php
             $search = $_GET['query'] ?? '';
-            $query = DB::query("SELECT * FROM `products-with-noprice` WHERE MATCH(title) AGAINST(%s) ORDER BY MATCH(title) AGAINST(%s) DESC", $search, $search);
+            $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s) ORDER BY MATCH(title) AGAINST(%s) DESC", $search, $search);
             $mh = curl_multi_init();
             foreach ($query as $result) {
                 $url = "https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link']) - 17);
