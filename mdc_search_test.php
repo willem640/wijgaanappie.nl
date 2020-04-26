@@ -10,7 +10,7 @@ require_once 'simple_html_dom.php';
 <!DOCTYPE html>
 <html>
     <head>
-        <?=$header?>
+        <?php echo $header; ?>
         <script>
             var num_products = 1;
             var current_product_index = 0;
