@@ -214,15 +214,16 @@ require_once 'simple_html_dom.php';
                 $content = json_decode(curl_multi_getcontent($ch), true);
                 $prod = $content['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product'];
                 $_SESSION['orderable_array'][$key] = $prod;
+                echo $prod["description"];
                 ++$key;
                 echo '<div class="mdc-card search-result-card">'
                .' <div class="mdc-card__primary-action" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["type"]["name"])) . '\',\'' . $key . '\')">'
                     .'<div class="mdc-card__media search-result-card__media" style="background-image: url('.$prod['images'][0]['link']['href'].'"></div>'
                         .'<h5 class="mdc-typography--headline5 search-result-card__title">'
-                            . $prod['description']
+                            . $prod["description"]
                         . '</h5>'
                         .'<p class="mdc-typography--body1 search-result-card__content">'
-                        . '€'.$prod['priceLabel']['now'].' - '.$prod['unitSize']
+                        . '€'.$prod["priceLabel"]["now"].' - '.$prod["unitSize"]
                         . '</p>'
                     .'</div>'
                 .'</div>';
