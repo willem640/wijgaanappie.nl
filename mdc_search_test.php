@@ -228,7 +228,7 @@ require_once 'simple_html_dom.php';
                 .'</div>';
             } //TODO: niet in 4 kijken in de json, maar scannen; discount -> label bekijken; discount->label laten zien ipv prijs als die er niet is
             curl_multi_close($mh);
-            var_export($_SESSION['orderable_array']);
+            echo json_encode($_SESSION['orderable_array']);
             ?>
 
 
