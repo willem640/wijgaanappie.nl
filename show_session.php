@@ -1,2 +1,2 @@
 <?php
-echo json_encode($_SESSION['orderable_array'][$_GET['a']]);
+echo json_encode($_SESSION['orderable_array'][ int($_GET['a']) ]);
