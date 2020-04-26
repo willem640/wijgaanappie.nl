@@ -16,7 +16,6 @@ $query=DB::query("SELECT * FROM `products-with-noprice` WHERE MATCH(title) AGAIN
 echo 'Resulaten Aantal Gevonden: ' . count($query);
 echo '<ul>';
 $mh = curl_multi_init();
-$curlHandles=array();
 foreach($query as $result){
     echo '<li>'.$result['title'].'</li>';
     $url="https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link'])-17);
@@ -37,11 +36,13 @@ do {
 
 foreach($curlHandles as $url=>$ch){
     $content=json_decode(curl_multi_getcontent($ch), true);
-    $img_src=$content['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product']['images'][0]['link']['href'];
+    $prod=$content['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product'];
+    $products[]=$prod;
     echo '<pre>';
-    echo '<img src="'.$img_src.'">';
+    echo '<img src="'.$prod['images'][0]['link'].'">';
     echo '</pre>';
 }
+var_export($products);
 curl_multi_close($mh);
 echo '</ul>';
 ?>
