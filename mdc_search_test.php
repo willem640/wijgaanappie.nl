@@ -216,7 +216,7 @@ require_once 'simple_html_dom.php';
                 $_SESSION['orderable_products'][$key] = $prod;
                 ++$key;
                 echo '<div class="mdc-card search-result-card">'
-               .' <div class="mdc-card__primary-action" onclick="onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["type"]["name"])) . '\',\'' . $key . '\')">'
+               .' <div class="mdc-card__primary-action" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["type"]["name"])) . '\',\'' . $key . '\')">'
                     .'<div class="mdc-card__media search-result-card__media" style="background-image: url('.$prod['images'][0]['link']['href'].'"></div>'
                         .'<h5 class="mdc-typography--headline5 search-result-card__title">'
                             . $prod['description']
