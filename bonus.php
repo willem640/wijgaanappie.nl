@@ -186,7 +186,7 @@
             }
 
             function buyProductPostError(xhr, text_status, error_thrown) {
-                if(xhr.status == 403){
+                if(xhr.status === 403){
                     nologin_snackbar.open();
                 } else {
                     $('#bonus-snackbar-order-error div div.mdc-snackbar__label')[0].innerHTML
