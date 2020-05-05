@@ -222,7 +222,8 @@ require_once 'simple_html_dom.php';
                     }
                     
                  }
-                $detail_lane = array_filter($content['_embedded']['lanes'], function ($lane) {return isset($lane['_embedded']['items'][0]['_embedded']['product']);})[0];
+                $detail_lane = array_filter($content['_embedded']['lanes'], function ($lane) {return isset($lane['_embedded']['items'][0]['_embedded']['product']);});
+                echo sizeof($detail_lane);
                 $prod = $detail_lane['_embedded']['items'][0]['_embedded']['product'];
                 /*if(!isset($prod)) {
                     continue;
