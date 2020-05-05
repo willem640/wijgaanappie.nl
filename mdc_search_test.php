@@ -216,7 +216,8 @@ require_once 'simple_html_dom.php';
                 $detailLane = array_filter($content['_embedded']['lanes'], function ($lane) {return (isset($lane['type']));})[0];
                 echo sizeof($content['_embedded']['lanes']);
                 foreach($content['_embedded']['lanes'] as $lane){
-                    echo $lane['type'];
+                    echo $lane['type'] == 'ProductDetailLane';
+                    echo $lane['type'] === 'ProductDetailLane';
                 }
                 if(!isset($detailLane)){
                     echo $content['title'];
