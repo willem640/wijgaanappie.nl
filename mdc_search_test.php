@@ -224,8 +224,8 @@ require_once 'simple_html_dom.php';
                     
                  }
                 $detail_lanes = array_filter($content['_embedded']['lanes'], function ($lane) {return isset($lane['_embedded']['items'][0]['_embedded']['product']);});
-                $detail_lane = array_values($detail_lanes);
-                echo json_encode($detail_lane['_embedded']);
+                $detail_lane = array_values($detail_lanes)[0];
+                //echo json_encode($detail_lane);
                 $prod = $detail_lane['_embedded']['items'][0]['_embedded']['product'];
                 /*if(!isset($prod)) {
                     continue;
