@@ -196,9 +196,9 @@ require_once 'simple_html_dom.php';
             $search = $_GET['query'] ?? '';
             $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s) ORDER BY MATCH(title) AGAINST(%s) DESC", $search, $search);
             $mh = curl_multi_init();
+            $ch = curl_init();
             foreach ($query as $result) {
                 $url = "https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link']) - 17);
-                $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 $curlHandles[$url] = $ch;
@@ -213,14 +213,16 @@ require_once 'simple_html_dom.php';
             $key = 0;
             foreach ($curlHandles as $url => $ch) {
                 $content = json_decode(curl_multi_getcontent($ch), true);
-                $detailLane = array_filter($content['_embedded']['lanes'], function ($lane) {return isset($lane['_embedded']['items'][0]['_embedded']['product']);});
-                echo sizeof($detailLane);
-                if(!isset($detailLane)){
-                    echo $content['title'];
-                    foreach($content['_embedded']['lanes'] as $lane){
-                        echo $lane['type'];
+                 if(!isset($content)){
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $content = json_decode(curl_exec($ch), true); // try again
+                    if(!isset($content)){
+                        continue; // er zal wel iets met de key zijn
                     }
-                }
+                    
+                 }
+                $detailLane = array_filter($content['_embedded']['lanes'], function ($lane) {return isset($lane['_embedded']['items'][0]['_embedded']['product']);})[0];
                 $prod = $content['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product'];
                 /*if(!isset($prod)) {
                     continue;
