@@ -216,7 +216,7 @@ require_once 'simple_html_dom.php';
                  if(!isset($content)){
                     curl_setopt($ch, CURLOPT_URL, $handle_url);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    $content = json_decode(curl_exec($ch), true); // try again
+                    //$content = json_decode(curl_exec($ch), true); // try again
                     if(!isset($content)){
                         continue; // er zal wel iets met de key zijn
                     }
