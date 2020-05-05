@@ -37,7 +37,7 @@ require_once 'simple_html_dom.php';
             function buyProductDialog(title, price_was, price_now, unit_size, discount, index, description = '') {
                 current_product_index = index;
                 $('#bonus-product-dialog-title')[0].innerHTML = title;
-                var $content;
+                var $content = '';
                 if(price_was !== '') {
                     $content = $content.concat(`Van: €${$price_was}<br>`);
                 }
