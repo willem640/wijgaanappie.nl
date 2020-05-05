@@ -213,9 +213,7 @@ require_once 'simple_html_dom.php';
             $key = 0;
             foreach ($curlHandles as $url => $ch) {
                 $content = json_decode(curl_multi_getcontent($ch), true);
-                if($content['_embedded']['lanes'][4]['type'] !== 'ProductDetailLane'){
-                    echo '<script>console.log(\'AAAAAA\');</script>';
-                }
+                $detailLane = array_filter($content['_embedded']['lanes'], function ($lane) {return $lane['type'] == 'ProductDetailLane';})[0];
                 $prod = $content['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product'];
                 /*if(!isset($prod)) {
                     continue;
