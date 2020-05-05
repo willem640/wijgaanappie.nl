@@ -212,6 +212,9 @@ require_once 'simple_html_dom.php';
             foreach ($curlHandles as $url => $ch) {
                 $content = json_decode(curl_multi_getcontent($ch), true);
                 $prod = $content['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product'];
+                if(!isset($prod)) {
+                    continue;
+                }
                 $_SESSION['orderable_array'][$key] = $prod;
                 ++$key;
                 echo '<div class="mdc-card search-result-card">'
