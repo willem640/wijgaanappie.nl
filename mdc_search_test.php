@@ -196,8 +196,8 @@ require_once 'simple_html_dom.php';
             $search = $_GET['query'] ?? '';
             $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s) ORDER BY MATCH(title) AGAINST(%s) DESC", $search, $search);
             $mh = curl_multi_init();
-            $ch = curl_init();
             foreach ($query as $result) {
+                $ch = curl_init();
                 $url = "https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link']) - 17);
                 curl_setopt($ch, CURLOPT_URL, $url);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -223,7 +223,7 @@ require_once 'simple_html_dom.php';
                     
                  }
                 $detail_lane = array_filter($content['_embedded']['lanes'], function ($lane) {return isset($lane['_embedded']['items'][0]['_embedded']['product']);});
-                echo sizeof($detail_lane);
+                //$detail_lane = array_merge($detail_lane);
                 $prod = $detail_lane['_embedded']['items'][0]['_embedded']['product'];
                 /*if(!isset($prod)) {
                     continue;
