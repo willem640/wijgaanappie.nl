@@ -213,7 +213,7 @@ require_once 'simple_html_dom.php';
             $key = 0;
             foreach ($curlHandles as $url => $ch) {
                 $content = json_decode(curl_multi_getcontent($ch), true);
-                $detailLane = array_filter($content['_embedded']['lanes'], function ($lane) {return true;})[0];
+                $detailLane = array_filter($content['_embedded']['lanes'], function ($lane) {return true;});
                 echo sizeof($detailLane);
                 echo sizeof($content['_embedded']['lanes']);
                 foreach($content['_embedded']['lanes'] as $lane){
