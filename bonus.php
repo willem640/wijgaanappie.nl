@@ -206,7 +206,7 @@
                 $.ajax({
                     type: "POST",
                     url: '/bestelling.php',
-                    data: {product: index, amount: amount},
+                    data: {product: current_product_index, amount: num_products},
                     success: cancelProductPostSuccess,
                     error: cancelProductPostError,
                     dataType: 'text'
