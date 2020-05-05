@@ -94,6 +94,7 @@
             var success_snackbar;
             var error_snackbar;
             var nologin_snackbar;
+            var cancel_success_snackbar;
             $(document).ready(function () {
                 var ripple_surfaces = $('.ripple-surface');
                 for (var i = 0; i < ripple_surfaces.length; ++i) {
@@ -104,6 +105,7 @@
                 success_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-success')[0]);
                 error_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-error')[0]);
                 nologin_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-not-logged-in')[0]);
+                cancel_success_snackbar = new mdc.snackbar.MDCSnackbar($('bonus-snackbar-order-cancel-success')[0]);
                 const url_parameters = new URLSearchParams(window.location.search);
                 if (url_parameters.has('sort')) {
                     current_sort = url_parameters.get('sort');
@@ -191,7 +193,7 @@
                     nologin_snackbar.open();
                 } else {
                     $('#bonus-snackbar-order-error div div.mdc-snackbar__label')[0].innerHTML
-                            = 'Product niet besteld: ' + xhr.responseText;
+                            = 'Je product is niet besteld: ' + xhr.responseText;
                     error_snackbar.open();
                 }
             }
@@ -199,9 +201,27 @@
             function retryOrder() {
                 orderProduct(current_product_index, num_products);
             }
+            
             function undoOrder(){
-                orderProduct(current_product_index, -num_products);
-            } //TODO: implement undo button
+                $.ajax({
+                    type: "POST",
+                    url: '/bestelling.php',
+                    data: {product: index, amount: amount},
+                    success: cancelProductPostSuccess,
+                    error: cancelProductPostError,
+                    dataType: 'text'
+                });
+            } 
+            function cancelProductPostSuccess(data_returned, text_status, xhr) {
+                cancel_success_snackbar.open();
+            }
+
+            function cancelProductPostError(xhr, text_status, error_thrown) {
+                $('#bonus-snackbar-order-error div div.mdc-snackbar__label')[0].innerHTML
+                        = 'Je product is niet geannuleerd: ' + xhr.responseText;
+                error_snackbar.open();
+                
+            }
 
         </script>
 
@@ -240,7 +260,13 @@
                 <div class="mdc-snackbar__label"
                      role="status"
                      aria-live="polite">
-                    Product besteld
+                    Je product is besteld
+                </div>
+                 <div class="mdc-snackbar__actions">
+                    <button type="button" class="mdc-button mdc-snackbar__action ripple-surface" onclick="undoOrder()">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label" id="bonus-post-error__label">Annuleren</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -250,7 +276,7 @@
                 <div class="mdc-snackbar__label"
                      role="status"
                      aria-live="polite">
-                    Product niet besteld.
+                    Je product is niet besteld.
                 </div>
                 <div class="mdc-snackbar__actions">
                     <button type="button" class="mdc-button mdc-snackbar__action ripple-surface" onclick="retryOrder()">
@@ -272,6 +298,16 @@
                         <div class="mdc-button__ripple"></div>
                         <span class="mdc-button__label" id="bonus-post-error__label">Inloggen</span>
                     </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-order-cancel-success">
+            <div class="mdc-snackbar__surface">
+                <div class="mdc-snackbar__label"
+                     role="status"
+                     aria-live="polite">
+                    Je bestelling is geannuleerd.
                 </div>
             </div>
         </div>
