@@ -215,6 +215,7 @@ require_once 'simple_html_dom.php';
                 $content = json_decode(curl_multi_getcontent($ch), true);
                 $detailLane = array_filter($content['_embedded']['lanes'], function ($lane) {return true;})[0];
                 echo sizeof($detailLane);
+                echo sizeof($content['_embedded']['lanes']);
                 foreach($content['_embedded']['lanes'] as $lane){
                     echo $lane['type'] == 'ProductDetailLane';
                     echo $lane['type'] === 'ProductDetailLane';
