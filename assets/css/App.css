@@ -552,9 +552,8 @@
   padding: 16px;
 }
 .search-result-card .mdc-card__primary-action .search-result-card__media {
-  background-image: url("https://static.ah.nl/static/product/AHI_43545239363332303137_1_LowRes_JPG.JPG");
   background-size: cover;
-  height: 200px;
+  height: 30vh;
   margin: 8px;
 }
 .search-result-card .mdc-card__primary-action .search-result-card__title {

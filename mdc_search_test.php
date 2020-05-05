@@ -211,10 +211,10 @@ require_once 'simple_html_dom.php';
                 }
             } while ($active && $status == CURLM_OK);
             $key = 0;
-            foreach ($curlHandles as $url => $ch) {
+            foreach ($curlHandles as $handle_url => $ch) {
                 $content = json_decode(curl_multi_getcontent($ch), true);
                  if(!isset($content)){
-                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_URL, $handle_url);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     $content = json_decode(curl_exec($ch), true); // try again
                     if(!isset($content)){
@@ -222,8 +222,8 @@ require_once 'simple_html_dom.php';
                     }
                     
                  }
-                $detailLane = array_filter($content['_embedded']['lanes'], function ($lane) {return isset($lane['_embedded']['items'][0]['_embedded']['product']);})[0];
-                $prod = $content['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product'];
+                $detail_lane = array_filter($content['_embedded']['lanes'], function ($lane) {return isset($lane['_embedded']['items'][0]['_embedded']['product']);})[0];
+                $prod = $detail_lane['_embedded']['items'][0]['_embedded']['product'];
                 /*if(!isset($prod)) {
                     continue;
                 }*/
@@ -231,7 +231,7 @@ require_once 'simple_html_dom.php';
                 ++$key;
                 echo '<div class="mdc-card search-result-card">'
                .' <div class="mdc-card__primary-action ripple-surface" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["type"]["name"])) . '\',\'' . $key . '\')">'
-                    .'<div class="mdc-card__media search-result-card__media" style="background-image: url('.$prod['images'][0]['link']['href'].'"></div>'
+                    .'<div class="mdc-card__media search-result-card__media" style="background-image: url('.$prod['images'][0]['link']['href'].')"></div>'
                         .'<h5 class="mdc-typography--headline5 search-result-card__title">'
                             . $prod["description"]
                         . '</h5>'
