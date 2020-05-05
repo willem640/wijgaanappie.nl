@@ -34,23 +34,25 @@ require_once 'simple_html_dom.php';
                 });
             });
 
-            function buyProductDialog(title, price_was, price_now, unit_size, discount, index) {
+            function buyProductDialog(title, price_was, price_now, unit_size, discount, index, description = '') {
                 current_product_index = index;
                 $('#bonus-product-dialog-title')[0].innerHTML = title;
-                if (price_was === '') {
-                    $('#bonus-product-dialog-content')[0].innerHTML =
-                            `Voor: ${price_now}<br>`.concat(
-                                    `Korting: ${discount}<br>`,
-                                    `${unit_size}
-                                        `);
-                } else {
-                    $('#bonus-product-dialog-content')[0].innerHTML =
-                            `Van: €${price_was}<br>`.concat(
-                                    `Voor: €${price_now}<br>`,
-                                    `Korting: ${discount}<br>`,
-                                    `${unit_size}`);
+                var $content;
+                if(price_was !== '') {
+                    $content = $content.concat(`Van: €${$price_was}<br>`);
                 }
-                ;
+                if(price_now !== '' && price_was === '') {
+                    $content = $content.concat(`Prijs: €${price_now}<br>`);
+                } else if(price_now !== '') {
+                    $content = $content.concat(`Voor: €${price_now}<br>`);
+                }
+                if(unit_size !== ''){
+                    $content = $content.concat(`${unit_size}<br>`);
+                }
+                if(description !== ''){
+                    $content = $content.concat(`${description}<br>`);
+                }
+                $('#bonus-product-dialog-content')[0].innerHTML = $content;
                 setProductAmount(1);
                 dialog.open();
                 if (!icon_buttons_dialog.length) {
@@ -211,10 +213,13 @@ require_once 'simple_html_dom.php';
             $key = 0;
             foreach ($curlHandles as $url => $ch) {
                 $content = json_decode(curl_multi_getcontent($ch), true);
-                $prod = $content['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product'];
-                if(!isset($prod)) {
-                    continue;
+                if($content['_embedded']['lanes'][4]['type'] !== 'ProductDetailLane'){
+                    echo '<script>console.log(\'AAAAAA\');</script>';
                 }
+                $prod = $content['_embedded']['lanes'][4]['_embedded']['items'][0]['_embedded']['product'];
+                /*if(!isset($prod)) {
+                    continue;
+                }*/
                 $_SESSION['orderable_array'][$key] = $prod;
                 ++$key;
                 echo '<div class="mdc-card search-result-card">'
