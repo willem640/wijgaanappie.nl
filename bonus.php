@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <?php echo $header; ?>
+    <?=$header?>
     </head>
     <body>
         <!-- Google Tag Manager (noscript) -->

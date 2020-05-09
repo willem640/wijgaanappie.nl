@@ -10,49 +10,64 @@ require_once 'simple_html_dom.php';
 <html>
     <head>
         <?=$header?>
-        <script>
-            var num_products = 1;
+        <script type="text/javascript">
+             var num_products = 1;
             var current_product_index = 0;
             var dialog;
+            var select;
             var icon_buttons_dialog = [];
             var success_snackbar;
             var error_snackbar;
             var nologin_snackbar;
+            var cancel_success_snackbar;
             $(document).ready(function () {
                 var ripple_surfaces = $('.ripple-surface');
                 for (var i = 0; i < ripple_surfaces.length; ++i) {
                     mdc.ripple.MDCRipple.attachTo(ripple_surfaces[i]);
                 }
                 dialog = new mdc.dialog.MDCDialog($('.bonus-product-dialog')[0]);
+                //select = new mdc.select.MDCSelect($('.sort-select')[0]);
                 success_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-success')[0]);
                 error_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-error')[0]);
                 nologin_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-not-logged-in')[0]);
+                cancel_success_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-cancel-success')[0]);
+                const url_parameters = new URLSearchParams(window.location.search);
+                if (url_parameters.has('sort')) {
+                    current_sort = url_parameters.get('sort');
+                    current_sort_index = $('div.bonus-sort-select ul li[data-value="' + current_sort + '"]')
+                            .index();
+                    //select.selectedIndex = current_sort_index;
+                } else {
+                    //select.selectedIndex = 0;
+                }
                 dialog.listen('MDCDialog:closed', function (action) {
                     if (action.detail.action === 'order') {
                         orderProduct(current_product_index, num_products);
                     }
                 });
-            });
 
-            function buyProductDialog(title, price_was, price_now, unit_size, discount, index, description = '') {
+                //select.listen('MDCSelect:change', () => {
+                //    document.location.href = window.location.pathname + '?sort=' + select.value;
+                //});
+            });
+            
+            function buyProductDialog(title, price_was, price_now, unit_size, discount, index) {
                 current_product_index = index;
                 $('#bonus-product-dialog-title')[0].innerHTML = title;
-                var $content = '';
-                if(price_was !== '') {
-                    $content = $content.concat(`Van: €${$price_was}<br>`);
+                if (price_was === '') {
+                    $('#bonus-product-dialog-content')[0].innerHTML =
+                            `Voor: ${price_now}<br>`.concat(
+                                    `Korting: ${discount}<br>`,
+                                    `${unit_size}
+                                        `);
+                } else {
+                    $('#bonus-product-dialog-content')[0].innerHTML =
+                            `Van: €${price_was}<br>`.concat(
+                                    `Voor: €${price_now}<br>`,
+                                    `Korting: ${discount}<br>`,
+                                    `${unit_size}`);
                 }
-                if(price_now !== '' && price_was === '') {
-                    $content = $content.concat(`Prijs: €${price_now}<br>`);
-                } else if(price_now !== '') {
-                    $content = $content.concat(`Voor: €${price_now}<br>`);
-                }
-                if(unit_size !== ''){
-                    $content = $content.concat(`${unit_size}<br>`);
-                }
-                if(description !== ''){
-                    $content = $content.concat(`${description}<br>`);
-                }
-                $('#bonus-product-dialog-content')[0].innerHTML = $content;
+                ;
                 setProductAmount(1);
                 dialog.open();
                 if (!icon_buttons_dialog.length) {
@@ -99,11 +114,11 @@ require_once 'simple_html_dom.php';
             }
 
             function buyProductPostError(xhr, text_status, error_thrown) {
-                if (xhr.status === 403) {
+                if(xhr.status === 403){
                     nologin_snackbar.open();
                 } else {
                     $('#bonus-snackbar-order-error div div.mdc-snackbar__label')[0].innerHTML
-                            = 'Product niet besteld: ' + xhr.responseText;
+                            = 'Je product is niet besteld: ' + xhr.responseText;
                     error_snackbar.open();
                 }
             }
@@ -111,10 +126,30 @@ require_once 'simple_html_dom.php';
             function retryOrder() {
                 orderProduct(current_product_index, num_products);
             }
-            function undoOrder() {
-                orderProduct(current_product_index, -num_products);
-            } //TODO: implement undo button
+            
+            function undoOrder(){
+                $.ajax({
+                    type: "POST",
+                    url: '/bestelling.php',
+                    data: {product: current_product_index, amount: -num_products},
+                    success: cancelProductPostSuccess,
+                    error: cancelProductPostError,
+                    dataType: 'text'
+                });
+            } 
+            function cancelProductPostSuccess(data_returned, text_status, xhr) {
+                cancel_success_snackbar.open();
+            }
+
+            function cancelProductPostError(xhr, text_status, error_thrown) {
+                $('#bonus-snackbar-order-error div div.mdc-snackbar__label')[0].innerHTML
+                        = 'Je product is niet geannuleerd: ' + xhr.responseText;
+                error_snackbar.open();
+                
+            }
+
         </script>
+
     </head>
     <body>
         <?php
@@ -150,12 +185,18 @@ require_once 'simple_html_dom.php';
             </div>
             <div class="mdc-dialog__scrim"></div>
         </div>
-        <div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-order-success">
+       <div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-order-success">
             <div class="mdc-snackbar__surface">
                 <div class="mdc-snackbar__label"
                      role="status"
                      aria-live="polite">
-                    Product besteld
+                    Je product is besteld
+                </div>
+                 <div class="mdc-snackbar__actions">
+                    <button type="button" class="mdc-button mdc-snackbar__action ripple-surface" onclick="undoOrder()">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label" id="bonus-post-error__label">Annuleren</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -165,7 +206,7 @@ require_once 'simple_html_dom.php';
                 <div class="mdc-snackbar__label"
                      role="status"
                      aria-live="polite">
-                    Product niet besteld.
+                    Je product is niet besteld.
                 </div>
                 <div class="mdc-snackbar__actions">
                     <button type="button" class="mdc-button mdc-snackbar__action ripple-surface" onclick="retryOrder()">
@@ -175,7 +216,7 @@ require_once 'simple_html_dom.php';
                 </div>
             </div>
         </div>
-        <div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-not-logged-in">
+                <div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-not-logged-in">
             <div class="mdc-snackbar__surface">
                 <div class="mdc-snackbar__label"
                      role="status"
@@ -190,8 +231,18 @@ require_once 'simple_html_dom.php';
                 </div>
             </div>
         </div>
+        
+        <div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-order-cancel-success">
+            <div class="mdc-snackbar__surface">
+                <div class="mdc-snackbar__label"
+                     role="status"
+                     aria-live="polite">
+                    Je bestelling is geannuleerd.
+                </div>
+            </div>
+        </div>
 
-        <div class="wrapper">
+        <div class="wrapper jscroll">
             <?php
             $search = $_GET['query'] ?? '';
             $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s) ORDER BY MATCH(title) AGAINST(%s) DESC", $search, $search);

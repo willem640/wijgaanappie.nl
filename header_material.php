@@ -3,7 +3,14 @@
 $header = "
 <!-- material.io stylesheet and js library -->
 <link href=\"node_modules/material-components-web/dist/material-components-web.min.css\" rel=\"stylesheet\">
-<script src=\"node_modules/material-components-web/dist/material-components-web.min.js\"></script>    
+<script src=\"node_modules/material-components-web/dist/material-components-web.min.js\"></script>
+
+<!-- JQuery -->
+<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>
+
+
+<!-- JScroll infinite scrolling -->
+<script src=\"https://unpkg.com/jscroll@2.4.1/dist/jquery.jscroll.min.js\"></script>
 
 <!-- small screen stylesheet -->
 <link rel=\"stylesheet\" href=\"style_smallscreen.css\">
@@ -27,4 +34,4 @@ $header = "
 </script>
     <meta charset=\"utf-8\">
     <meta name=\"google-site-verification\" content=\"uvDiVjrbFuwiF-ME9NPjbmsZsRXQGzNzGdJUElgM7DQ\" />
-    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>";
+";
