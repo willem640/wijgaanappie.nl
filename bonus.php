@@ -105,7 +105,7 @@
                 success_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-success')[0]);
                 error_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-error')[0]);
                 nologin_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-not-logged-in')[0]);
-                cancel_success_snackbar = new mdc.snackbar.MDCSnackbar($('bonus-snackbar-order-cancel-success')[0]);
+                cancel_success_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-cancel-success')[0]);
                 const url_parameters = new URLSearchParams(window.location.search);
                 if (url_parameters.has('sort')) {
                     current_sort = url_parameters.get('sort');
