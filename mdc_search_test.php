@@ -293,7 +293,7 @@ require_once 'simple_html_dom.php';
             } else {
                 $sort_by = 'title';
             }
-            $query = DB::query("SELECT * FROM `products` WHERE MATCH(%s0) AGAINST(%s2) ORDER BY MATCH(%s0) AGAINST(%s2) %s1", $search, $sort_direction, $sort_by);
+            $query = DB::query("SELECT * FROM `products` WHERE MATCH(%s1) AGAINST(%s0) ORDER BY MATCH(%s1) AGAINST(%s0) ".$sort_direction, $search, $sort_by);
             $mh = curl_multi_init();
 
             foreach ($query as $result) {
