@@ -282,7 +282,18 @@ require_once 'simple_html_dom.php';
             </div>
             <?php
             $search = $_GET['q'] ?? '';
-            $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s) ORDER BY MATCH(title) AGAINST(%s) DESC", $search, $search);
+            $sort = $_GET['sort'] ?? '';
+            if (strpos($sort, 'reverse') !== false){
+                $sort_direction = 'ASC';
+            } else {
+                $sort_direction = 'DESC';
+            }
+            if (strpos(($_GET['sort'] ?? ''), 'price') !== false){
+                $sort_by = 'priceNow';
+            } else {
+                $sort_by = 'title';
+            }
+            $query = DB::query("SELECT * FROM `products` WHERE MATCH(%s2) AGAINST(%s0) ORDER BY MATCH(%s2) AGAINST(%s0) %s1", $search, $sort_direction, $sort_by);
             $mh = curl_multi_init();
 
             foreach ($query as $result) {
