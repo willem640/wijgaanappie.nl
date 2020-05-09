@@ -9,9 +9,9 @@ require_once 'simple_html_dom.php';
 <!DOCTYPE html>
 <html>
     <head>
-        <?=$header?>
+        <?= $header ?>
         <script type="text/javascript">
-             var num_products = 1;
+            var num_products = 1;
             var current_product_index = 0;
             var dialog;
             var select;
@@ -36,9 +36,9 @@ require_once 'simple_html_dom.php';
                     current_sort = url_parameters.get('sort');
                     current_sort_index = $('div.bonus-sort-select ul li[data-value="' + current_sort + '"]')
                             .index();
-                    //select.selectedIndex = current_sort_index;
+                    select.selectedIndex = current_sort_index;
                 } else {
-                    //select.selectedIndex = 0;
+                    select.selectedIndex = 0;
                 }
                 dialog.listen('MDCDialog:closed', function (action) {
                     if (action.detail.action === 'order') {
@@ -46,28 +46,37 @@ require_once 'simple_html_dom.php';
                     }
                 });
 
-                //select.listen('MDCSelect:change', () => {
-                //    document.location.href = window.location.pathname + '?sort=' + select.value;
-                //});
+                select.listen('MDCSelect:change', () => {
+                    var url_params = new URLSearchParameters(window.location.search);
+                    var q;
+                    if(url_params.has('q')){
+                        q = url_params.get('q');
+                    } else {
+                        q = '';
+                    }
+                    document.location.href = window.location.pathname + '?sort=' + select.value + '&q=' + q;
+                });
             });
-            
-            function buyProductDialog(title, price_was, price_now, unit_size, discount, index) {
+
+            function buyProductDialog(title, price_was, price_now, unit_size, discount, index, description = '') {
                 current_product_index = index;
                 $('#bonus-product-dialog-title')[0].innerHTML = title;
-                if (price_was === '') {
-                    $('#bonus-product-dialog-content')[0].innerHTML =
-                            `Voor: ${price_now}<br>`.concat(
-                                    `Korting: ${discount}<br>`,
-                                    `${unit_size}
-                                        `);
-                } else {
-                    $('#bonus-product-dialog-content')[0].innerHTML =
-                            `Van: €${price_was}<br>`.concat(
-                                    `Voor: €${price_now}<br>`,
-                                    `Korting: ${discount}<br>`,
-                                    `${unit_size}`);
+                var $content = '';
+                if(price_was !== '') {
+                    $content = $content.concat(`Van: €${$price_was}<br>`);
                 }
-                ;
+                if(price_now !== '' && price_was === '') {
+                    $content = $content.concat(`Prijs: €${price_now}<br>`);
+                } else if(price_now !== '') {
+                    $content = $content.concat(`Voor: €${price_now}<br>`);
+                }
+                if(unit_size !== ''){
+                    $content = $content.concat(`${unit_size}<br>`);
+                }
+                if(description !== ''){
+                    $content = $content.concat(`${description}<br>`);
+                }
+                $('#bonus-product-dialog-content')[0].innerHTML = $content;
                 setProductAmount(1);
                 dialog.open();
                 if (!icon_buttons_dialog.length) {
@@ -114,7 +123,7 @@ require_once 'simple_html_dom.php';
             }
 
             function buyProductPostError(xhr, text_status, error_thrown) {
-                if(xhr.status === 403){
+                if (xhr.status === 403) {
                     nologin_snackbar.open();
                 } else {
                     $('#bonus-snackbar-order-error div div.mdc-snackbar__label')[0].innerHTML
@@ -126,8 +135,8 @@ require_once 'simple_html_dom.php';
             function retryOrder() {
                 orderProduct(current_product_index, num_products);
             }
-            
-            function undoOrder(){
+
+            function undoOrder() {
                 $.ajax({
                     type: "POST",
                     url: '/bestelling.php',
@@ -136,7 +145,7 @@ require_once 'simple_html_dom.php';
                     error: cancelProductPostError,
                     dataType: 'text'
                 });
-            } 
+            }
             function cancelProductPostSuccess(data_returned, text_status, xhr) {
                 cancel_success_snackbar.open();
             }
@@ -145,7 +154,7 @@ require_once 'simple_html_dom.php';
                 $('#bonus-snackbar-order-error div div.mdc-snackbar__label')[0].innerHTML
                         = 'Je product is niet geannuleerd: ' + xhr.responseText;
                 error_snackbar.open();
-                
+
             }
 
         </script>
@@ -185,14 +194,14 @@ require_once 'simple_html_dom.php';
             </div>
             <div class="mdc-dialog__scrim"></div>
         </div>
-       <div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-order-success">
+        <div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-order-success">
             <div class="mdc-snackbar__surface">
                 <div class="mdc-snackbar__label"
                      role="status"
                      aria-live="polite">
                     Je product is besteld
                 </div>
-                 <div class="mdc-snackbar__actions">
+                <div class="mdc-snackbar__actions">
                     <button type="button" class="mdc-button mdc-snackbar__action ripple-surface" onclick="undoOrder()">
                         <div class="mdc-button__ripple"></div>
                         <span class="mdc-button__label" id="bonus-post-error__label">Annuleren</span>
@@ -216,7 +225,7 @@ require_once 'simple_html_dom.php';
                 </div>
             </div>
         </div>
-                <div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-not-logged-in">
+        <div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-not-logged-in">
             <div class="mdc-snackbar__surface">
                 <div class="mdc-snackbar__label"
                      role="status"
@@ -231,7 +240,7 @@ require_once 'simple_html_dom.php';
                 </div>
             </div>
         </div>
-        
+
         <div class="mdc-snackbar bonus-snackbar-after-order" id="bonus-snackbar-order-cancel-success">
             <div class="mdc-snackbar__surface">
                 <div class="mdc-snackbar__label"
@@ -243,11 +252,39 @@ require_once 'simple_html_dom.php';
         </div>
 
         <div class="wrapper jscroll">
+            <div class="mdc-card search-result-card">
+                <div class="mdc-select sort-select">
+                    <div class="mdc-select__anchor bonus-sort-select ripple-surface">
+                        <i class="mdc-select__dropdown-icon"></i>
+                        <div class="mdc-select__selected-text" id="select-sort-selected-text"></div>
+                        <span class="mdc-floating-label">Sorteer</span>
+                        <div class="mdc-line-ripple bonus-sort-select-line-ripple"></div>
+                    </div>
+
+                    <div class="mdc-select__menu mdc-menu mdc-menu-surface bonus-sort-select">
+                        <ul class="mdc-list">
+
+                            <li class="mdc-list-item ripple-surface" data-value="alphabetical">
+                                Alfabetisch (A-z)
+                            </li>
+                            <li class="mdc-list-item ripple-surface" data-value="reverse alphabetical">
+                                Omgekeerd Alfabetisch (z-A)
+                            </li>
+                            <li class="mdc-list-item ripple-surface" data-value="price">
+                                Op prijs (oplopend)
+                            </li>
+                            <li class="mdc-list-item ripple-surface" data-value="reverse price">
+                                Op prijs (aflopend)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <?php
-            $search = $_GET['query'] ?? '';
+            $search = $_GET['q'] ?? '';
             $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s) ORDER BY MATCH(title) AGAINST(%s) DESC", $search, $search);
             $mh = curl_multi_init();
-            
+
             foreach ($query as $result) {
                 $ch = curl_init();
                 $url = "https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link']) - 17);
@@ -265,36 +302,37 @@ require_once 'simple_html_dom.php';
             $key = 0;
             foreach ($curlHandles as $handle_url => $ch) {
                 $content = json_decode(curl_multi_getcontent($ch), true);
-                 if(!isset($content)){
+                if (!isset($content)) {
                     curl_setopt($ch, CURLOPT_URL, $handle_url);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     $content = json_decode(curl_exec($ch), true); // try again
-                    if(!isset($content)){
+                    if (!isset($content)) {
                         continue; // er zal wel iets met de key zijn
                     }
-                    
-                 }
-                $detail_lanes = array_filter($content['_embedded']['lanes'], function ($lane) {return isset($lane['_embedded']['items'][0]['_embedded']['product']);});
+                }
+                $detail_lanes = array_filter($content['_embedded']['lanes'], function ($lane) {
+                    return isset($lane['_embedded']['items'][0]['_embedded']['product']);
+                });
                 $detail_lane = array_values($detail_lanes)[0];
                 //echo json_encode($detail_lane);
                 $prod = $detail_lane['_embedded']['items'][0]['_embedded']['product'];
-                /*if(!isset($prod)) {
-                    continue;
-                }*/
+                /* if(!isset($prod)) {
+                  continue;
+                  } */
                 $_SESSION['orderable_array'][$key] = $prod;
                 ++$key;
                 echo '<div class="mdc-card search-result-card">'
-               .' <div class="mdc-card__primary-action ripple-surface" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["label"] ?? $prod["discount"]["type"]["name"])) . '\',\'' . $key . '\')">'
-                    .'<div class="mdc-card__media search-result-card__media" style="background-image: url('.$prod['images'][0]['link']['href'].')"></div>'
-                        .'<h5 class="mdc-typography--headline5 search-result-card__title">'
-                            . $prod["description"]
-                        . '</h5>'
-                        .'<p class="mdc-typography--body1 search-result-card__content">'
-                        . '€'.($prod["priceLabel"]["now"] ?? ($prod["discount"]["label"] ?? '')).' - '.$prod["unitSize"]
-                        . '</p>'
-                    .'</div>'
-                .'</div>';
-            } 
+                . ' <div class="mdc-card__primary-action ripple-surface" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["label"] ?? $prod["discount"]["type"]["name"])) . '\',\'' . $key . '\')">'
+                . '<div class="mdc-card__media search-result-card__media" style="background-image: url(' . $prod['images'][0]['link']['href'] . ')"></div>'
+                . '<h5 class="mdc-typography--headline5 search-result-card__title">'
+                . $prod["description"]
+                . '</h5>'
+                . '<p class="mdc-typography--body1 search-result-card__content">'
+                . '€' . ($prod["priceLabel"]["now"] ?? ($prod["discount"]["label"] ?? '')) . ' - ' . $prod["unitSize"]
+                . '</p>'
+                . '</div>'
+                . '</div>';
+            }
             curl_multi_close($mh);
             ?>
 
