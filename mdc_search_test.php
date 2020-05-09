@@ -26,7 +26,7 @@ require_once 'simple_html_dom.php';
                     mdc.ripple.MDCRipple.attachTo(ripple_surfaces[i]);
                 }
                 dialog = new mdc.dialog.MDCDialog($('.bonus-product-dialog')[0]);
-                //select = new mdc.select.MDCSelect($('.sort-select')[0]);
+                select = new mdc.select.MDCSelect($('.sort-select')[0]);
                 success_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-success')[0]);
                 error_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-error')[0]);
                 nologin_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-not-logged-in')[0]);
