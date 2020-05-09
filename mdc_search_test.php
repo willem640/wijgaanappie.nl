@@ -47,7 +47,7 @@ require_once 'simple_html_dom.php';
                 });
 
                 select.listen('MDCSelect:change', () => {
-                    var url_params = new URLSearchParameters(window.location.search);
+                    var url_params = new URLSearchParams(window.location.search);
                     var q;
                     if(url_params.has('q')){
                         q = url_params.get('q');
