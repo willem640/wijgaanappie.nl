@@ -284,9 +284,9 @@ require_once 'simple_html_dom.php';
             $search = $_GET['q'] ?? '';
             $sort = $_GET['sort'] ?? '';
             if (strpos($sort, 'reverse') !== false){
-                $sort_direction = 'ASC';
-            } else {
                 $sort_direction = 'DESC';
+            } else {
+                $sort_direction = 'ASC';
             }
             if (strpos(($_GET['sort'] ?? ''), 'price') !== false){
                 $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY priceNow ".$sort_direction, $search);
