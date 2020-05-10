@@ -289,11 +289,11 @@ require_once 'simple_html_dom.php';
                 $sort_direction = 'DESC';
             }
             if (strpos(($_GET['sort'] ?? ''), 'price') !== false){
-                $sort_by = 'priceNow';
+                $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY priceNow ".$sort_direction, $search);
             } else {
-                $sort_by = 'title';
+                $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY MATCH(title) AGAINST(%s0) ".$sort_direction, $search);
             }
-            $query = DB::query("SELECT * FROM `products` WHERE MATCH(%s1) AGAINST(%s0) ORDER BY MATCH(%s1) AGAINST(%s0) ".$sort_direction, $search, $sort_by);
+
             $mh = curl_multi_init();
 
             foreach ($query as $result) {
