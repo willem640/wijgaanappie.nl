@@ -263,7 +263,10 @@ require_once 'simple_html_dom.php';
 
                     <div class="mdc-select__menu mdc-menu mdc-menu-surface bonus-sort-select">
                         <ul class="mdc-list">
-
+                            
+                            <li class="mdc-list-item ripple-surface" data-value="relevance">
+                                Op relevantie
+                            </li>
                             <li class="mdc-list-item ripple-surface" data-value="alphabetical">
                                 Alfabetisch (A-z)
                             </li>
@@ -290,7 +293,9 @@ require_once 'simple_html_dom.php';
             }
             if (strpos(($_GET['sort'] ?? ''), 'price') !== false){
                 $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY priceNow ".$sort_direction, $search);
-            } else {
+            } else if (strpos(($_GET['sort'] ?? ''), 'alphabetical') !== false) { 
+                $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY title ".$sort_direction, $search);
+            } else { //not price, not alphabetical, so sort by relevance
                 $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY MATCH(title) AGAINST(%s0) ".$sort_direction, $search);
             }
 
