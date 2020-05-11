@@ -2,8 +2,8 @@
 
 $search = $_GET['q'] ?? '';
 $sort = $_GET['sort'] ?? '';
-$from = int($_GET['from'] ?? 0);
-$to = int($_GET['to'] ?? 10);
+$from = (int)($_GET['from'] ?? 0);
+$to = (int)($_GET['to'] ?? 10);
 $num = abs($to - $from);
 
 if (strpos($sort, 'reverse') !== false) {
