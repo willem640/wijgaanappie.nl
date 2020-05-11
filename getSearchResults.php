@@ -1,4 +1,7 @@
 <?php
+session_start();
+require_once 'setup.php';
+require_once 'simple_html_dom.php';
 
 $search = $_GET['q'] ?? '';
 $sort = $_GET['sort'] ?? '';
