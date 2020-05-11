@@ -1,12 +1,13 @@
 <?php
+
 session_start();
 require_once 'setup.php';
 require_once 'simple_html_dom.php';
 
 $search = $_GET['q'] ?? '';
 $sort = $_GET['sort'] ?? '';
-$from = (int)($_GET['from'] ?? 0);
-$to = (int)($_GET['to'] ?? 10);
+$from = (int) ($_GET['from'] ?? 0);
+$to = (int) ($_GET['to'] ?? 10);
 $num = abs($to - $from);
 
 if (strpos($sort, 'reverse') !== false) {
@@ -14,14 +15,17 @@ if (strpos($sort, 'reverse') !== false) {
 } else {
     $sort_direction = 'ASC';
 }
-if (strpos(($_GET['sort'] ?? ''), 'price') !== false) {
+if (strpos(($sort ?? ''), 'price') !== false) {
     $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY priceNow " . $sort_direction . " LIMIT " . $from . "," . $num, $search);
-} else if (strpos(($_GET['sort'] ?? ''), 'alphabetical') !== false) {
+    $count = DB::query("SELECT COUNT(*) FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY priceNow " . $sort_direction, $search);
+} else if (strpos(($sort ?? ''), 'alphabetical') !== false) {
     $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY title " . $sort_direction . " LIMIT " . $from . "," . $num, $search);
+    $count = DB::query("SELECT COUNT(*) FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY title " . $sort_direction, $search);
 } else { //not price, not alphabetical, so sort by relevance
     $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY MATCH(title) AGAINST(%s0) " . $sort_direction . " LIMIT " . $from . "," . $num, $search);
+    $count = DB::query("SELECT COUNT(*) FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY MATCH(title) AGAINST(%s0) " . $sort_direction, $search);
 }
-
+$count = (int) ($count[0]['COUNT(*)']);
 $mh = curl_multi_init();
 
 foreach ($query as $result) {
@@ -73,3 +77,16 @@ foreach ($curlHandles as $handle_url => $ch) {
     . '</div>';
 }
 curl_multi_close($mh);
+if ($to < $count && $from < $count) {
+    if ($to + $num > $count) {
+        $to = $count;
+    } else {
+        $to += $num;
+    }
+    if ($from + $num > $count) {
+        die();
+    } else {
+        $from += $num;
+    }
+    echo '<a style="display:none" href="getSearchResults.php?q=' . $search . '&sort=' . $sort . '&to=' . $to . '&from=' . $from . '"></a>';
+}

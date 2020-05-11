@@ -1758,5 +1758,11 @@
     stroke-dashoffset: -124;
   }
 }
+#search-results-added {
+  width: 80%;
+  position: absolute;
+  left: 10%;
+  top: 65vh;
+}
 
 /*# sourceMappingURL=App.css.map */

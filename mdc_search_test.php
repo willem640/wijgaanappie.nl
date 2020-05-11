@@ -21,6 +21,7 @@ require_once 'simple_html_dom.php';
             var nologin_snackbar;
             var cancel_success_snackbar;
             var search_input;
+            var current_search_query;
             $(document).ready(function () {
                 var ripple_surfaces = $('.ripple-surface');
                 for (var i = 0; i < ripple_surfaces.length; ++i) {
@@ -34,7 +35,7 @@ require_once 'simple_html_dom.php';
                 nologin_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-not-logged-in')[0]);
                 cancel_success_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-cancel-success')[0]);
                 search_input = new mdc.textField.MDCTextField($('.search-box')[0]);
-                $('#search-input-form').bind('submit', doSearch);
+                $('#search-input-form').bind('submit', doSearchFormSubmit);
 
                 const url_parameters = new URLSearchParams(window.location.search);
                 if (url_parameters.has('sort')) {
@@ -166,9 +167,31 @@ require_once 'simple_html_dom.php';
 
             }
 
-            function doSearch(event) {
+            function doSearchFormSubmit(event) {
                 event.preventDefault();
-                console.log(event);
+                searchFor(event.target[0].value);
+            }
+
+            function searchFor(query) {
+                if (current_search_query !== query) {
+                    current_search_query = query;
+                    if($('#search-results-added').length > 0){
+                        $('#search-results-added').remove();
+                    }
+                    var urlparams = new URLSearchParams(window.location.search);
+                    var sort;
+                    if(urlparams.has('sort')){
+                        sort = urlparams.get('sort');
+                    } else {
+                        sort = 'relevance';
+                    }
+                    $('body').append('<div id="search-results-added" class="jscroll"><a style="display:none" href="getSearchResults.php?q=' + query + '&sort=' + sort + '&to=' + 10 + '&from=' + 0 + '"></a></div>')
+                    
+                    $('.jscroll').jscroll({
+                        loadingHtml: '<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle></svg>',
+                        padding: 50
+                    });
+                }
             }
 
         </script>
@@ -265,11 +288,11 @@ require_once 'simple_html_dom.php';
             </div>
         </div>
 
-        <div class="wrapper jscroll">
+        <div class="wrapper">
             <div class="mdc-card search-result-card search-top-card">
                 <label class="mdc-text-field mdc-text-field--outlined search-box">
                     <form id="search-input-form">
-                        <input type="text" onblur="this.form.submit();" class="mdc-text-field__input" aria-labelledby="search-input">
+                        <input type="text" onblur="searchFor(this.value);" class="mdc-text-field__input" aria-labelledby="search-input">
                     </form>
                     <span class="mdc-notched-outline">
                         <span class="mdc-notched-outline__leading"></span>
@@ -335,80 +358,7 @@ require_once 'simple_html_dom.php';
                 DEALINGS IN THE SOFTWARE.
 
             -->
-            <div class="loader">
-                <svg class="circular">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle>
-                </svg>
-            </div>
-            <?php
-            $search = $_GET['q'] ?? '';
-            $sort = $_GET['sort'] ?? '';
-            if (strpos($sort, 'reverse') !== false) {
-                $sort_direction = 'DESC';
-            } else {
-                $sort_direction = 'ASC';
-            }
-            if (strpos(($_GET['sort'] ?? ''), 'price') !== false) {
-                $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY priceNow " . $sort_direction, $search);
-            } else if (strpos(($_GET['sort'] ?? ''), 'alphabetical') !== false) {
-                $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY title " . $sort_direction, $search);
-            } else { //not price, not alphabetical, so sort by relevance
-                $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY MATCH(title) AGAINST(%s0) " . $sort_direction, $search);
-            }
-
-            $mh = curl_multi_init();
-
-            foreach ($query as $result) {
-                $ch = curl_init();
-                $url = "https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link']) - 17);
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                $curlHandles[$url] = $ch;
-                curl_multi_add_handle($mh, $ch);
-            }
-            do {
-                $status = curl_multi_exec($mh, $active);
-                if ($active) {
-                    curl_multi_select($mh);
-                }
-            } while ($active && $status == CURLM_OK);
-            $key = 0;
-            foreach ($curlHandles as $handle_url => $ch) {
-                $content = json_decode(curl_multi_getcontent($ch), true);
-                if (!isset($content)) {
-                    curl_setopt($ch, CURLOPT_URL, $handle_url);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    $content = json_decode(curl_exec($ch), true); // try again
-                    if (!isset($content)) {
-                        continue; // er zal wel iets met de key zijn
-                    }
-                }
-                $detail_lanes = array_filter($content['_embedded']['lanes'], function ($lane) {
-                    return isset($lane['_embedded']['items'][0]['_embedded']['product']);
-                });
-                $detail_lane = array_values($detail_lanes)[0];
-                //echo json_encode($detail_lane);
-                $prod = $detail_lane['_embedded']['items'][0]['_embedded']['product'];
-                /* if(!isset($prod)) {
-                  continue;
-                  } */
-                $_SESSION['orderable_array'][$key] = $prod;
-                ++$key;
-                echo '<div class="mdc-card search-result-card">'
-                . ' <div class="mdc-card__primary-action ripple-surface" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["label"] ?? $prod["discount"]["type"]["name"])) . '\',\'' . $key . '\')">'
-                . '<div class="mdc-card__media search-result-card__media" style="background-image: url(' . $prod['images'][0]['link']['href'] . ')"></div>'
-                . '<h5 class="mdc-typography--headline5 search-result-card__title">'
-                . $prod["description"]
-                . '</h5>'
-                . '<p class="mdc-typography--body1 search-result-card__content">'
-                . '€' . ($prod["priceLabel"]["now"] ?? ($prod["discount"]["label"] ?? '')) . ' - ' . $prod["unitSize"]
-                . '</p>'
-                . '</div>'
-                . '</div>';
-            }
-            curl_multi_close($mh);
-            ?>
-
+            
 
         </div>
     </body>
