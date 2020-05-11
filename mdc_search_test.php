@@ -20,26 +20,34 @@ require_once 'simple_html_dom.php';
             var error_snackbar;
             var nologin_snackbar;
             var cancel_success_snackbar;
+            var search_input;
             $(document).ready(function () {
                 var ripple_surfaces = $('.ripple-surface');
                 for (var i = 0; i < ripple_surfaces.length; ++i) {
                     mdc.ripple.MDCRipple.attachTo(ripple_surfaces[i]);
                 }
+
                 dialog = new mdc.dialog.MDCDialog($('.bonus-product-dialog')[0]);
                 select = new mdc.select.MDCSelect($('.sort-select')[0]);
                 success_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-success')[0]);
                 error_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-error')[0]);
                 nologin_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-not-logged-in')[0]);
                 cancel_success_snackbar = new mdc.snackbar.MDCSnackbar($('#bonus-snackbar-order-cancel-success')[0]);
+                search_input = new mdc.textField.MDCTextField($('.search-box')[0]);
+                $('#search-input-form').bind('submit', doSearch);
+
                 const url_parameters = new URLSearchParams(window.location.search);
                 if (url_parameters.has('sort')) {
-                    current_sort = url_parameters.get('sort');
-                    current_sort_index = $('div.bonus-sort-select ul li[data-value="' + current_sort + '"]')
+
+                    var current_sort = url_parameters.get('sort');
+
+                    var current_sort_index = $('div.bonus-sort-select ul li[data-value="' + current_sort + '"]')
                             .index();
                     select.selectedIndex = current_sort_index;
                 } else {
                     select.selectedIndex = 0;
                 }
+
                 dialog.listen('MDCDialog:closed', function (action) {
                     if (action.detail.action === 'order') {
                         orderProduct(current_product_index, num_products);
@@ -49,7 +57,7 @@ require_once 'simple_html_dom.php';
                 select.listen('MDCSelect:change', () => {
                     var url_params = new URLSearchParams(window.location.search);
                     var q;
-                    if(url_params.has('q')){
+                    if (url_params.has('q')) {
                         q = url_params.get('q');
                     } else {
                         q = '';
@@ -62,18 +70,18 @@ require_once 'simple_html_dom.php';
                 current_product_index = index;
                 $('#bonus-product-dialog-title')[0].innerHTML = title;
                 var $content = '';
-                if(price_was !== '') {
+                if (price_was !== '') {
                     $content = $content.concat(`Van: €${$price_was}<br>`);
                 }
-                if(price_now !== '' && price_was === '') {
+                if (price_now !== '' && price_was === '') {
                     $content = $content.concat(`Prijs: €${price_now}<br>`);
-                } else if(price_now !== '') {
+                } else if (price_now !== '') {
                     $content = $content.concat(`Voor: €${price_now}<br>`);
                 }
-                if(unit_size !== ''){
+                if (unit_size !== '') {
                     $content = $content.concat(`${unit_size}<br>`);
                 }
-                if(description !== ''){
+                if (description !== '') {
                     $content = $content.concat(`${description}<br>`);
                 }
                 $('#bonus-product-dialog-content')[0].innerHTML = $content;
@@ -85,7 +93,7 @@ require_once 'simple_html_dom.php';
                         icon_buttons_dialog[i] = new mdc.ripple.MDCRipple(icon_buttons_html[i]);
                         icon_buttons_dialog[i].unbounded = true;
                     }
-                }
+            }
             }
 
             function setProductAmount(new_num_products) {
@@ -146,6 +154,7 @@ require_once 'simple_html_dom.php';
                     dataType: 'text'
                 });
             }
+
             function cancelProductPostSuccess(data_returned, text_status, xhr) {
                 cancel_success_snackbar.open();
             }
@@ -155,6 +164,11 @@ require_once 'simple_html_dom.php';
                         = 'Je product is niet geannuleerd: ' + xhr.responseText;
                 error_snackbar.open();
 
+            }
+
+            function doSearch(event) {
+                event.preventDefault();
+                console.log(event);
             }
 
         </script>
@@ -252,7 +266,19 @@ require_once 'simple_html_dom.php';
         </div>
 
         <div class="wrapper jscroll">
-            <div class="mdc-card search-result-card">
+            <div class="mdc-card search-result-card search-top-card">
+                <label class="mdc-text-field mdc-text-field--outlined search-box">
+                    <form id="search-input-form">
+                        <input type="text" onblur="this.form.submit();" class="mdc-text-field__input" aria-labelledby="search-input">
+                    </form>
+                    <span class="mdc-notched-outline">
+                        <span class="mdc-notched-outline__leading"></span>
+                        <span class="mdc-notched-outline__notch">
+                            <span class="mdc-floating-label" id="search-input">Zoek</span>
+                        </span>
+                        <span class="mdc-notched-outline__trailing"></span>
+                    </span>
+                </label>
                 <div class="mdc-select sort-select">
                     <div class="mdc-select__anchor bonus-sort-select ripple-surface">
                         <i class="mdc-select__dropdown-icon"></i>
@@ -263,7 +289,7 @@ require_once 'simple_html_dom.php';
 
                     <div class="mdc-select__menu mdc-menu mdc-menu-surface bonus-sort-select">
                         <ul class="mdc-list">
-                            
+
                             <li class="mdc-list-item ripple-surface" data-value="relevance">
                                 Op relevantie
                             </li>
@@ -283,20 +309,51 @@ require_once 'simple_html_dom.php';
                     </div>
                 </div>
             </div>
+            <!--
+                only applies to div.loader and children
+            
+                Copyright (c) <Year Unknown> - Andy/@agtoaaa - https://codepen.io/agtoaaa/pen/brNLVx
+
+                Permission is hereby granted, free of charge, to any person 
+                obtaining a copy of this software and associated documentation 
+                files (the "Software"), to deal in the Software without restriction,
+                including without limitation the rights to use, copy, modify, 
+                merge, publish, distribute, sublicense, and/or sell copies of 
+                the Software, and to permit persons to whom the Software is 
+                furnished to do so, subject to the following conditions:
+
+                The above copyright notice and this permission notice shall 
+                be included in all copies or substantial portions of the Software.
+
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+                EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+                OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
+                NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+                HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+                WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+                OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+                DEALINGS IN THE SOFTWARE.
+
+            -->
+            <div class="loader">
+                <svg class="circular">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle>
+                </svg>
+            </div>
             <?php
             $search = $_GET['q'] ?? '';
             $sort = $_GET['sort'] ?? '';
-            if (strpos($sort, 'reverse') !== false){
+            if (strpos($sort, 'reverse') !== false) {
                 $sort_direction = 'DESC';
             } else {
                 $sort_direction = 'ASC';
             }
-            if (strpos(($_GET['sort'] ?? ''), 'price') !== false){
-                $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY priceNow ".$sort_direction, $search);
-            } else if (strpos(($_GET['sort'] ?? ''), 'alphabetical') !== false) { 
-                $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY title ".$sort_direction, $search);
+            if (strpos(($_GET['sort'] ?? ''), 'price') !== false) {
+                $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY priceNow " . $sort_direction, $search);
+            } else if (strpos(($_GET['sort'] ?? ''), 'alphabetical') !== false) {
+                $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY title " . $sort_direction, $search);
             } else { //not price, not alphabetical, so sort by relevance
-                $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY MATCH(title) AGAINST(%s0) ".$sort_direction, $search);
+                $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY MATCH(title) AGAINST(%s0) " . $sort_direction, $search);
             }
 
             $mh = curl_multi_init();

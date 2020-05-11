@@ -20,6 +20,9 @@ $secondary: #004ba0; // global variables outside of the theme omdat theme soms n
 @use '@material/ripple';
 @use "@material/select";
 @use '@material/snackbar';
+@use "@material/textfield" with (
+    $focused-label-color: $primary,
+);
 @use "@material/typography";
 
 
@@ -173,4 +176,64 @@ $list_columns: 3;
             color: gray;
         }
     }
+}
+
+.search-top-card{
+    .search-box{
+        @include textfield.core-styles;
+        @include textfield.focused-outline-color($primary);
+    }
+    .mdc-text-field--focused.search-box{
+         @include textfield.label-color($primary);
+
+    }
+}
+
+
+
+
+
+// gestolen van codepen
+$width: 100px;
+
+.loader{
+  width: $width;
+  height: $width;
+  margin-left: calc(50% - 50px);
+}
+
+.circular{
+  animation: rotate 2s linear infinite;
+  height: $width;
+  width: $width;
+}
+
+.path {
+  stroke-dasharray: 1,200;
+  stroke-dashoffset: 0;
+  stroke:$primary;
+  position:relative;
+  animation:
+   dash 1.5s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@keyframes rotate{
+ 100%{
+  transform: rotate(360deg);
+ }
+}
+@keyframes dash{
+ 0%{
+  stroke-dasharray: 1,200;
+  stroke-dashoffset: 0;
+ }
+ 50%{
+  stroke-dasharray: 89,200;
+  stroke-dashoffset: -35;
+ }
+ 100%{
+  stroke-dasharray: 89,200;
+  stroke-dashoffset: -124;
+ }
 }

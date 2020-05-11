@@ -59,7 +59,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     $(".dropdown-content").slideToggle(200, "swing");
 	});
 </script>
-<center><p> Hoihoi welkom op de website van Robin's AH bezorgservice.<br> Als je vragen hebt, als je je wachtwoord vergeten bent of als je je account wil verwijderen kan je een mailtje sturen naar <a href="mailto:willemschipper2@gmail.com">willemschipper2@gmail.com</a> of naar <a href="mailto:robinvandijke2002@gmail.com">robinvandijke2002@gmail.com</a><br>
+<center><p> Welkom op de website van Robin's AH bezorgservice.<br> Als je vragen hebt, als je je wachtwoord vergeten bent of als je je account wil verwijderen kan je een mailtje sturen <br>
+        <br><br>Een deel van de software die in wijgaanappie.nl gebruik is heeft een MIT license.<br>
+        
+
 </body>
 
 </html>
