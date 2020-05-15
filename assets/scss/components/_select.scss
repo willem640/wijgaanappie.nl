@@ -1,0 +1,19 @@
+@use "@material/line-ripple" as mdc-line-ripple;
+@use "@material/select" as mdc-select;
+
+$primary: #1976d2 !default;
+
+.bonus-sort-select {
+    width: 100%;
+}
+
+
+.sort-select{
+    @include mdc-select.focused-bottom-line-color($primary);
+    @include mdc-select.focused-label-color($primary);
+}
+
+.bonus-sort-select-line-ripple{
+    @include mdc-line-ripple.active-color($primary);
+    @include mdc-line-ripple.inactive-color($primary);
+}

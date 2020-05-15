@@ -1,0 +1,20 @@
+@use "@material/theme" with (
+$primary: #1976d2,
+$secondary: #004ba0,
+$background: #fff,
+$on-primary: #1976d2,
+$on-secondary: #004ba0,
+);
+$primary: #1976d2;
+$secondary: #004ba0;
+
+@use "components/card";
+@use "components/image-list";
+@use "components/loader" with ($primary: $primary);
+@use "components/dialog" with ($primary: $primary);
+@use "components/snackbar";
+@use "components/select" with ($primary: $primary);
+@use "components/textfield" with ($primary: $primary);
+@use "global/mobile-banner";
+@use "helpers/ripple";
+@use "page_specific/zoeken_php";

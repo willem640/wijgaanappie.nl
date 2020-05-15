@@ -1,0 +1,12 @@
+@use "@material/ripple" as mdc-ripple;
+
+@mixin basic-bounded-ripple{
+    @include mdc-ripple.surface;
+    @include mdc-ripple.radius-bounded;
+    @include mdc-ripple.states-base-color(black);
+    @include mdc-ripple.states-opacities((hover: 0, focus: 0, press: .25));
+    overflow: hidden;
+}
+.ripple-surface{
+    @include basic-bounded-ripple;
+}

@@ -1,0 +1,50 @@
+@use "@material/button" as mdc-button;
+@use "@material/dialog" as mdc-dialog;
+@use "@material/icon-button" as mdc-icon-button;
+@use "@material/ripple" as mdc-ripple;
+
+$primary: #1976d2 !default;
+
+.bonus-product-dialog{
+    @include mdc-dialog.min-width(80vw);
+    @include mdc-dialog.shape-radius(8px);
+    .mdc-dialog__container{
+        .mdc-dialog__surface{
+
+            .mdc-dialog__content{
+                padding-right: 24px;
+                padding-bottom: 0px;
+                padding-left: 24px;
+            }
+
+            .mdc-dialog__content#bonus-product-dialog-content-stuks-buttons{
+                padding-top:0;
+            }
+
+            footer.mdc-dialog__actions{
+                button{
+                    @include mdc-button.filled-accessible(#fff);
+                }
+                button.mdc-button--raised{
+                    @include mdc-button.filled-accessible($primary);
+                }
+
+            }
+        }
+    }
+
+}
+
+#bonus-product-dialog-content-stuks-buttons-stuks{
+    display:inline;
+    padding-top: 8px;
+    line-height: 0;
+}
+
+.mdc-icon-button{
+    @include mdc-icon-button.core-styles;
+    @include mdc-ripple.surface;
+    @include mdc-ripple.radius-unbounded;
+    @include mdc-ripple.states-base-color(black);
+    @include mdc-ripple.states-opacities((hover: 0, focus: 0, press: .25));
+}

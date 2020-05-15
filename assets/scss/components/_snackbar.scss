@@ -1,0 +1,17 @@
+@use "@material/button" as mdc-button;
+@use "@material/snackbar" as mdc-snackbar;
+
+.bonus-snackbar-after-order{
+    @include mdc-snackbar.min-width(100%);
+    @include mdc-snackbar.fill-color(#fff);
+    @include mdc-snackbar.label-ink-color(#000);
+    .mdc-snackbar__surface{
+        .mdc-snackbar__actions{
+            button.mdc-snackbar__action{
+                @include mdc-button.filled-accessible(#fff);
+                @include mdc-button.ink-color(#004ba0);
+
+            }
+        }
+    }
+}

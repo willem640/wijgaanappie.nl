@@ -1,0 +1,28 @@
+@use "@material/typography" as mdc-typography;
+
+.material-card{
+
+    margin-bottom: 16px;
+    .mdc-card__primary-action{
+        p{
+            @include mdc-typography.typography(body1);
+            padding:16px;
+        }
+        .material-card__media{
+            background-size: cover;
+            height: 30vh;
+            margin: 8px;
+        }
+        .material-card__title{
+            margin-block-start: 0.8rem;
+            margin-block-end: 0.8rem;
+            padding-left: 16px;
+        }
+        .material-card__content{
+            margin-block-start: 0;
+            margin-block-end:0;
+            padding-top:  0;
+            color: gray;
+        }
+    }
+}

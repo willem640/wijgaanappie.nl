@@ -1,48 +1,14 @@
-@font-face{
-    font-family: "Hamburg";
-    src: url("fonts/Hamburg-Regular.woff2") format("woff2");
-    font-style: regular;
-    font-weight: regular;
-    font-display: swap;
 
-}
-@font-face{
-    font-family: "Hamburg";
-    src: url("fonts/Hamburg-DemiBold.woff2") format("woff2");
-    font-style: demibold;
-    font-weight: demibold;
-    font-display: swap;
-
-}
-@font-face{
-    font-family: "Hamburg";
-    src: url("fonts/Hamburg-Bold.woff2") format("woff2");
-    font-style: bold;
-    font-weight: bold;
-    font-display: swap;
-
-}
-@font-face{
-    font-family: "Hamburg";
-    src: url("fonts/Hamburg-Medium.woff2") format("woff2");
-    font-style: medium;
-    font-weight: medium;
-    font-display: swap;
-
-}
 label {
-        font-family: Hamburg;
         font-style: regular;
 }
 th, tr {
 	
-	font-family: Hamburg;
 	font-style: regular;
 	
 }
 #confirm {
 	
-	font-family: Hamburg;
 	width: 30vw;
 	font-size: 2vw;
 	text-align: center;
@@ -61,7 +27,6 @@ th, tr {
 #aantal {
 	float: left;
 	height: 32px;
-	font-family: Hamburg;
 	font-style: regular;
 }
 .content{
@@ -70,16 +35,9 @@ th, tr {
 	margin-right: 2vw;
 	
 }
-.content h1 {
-	
-	font-family: Hamburg;
-	font-weight: demibold;
-	
-}
+
 .content p {
 	
-	font-family: Hamburg;
-	font-weight: regular;
     margin-top: 1vw;
 	
 }
@@ -206,6 +164,7 @@ body {
 	margin-left: 15vw;
 	margin-right: 15vw;
 	display: inline-block;
+        height: 100vh;
 	
 }
 .link{
@@ -216,6 +175,14 @@ body {
 	text-align: center;
 	margin: 2vh calc(5vw - 12px);
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.link i{
+	margin-top:16%;
+	height: 50%;
+	width: 50%;
+	fill: white;
+        color:white; 
+        font-size: 62px;
 }
 .link svg{
 	margin-top:20%;
@@ -261,12 +228,10 @@ body {
 }
 .product-card h3 {
 	margin-top: 1vh;
-	font-family: Hamburg;
 	font-size: 3vh;
 	margin-bottom: 0;
 }
 .product-card h4 {
-	font-family: Hamburg;
 	font-size: 1.5vh;
 	color: grey;
 	margin-top: .5vh;
@@ -283,7 +248,6 @@ body {
 	position: relative;
 	border: none;
 	background: none;
-	font-family: Hamburg;
 	color: #004ba0;
 	margin: 1vh 0;
 	font-size: 2.5vh;
@@ -344,14 +308,12 @@ body {
 	margin: 0;
 	text-decoration: none;
 	color: white;
-	font-family: Hamburg;
 	font-size: .9em;
 	
 }
 a#banner_a, a#home, a#fancy_a{
 	color: #FFFFFF;
 	border-color:#1976d2;
-	font-family: Hamburg;
 	font-weight: demibold;
 	text-shadow: 2px 2px #303030;
 	font-size: 2vh;
@@ -447,7 +409,6 @@ input[type="search"]:focus{
 input#fancy_a{
 	color: #FFFFFF;
 	border-color:#1976d2;
-	font-family: Hamburg;
 	font-weight: demibold;
 	text-shadow: 2px 2px #303030;
 	font-size: 2vh;
@@ -461,7 +422,6 @@ input#fancy_a{
 }
 #confirm { 
 	
-	font-family: Hamburg;
 	width: 30vw;
 	font-size: 2vw;
 	text-align: center;
@@ -504,7 +464,6 @@ input#fancy_a{
 }
 .status p {
 	margin-top:0;
-	font-family: Hamburg;
 	font-size: 2vh;
 	margin: 0 2vw;
 	padding-bottom: 1vh;
@@ -553,7 +512,6 @@ input#fancy_a{
             box-shadow: 0 0 2vh green;
 }
 #card p {
-	font-family: Hamburg;
 	font-size: 2vh;
 	line-height: 2.3vh;
 	padding: 0 2vw;
@@ -573,6 +531,7 @@ input#fancy_a{
 	text-align: center;
 	font-weight: demibold;
 	letter-spacing: 1vw;
+        line-height: 1.5rem;
 	font-size: 3vh;
 	margin-bottom: 2svh;
 	height: 4vh;
@@ -720,12 +679,12 @@ center {
 }
 a#register, a:visited#register {
 	color: black;
-	font-family: Hamburg;
+
 	font-size: 1vh;
 	text-decoration: none;
 }
 h1 {
-	font-family: Hamburg;
+
 }
 .order {
 	
@@ -737,7 +696,6 @@ h1 {
 }
 .order h2 {
 	text-align: center;
-	font-family: Hamburg;
 	font-size: 4vh;
 }
 .grid{
@@ -762,7 +720,6 @@ h1 {
     padding-bottom:2vw;
     border-radius: 6vw;
     text-align: center;
-    font-family: Hamburg;
     max-width: 32vw;
     height: 35vw;
 }

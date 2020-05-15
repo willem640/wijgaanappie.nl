@@ -1,0 +1,41 @@
+@use '@material/image-list' as mdc-image-list;
+@use '@material/typography' as mdc-typography;
+
+$list_columns: 3;
+.bonus-image-list{
+    @include mdc-image-list.shape-radius(8px);
+    @include mdc-image-list.standard-columns($list_columns);
+    li.bonus-image-list__item{
+        margin: 4px;
+        width: calc(100%/#{$list_columns} - 2*4px);
+        padding:0;
+        border-radius:8px;
+
+        .price-label{
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 1.5rem;
+            //trbl
+            //margin:auto;
+            padding: 0.25rem 0.3rem 0 0.3rem;
+            border-radius: 0 0 0 8px;
+            font-family: Roboto, sans-serif;
+            background-color: /*#2ba0b3$primary*/#63a4ff;
+            display:block;
+
+            color: white;
+            span {
+                vertical-align: middle;
+                @include mdc-typography.typography(body1);
+                font-size: 1rem;
+                display: block;
+            }
+        }
+
+        .bonus-image-list__supporting{
+            padding: 0 8px;
+            height:32px;
+        }
+    }
+}

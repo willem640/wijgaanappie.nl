@@ -57,24 +57,20 @@ foreach ($curlHandles as $handle_url => $ch) {
         return isset($lane['_embedded']['items'][0]['_embedded']['product']);
     });
     $detail_lane = array_values($detail_lanes)[0];
-    //echo json_encode($detail_lane);
     $prod = $detail_lane['_embedded']['items'][0]['_embedded']['product'];
-    /* if(!isset($prod)) {
-      continue;
-      } */
-    $_SESSION['orderable_array'][$key] = $prod;
-    ++$key;
-    echo '<div class="mdc-card search-result-card">'
-    . ' <div class="mdc-card__primary-action ripple-surface" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["label"] ?? $prod["discount"]["type"]["name"])) . '\',\'' . $key . '\')">'
-    . '<div class="mdc-card__media search-result-card__media" style="background-image: url(' . $prod['images'][0]['link']['href'] . ')"></div>'
-    . '<h5 class="mdc-typography--headline5 search-result-card__title">'
+    $_SESSION['orderable_array'][$key + $from] = $prod;
+    echo '<div class="mdc-card material-card">'
+    . ' <div class="mdc-card__primary-action ripple-surface" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["label"] ?? $prod["discount"]["type"]["name"])) . '\',\'' . ($key +$from). '\')">'
+    . '<div class="mdc-card__media material-card__media" style="background-image: url(' . $prod['images'][0]['link']['href'] . ')"></div>'
+    . '<h5 class="mdc-typography--headline5 material-card__title">'
     . $prod["description"]
     . '</h5>'
-    . '<p class="mdc-typography--body1 search-result-card__content">'
+    . '<p class="mdc-typography--body1 material-card__content">'
     . '€' . ($prod["priceLabel"]["now"] ?? ($prod["discount"]["label"] ?? '')) . ' - ' . $prod["unitSize"]
     . '</p>'
     . '</div>'
     . '</div>';
+    ++$key;
 }
 curl_multi_close($mh);
 if ($to < $count && $from < $count) {

@@ -1,0 +1,18 @@
+@use "@material/textfield" as mdc-textfield with (
+$focused-label-color: #004ba0,
+);
+
+$primary: #1976d2 !default;
+
+.material-textfield{
+    @include mdc-textfield.core-styles;
+    @include mdc-textfield.focused-outline-color($primary);
+}
+.mdc-text-field--focused.material-text-field{
+    @include mdc-textfield.label-color(#004ba0);
+
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label{
+    color: #004ba0;
+}

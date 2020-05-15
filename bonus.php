@@ -1,90 +1,11 @@
-<?php session_start(); require_once 'header_material.php';?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
     <head>
-    <?=$header?>
+    <?php include 'header_material.php'?>
     </head>
     <body>
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5GJ825S"
-                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
-        <div class="anim">
-        </div>
-        <div class="banner-mobile">
-            <div class="links">
-                <div class="link">
-                    <a href="index.php">
-<?php include("assets/home-24px.svg"); ?>
-                        <p>Home</p>
-                    </a>
-                </div>
-                <div class="link">
-                    <a href="zoeken.php">
-<?php include("assets/search-24px.svg"); ?>
-                        <p>Zoek</p>
-                    </a>
-                </div>
-                <div class="link">
-                    <a href="bonus.php">
-<?php include("assets/euro_symbol-24px.svg"); ?>
-                        <p>Bonus</p>
-                    </a>
-                </div>
-                <div class="link">
-                    <a href="bestelling.php">
-<?php include("assets/shopping_cart-24px.svg"); ?>
-                        <p>Winkelmandje</p>
-                    </a>
-                </div>
-                <div class="link">
-                    <a href="contact.php">
-                <?php include("assets/contact_support-24px.svg"); ?>
-                        <p>Contact</p>
-                    </a>
-                </div>
-                <?php
-                $logged_in = (isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : false);
-                if ($logged_in) {
-                    echo '<div class="link">
-			  <a href="profile.php">';
-                    include("assets/person_outline-24px.svg");
-                    echo '<p>Profiel</p>
-		      </a>
-	          </div>';
-                } else {
-                    echo '<div class="link">
-			  <a href="login.php">';
-                    include("assets/lock_open-24px.svg");
-                    echo '<p>Login</p>
-		      </a>
-			  </div>';
-                }
-                ?>
-
-            </div>
-        </div>
-        <div class="circle">
-            <img src="assets/android-chrome-512x512.png">
-        </div>
-        <script>
-            var i = 0;
-            $('.links').fadeOut(0);
-            $('.circle').click(function () {
-                i += 1;
-                if (i % 2 != 0) {
-                    $(".wrapper").fadeOut();
-                    $('.banner-mobile').animate({height: "100vh"});
-                    $('.circle').animate({top: '-=15vh'});
-                    $('.links').fadeIn();
-                } else {
-                    $(".wrapper").fadeIn();
-                    $('.banner-mobile').animate({height: "50vh"});
-                    $('.circle').animate({top: '+=15vh'});
-                    $('.links').fadeOut();
-                }
-            });
-        </script>
+        <?php include 'mobile_banner.php' ?>
         <script type="text/javascript">
             var num_products = 1;
             var current_product_index = 0;
