@@ -12,13 +12,14 @@ session_start();
         $('#circle').click(() => {
  
             if (!$('#circle').hasClass('open')) {
-                $('body > *').not('.top-mobile-banner').not('.circle').not('script').velocity({opacity: 0});
+                $('body > *').not('.top-mobile-banner').not('.circle').not('script').velocity("fadeOut");
                 $('.top-mobile-banner').velocity({height: "100vh"});
                 $('.circle').velocity({top: '-=15vh'});
                 $('.banner-links').velocity("fadeIn");
                 $('#circle').addClass('open');
             } else {
-                $('body > *').not('.top-mobile-banner').not('.circle').not('script').velocity({opacity: 1});
+                $('body > *').not('.top-mobile-banner').not('.circle').not('script').velocity("fadeIn");
+                setTimeout(() => {$('body > *').not('.top-mobile-banner').not('.circle').not('script').css("display", "");}, 450);
                 $('.top-mobile-banner').velocity({height: "50vh"});
                 $('.circle').velocity({top: '+=15vh'});
                 $('.banner-links').velocity("fadeOut");
