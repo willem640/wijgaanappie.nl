@@ -1,6 +1,3 @@
-
-
-
 <!-- material.io stylesheet and js library -->
 <link href="node_modules/material-components-web/dist/material-components-web.min.css" rel="stylesheet">
 <script src="node_modules/material-components-web/dist/material-components-web.min.js"></script>
