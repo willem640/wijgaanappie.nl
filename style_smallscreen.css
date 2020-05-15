@@ -53,18 +53,6 @@ th, tr {
     width: 100%;
 
 }
-.circle {
-	position: absolute;
-	left: 37.5vw;
-	right: 37.5vw;
-	top: calc(25vh - 12.5vw);
-	width:25vw;
-	height: 25vw;
-	border-radius: 50%;
-	background-color: white;
-	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-	z-index: 2;
-}
 .circle img {
 	margin: 0;
 	position: absolute;
