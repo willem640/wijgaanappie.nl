@@ -28,6 +28,10 @@ if (strpos(($sort ?? ''), 'price') !== false) {
 $count = (int) ($count[0]['COUNT(*)']);
 $mh = curl_multi_init();
 
+if(count($query) === 0){
+    echo '<p class="mdc-typography--body1" style="text-align: center; width: 100%; font-size: 1.5rem">Geen resultaten gevonden</p>';
+    die();
+}
 foreach ($query as $result) {
     $ch = curl_init();
     $url = "https://www.ah.nl/service/rest" . substr($result['link'], 17, strlen($result['link']) - 17);
