@@ -5,6 +5,9 @@
 <!-- JQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<!-- JQuery form validation plugin -->
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
 <!-- Velocity.js animation engine -->
 <script src="assets/js/velocity.js" type="text/javascript"></script>
 

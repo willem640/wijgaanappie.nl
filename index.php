@@ -44,7 +44,7 @@ require_once 'setup.php';
                     echo '<svg class="outer" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>';
                     echo '</div>';
                 } elseif ($komt_chobin === '2') { //special status
-                    echo '<p "mdc-typography--body1">' . $query['special_status'] . '</p>';
+                    echo '<p class="mdc-typography--body1">' . $query['special_status'] . '</p>';
                     echo '<div class="status_circle" id="orange">';
                     include("assets/radio_button_checked-24px.svg");
                     echo '<svg class="outer" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>';

@@ -8,6 +8,7 @@ $on-secondary: #004ba0,
 $primary: #1976d2;
 $secondary: #004ba0;
 
+@use "components/button" with ($primary: $primary);
 @use "components/card";
 @use "components/image-list";
 @use "components/loader" with ($primary: $primary);
@@ -17,4 +18,6 @@ $secondary: #004ba0;
 @use "components/textfield" with ($primary: $primary);
 @use "global/mobile-banner";
 @use "helpers/ripple";
+@use "page_specific/inloggen_php";
+@use "page_specific/register_php";
 @use "page_specific/zoeken_php";

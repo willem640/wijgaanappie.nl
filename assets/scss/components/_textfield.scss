@@ -1,6 +1,7 @@
 @use "@material/textfield" as mdc-textfield with (
 $focused-label-color: #004ba0,
 );
+@use "@material/textfield/helper-text" as mdc-helper-text;
 
 $primary: #1976d2 !default;
 

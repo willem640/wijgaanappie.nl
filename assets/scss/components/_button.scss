@@ -1,0 +1,7 @@
+@use "@material/button" as mdc-button;
+
+$primary: #1976d2 !default;
+
+.material-button {
+    @include mdc-button.filled-accessible($primary);
+}

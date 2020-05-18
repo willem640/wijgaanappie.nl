@@ -43,8 +43,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         } else {
             $error = 'Je email is nog niet geactiveerd, als je geen mail hebt ontvangen kan je ons <a href="contact.php">appen of een mailtje sturen</a>';
         }
-    } else
-        echo 'password incorrect';
+    } else {
+        $error = 'Je wachtwoord klopt niet, probeer het nog een keer';
+    }
 }
 ?>
 <html>
@@ -56,29 +57,48 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
         <div class="wrapper">
             <div id="card">
+                <h1 class="mdc-typography--headline1">Inloggen</h1>
                 <form class="form" method="post">
-                    <h1>Inloggen</h1>
+
                     <div class="text-field">
                         <input type="text" id="username" name="username" required>
                         <span class="highlight"></span>
                         <span class="bar"></span>
-                        <label>Gebruikersnaam</label>
+                        <label for="username">Gebruikersnaam</label>
                     </div>
                     <div class="text-field">
                         <input type="password" id="password" name="password" required>
                         <span class="highlight"></span>
                         <span class="bar"></span>
-                        <label>Wachtwoord</label>
+                        <label for="password">Wachtwoord</label>
                     </div>
-                    <?php echo '<center style="width:100%; float:right;"><p>' . $error . '</p></center>'; ?>
                     <div id="remember">
                         <input type="checkbox" name="remember_me" id="remember_me">
                         <label for="remember_me">Onthoud mij voor 30 dagen</label>
                     </div>
-                    <input id="fancy_a" type="submit" value="Inloggen">
+                    <?php if (isset($error)) {
+                        echo '<p class="mdc-typography--body1 login-error">' . $error . '</p>';
+                    } ?>
+
+
+                    <div class="mdc-touch-target-wrapper">
+                        <button onclick="if ($(this).closest('form').valid) {
+                                    $(this).closest('form').submit();
+                                }" class="mdc-button mdc-button--touch material-button login-button">
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label">Inloggen</span>
+                            <div class="mdc-button__touch"></div>
+                        </button>
+                    </div>
                 </form>
             </div>
-            <a id="register" href="/register.php">Nog niet geregistreerd? Maak een account aan!</a>	
+            <div class="mdc-touch-target-wrapper">
+                <button onclick="url_params = new URLSearchParams(window.location.search);window.location.href = 'register.php' + (url_params.has('return') ? '?return=' + url_params.get('return') : '')" class="mdc-button mdc-button--touch material-button register-button">
+                    <div class="mdc-button__ripple"></div>
+                    <span class="mdc-button__label">Registreren</span>
+                    <div class="mdc-button__touch"></div>
+                </button>
+            </div>	
         </div>
 
     </body>

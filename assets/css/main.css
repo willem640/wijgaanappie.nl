@@ -1,3 +1,34 @@
+.material-button:not(:disabled) {
+  background-color: #1976d2;
+}
+.material-button:not(:disabled) {
+  color: white;
+  /* @alternate */
+  color: var(--mdc-theme-text-primary-on-dark, white);
+}
+.material-button .mdc-button__ripple::before, .material-button .mdc-button__ripple::after {
+  background-color: white;
+  /* @alternate */
+  background-color: var(--mdc-theme-text-primary-on-dark, white);
+}
+.material-button:hover .mdc-button__ripple::before {
+  opacity: 0.08;
+}
+.material-button.mdc-ripple-upgraded--background-focused .mdc-button__ripple::before, .material-button:not(.mdc-ripple-upgraded):focus .mdc-button__ripple::before {
+  transition-duration: 75ms;
+  opacity: 0.24;
+}
+.material-button:not(.mdc-ripple-upgraded) .mdc-button__ripple::after {
+  transition: opacity 150ms linear;
+}
+.material-button:not(.mdc-ripple-upgraded):active .mdc-button__ripple::after {
+  transition-duration: 75ms;
+  opacity: 0.24;
+}
+.material-button.mdc-ripple-upgraded {
+  --mdc-ripple-fg-opacity: 0.24;
+}
+
 .material-card {
   margin-bottom: 16px;
 }
@@ -1848,6 +1879,45 @@
 }
 .ripple-surface.mdc-ripple-upgraded {
   --mdc-ripple-fg-opacity: 0.25;
+}
+
+.register-button {
+  width: 100%;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.login-button {
+  position: absolute;
+  margin: 0 25vw;
+  width: 30vw;
+  bottom: -2.5vh;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.login-error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  height: 48px;
+}
+
+#register-form {
+  padding: 32px;
+}
+#register-form .mdc-text-field {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.submit-register-button {
+  position: absolute;
+  margin: 0 25vw;
+  width: 35vw;
+  bottom: -2.5vh;
+  font-size: 1rem;
+  text-align: center;
 }
 
 #search-results-added {

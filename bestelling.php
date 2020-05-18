@@ -137,11 +137,11 @@ if (!isset($_SESSION['loggedin'])) {
                     foreach ((array) $cart as $prod) {
                         $am = $prod['bestelling_amount'] ?? 1;
                         echo '  <div class="product-card">
-                            <img src="assets/placeholder-card.jpg">
+                            <img src="'.$prod['images'][0]['link']['href'].'">
                             <div class="card-content">
-                            <h3 id="title">' . $prod['description'] . '</h3>
-                            <h4 id="price">€' . $prod['priceLabel']['now'] . '</h4>
-                            <h4 id="amount">' . $prod['bestelling_amount'] . ' Stuks</h4>
+                            <h3 id="title" class="mdc-typography--headline3">' . $prod['description'] . '</h3>
+                            <h4 id="price" class="mdc-typography--headline4">€' . $prod['priceLabel']['now'] . '</h4>
+                            <h4 id="amount" class="mdc-typography--headline4">' . $prod['bestelling_amount'] . ' Stuks</h4>
                             <div class="buttons">
                             <form method="post" id="delete' . $prod['id'] . '">
                             <input type="hidden" name="delete" value="' . $prod['id'] . '">
@@ -211,6 +211,7 @@ if (!isset($_SESSION['loggedin'])) {
                 }).addClass("rippleEffect");
             });
         </script>
+    </div>
 </body>
 
 </html>

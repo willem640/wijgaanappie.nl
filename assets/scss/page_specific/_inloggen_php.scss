@@ -1,0 +1,21 @@
+.register-button{
+    width: 100%;
+    text-align: center;
+    margin-top: 3rem;
+
+}
+.login-button{
+    position: absolute;
+    margin: 0 25vw;
+    width:  30vw;
+    bottom: -2.5vh;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.login-error{
+    color: red;
+    font-weight:bold;
+    text-align: center;
+    height:48px;
+}
