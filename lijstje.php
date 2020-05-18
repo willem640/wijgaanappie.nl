@@ -14,7 +14,7 @@ if (!($_SESSION['loggedin'] ?? false)) {
         <?php include 'header_material.php' ?>
     </head>
     <body>
-        <?php include 'banner_mobile.php' ?>
+        <?php include 'mobile_banner.php' ?>
     <center>
         <?php
         $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];

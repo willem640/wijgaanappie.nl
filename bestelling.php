@@ -125,7 +125,7 @@ if (!isset($_SESSION['loggedin'])) {
     <div class="wrapper">
         <div id="card">
             <?php
-            if ($logged_in) {
+            if ($_SESSION['loggedin']) {
                 $cart = json_decode(DB::query('SELECT cart FROM users WHERE username = %s', $_SESSION['username'])[0]['cart'], true);
                 if (empty($cart)) {
                     echo '<h1>Uw winkelmandje is op dit moment leeg!</h1>';
