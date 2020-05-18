@@ -80,7 +80,7 @@ if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
 		foreach($curr_order as $order){
                     $am=$order['bestelling_amount'] ?? 1;
                     echo '  <div class="product-card">
-                            <img src="assets/placeholder-card.jpg">
+                            <img src="'.$order['images'][0]['link']['href'].'">
                             <div class="card-content">
                             <h3 id="title">'.$order['description'].'</h3>
                             <h4 id="price">€'.$order['priceLabel']['now'].'</h4>

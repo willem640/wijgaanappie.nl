@@ -50,9 +50,10 @@ if (isset($_POST['place_order'])) {
         $prices = array_column(array_column($cart, 'priceLabel'), 'now');
         $descriptions = array_column($cart, 'description'); // test
         $amounts = array_column($cart, 'bestelling_amount');
-        $cart_trimmed = array_map(function($id, $price, $description, $amount) {
-            return ['id' => $id, 'priceLabel' => ['now' => $price], 'description' => $description, 'bestelling_amount' => $amount];
-        }, $ids, $prices, $descriptions, $amounts);
+        $images = array_column($cart, 'images');
+        $cart_trimmed = array_map(function($id, $price, $description, $amount, $image) {
+            return ['id' => $id, 'priceLabel' => ['now' => $price], 'description' => $description, 'bestelling_amount' => $amount, 'images' => $image];
+        }, $ids, $prices, $descriptions, $amounts, $images);
         if (empty($query[0]['username'])) {
             DB::insert('current_orders', ['contents' => json_encode($cart_trimmed), 'username' => $_SESSION['username'], 'realname' => $cq[0]['realname']]);
         } else {
