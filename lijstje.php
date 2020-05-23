@@ -35,28 +35,30 @@ if (!($_SESSION['loggedin'] ?? false)) {
                 if (empty($contents)) {
                     goto end_loop;
                 } //Zo krijg ik niet telkens lege orders te zien was best verwarrend   
-
+                echo '<div class="mdc-card material-card">';
                 echo '<h3>' . (empty($orders['realname']) ? $orders['username'] : $orders['realname']) . '</h3>';
-                echo '<table class="products">';
-                echo '<tr><th>Product</th><th>Prijs</th><th>Hoeveelheid</th></tr>';
+                echo '<ul>';
                 $subtotal = $bez = $total = 0;
                 foreach ((array) $contents as $prod) {
                     $am = $prod['bestelling_amount'];
-                    echo '<tr><td>' . $prod['description'] . '</td>'
-                    . '<td>€' . $prod['priceLabel']['now'] . '</td>'
-                    . '<td>' . $prod['bestelling_amount'] . '</td></tr>';
+                    echo '<li>'; //List item
+                    echo '<span>'; //Span for texts and meta tag
+                    echo '<span>' . $prod['description'] . '</span>'; //Primary text
+                    echo '<span>' . $prod['bestelling_amount'] . '</span>'; //Secondary text
+                    echo '<span>€' . $prod['priceLabel']['now'] . '</span>'; //Meta tag
                     $subtotal += $prod['priceLabel']['now'] * $am; // when items don't have an ID, the random value that is returned seems to be constant so it just works
                     $total = round(1.1 * $subtotal, 2);
                     $bez = $total - $subtotal;
                 }
-                echo '<tr><td><b>Subtotaal:</b></td><td></td><td>€' . $subtotal . '</td><td></td></tr>';
+                echo '</ul>';
+                echo '<span></span>'; //Vertical row
+                echo '<span>Subtotaal:€' . $subtotal . '</span>'; //Subtotal
 
-                echo '<tr><td><b>Bezorgkosten:</b></td><td></td><td>€' . $bez . '</td><td></td></tr>';
-                echo '<tr><td><b>Totaal:</b></td><td></td><td>€' . round($total, 2) . '</td><td></td></tr>';
-                echo '</table>';
-                echo '</table>';
+                echo '<span>Bezorgkosten:€' . $bez . '</span>'; //Shipping
+                echo '<span>Totaal:€' . round($total, 2) . '</span>'; //Total
                 end_loop:
                 $j++;
+                echo '</div>';
             }
             if (isset($_POST['clear'])) {
                 DB::query('DELETE FROM current_orders');
