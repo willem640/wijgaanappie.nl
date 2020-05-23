@@ -70,7 +70,7 @@ require_once 'simple_html_dom.php';
                 $('#bonus-product-dialog-title')[0].innerHTML = title;
                 var $content = '';
                 if (price_was !== '') {
-                    $content = $content.concat(`Van: €${$price_was}<br>`);
+                    $content = $content.concat(`Van: €${price_was}<br>`);
                 }
                 if (price_now !== '' && price_was === '') {
                     $content = $content.concat(`Prijs: €${price_now}<br>`);

@@ -23,6 +23,9 @@ session_start();
                 $('.circle').velocity({top: 10 * vh - 12.5 * vw}); // calc werkt hier niet
                 $('.banner-links').velocity("fadeIn");
                 $('#circle').addClass('open');
+                $(window).scrollTop(0);
+                $('body').addClass('noscroll');
+                
             } else {
                 $('body > *').not('.top-mobile-banner').not('.circle').not('script').velocity("fadeIn");
                 setTimeout(() => {
@@ -32,6 +35,9 @@ session_start();
                 $('.circle').velocity({top: 25 * vh - 12.5 * vw});
                 $('.banner-links').velocity("fadeOut");
                 $('#circle').removeClass('open');
+                $('body').removeClass('noscroll');
+                
+
             }
         });
     });

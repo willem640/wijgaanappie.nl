@@ -18,6 +18,7 @@ $secondary: #004ba0;
 @use "components/textfield" with ($primary: $primary);
 @use "global/mobile-banner";
 @use "helpers/ripple";
+@use "helpers/noscroll";
 @use "page_specific/inloggen_php";
 @use "page_specific/register_php";
 @use "page_specific/zoeken_php";
