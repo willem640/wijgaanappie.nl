@@ -15,13 +15,12 @@ if (!($_SESSION['loggedin'] ?? false)) {
     </head>
     <body>
         <?php include 'mobile_banner.php' ?>
-    <center>
         <?php
         $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
         if ($perm_level >= 2) {
             $all_orders = DB::query('SELECT * FROM current_orders');
             $j = 0; //Zo doe k ff index snap key=>value nie. fight me
-
+            echo '<div class="wrapper">';
             foreach ($all_orders as $orders) {
                 $contents = json_decode($orders['contents'], true);
                 $order_history = json_decode(DB::query('SELECT previous_orders FROM users WHERE username=%s', $orders['username'])[0]['previous_orders'], true);
@@ -65,8 +64,8 @@ if (!($_SESSION['loggedin'] ?? false)) {
                 echo('<script type="text/javascript">window.location.href=lijstje.php</script>');
             }
         }
+        echo '</div>';
         ?>
         <br><br><br><br><form method="post" onsubmit="return confirm('weet je zeker dat je alles hebt?')"><input type="submit"  value="lijst leeghalen" name="clear"></form>
-    </center>
 </body>
 </html>
