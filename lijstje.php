@@ -51,7 +51,7 @@ if (!($_SESSION['loggedin'] ?? false)) {
                     $bez = $total - $subtotal;
                 }
                 echo '</ul>';
-                echo '<span></span>'; //Vertical row
+                echo '<hr>'; //Vertical row
                 echo '<span>Subtotaal:€' . $subtotal . '</span>'; //Subtotal
 
                 echo '<span>Bezorgkosten:€' . $bez . '</span>'; //Shipping
