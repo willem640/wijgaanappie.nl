@@ -36,15 +36,16 @@ if (!($_SESSION['loggedin'] ?? false)) {
                 } //Zo krijg ik niet telkens lege orders te zien was best verwarrend   
                 echo '<div class="mdc-card material-card">';
                 echo '<h3>' . (empty($orders['realname']) ? $orders['username'] : $orders['realname']) . '</h3>';
-                echo '<ul>';
+                echo '<ul class="mdc-list mdc-list--two-line">';
                 $subtotal = $bez = $total = 0;
                 foreach ((array) $contents as $prod) {
                     $am = $prod['bestelling_amount'];
-                    echo '<li>'; //List item
-                    echo '<span>'; //Span for texts and meta tag
-                    echo '<span>' . $prod['description'] . '</span>'; //Primary text
-                    echo '<span>' . $prod['bestelling_amount'] . '</span>'; //Secondary text
-                    echo '<span>€' . $prod['priceLabel']['now'] . '</span>'; //Meta tag
+                    echo '<li class="mdc-list-item" tabindex="0">'; //List item
+                    echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
+                    echo '<span class="mdc-list-item__primary-text">' . $prod['description'] . '</span>'; //Primary text
+                    echo '<span class="mdc-list-item__secondary-text">' . $prod['bestelling_amount'] . '</span>'; //Secondary text
+                    echo '<span class="mdc-list-item__meta">€' . $prod['priceLabel']['now'] . '</span>'; //Meta tag
+                    echo '</span>';
                     $subtotal += $prod['priceLabel']['now'] * $am; // when items don't have an ID, the random value that is returned seems to be constant so it just works
                     $total = round(1.1 * $subtotal, 2);
                     $bez = $total - $subtotal;
