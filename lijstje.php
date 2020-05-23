@@ -43,9 +43,9 @@ if (!($_SESSION['loggedin'] ?? false)) {
                     echo '<li class="mdc-list-item" tabindex="0">'; //List item
                     echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
                     echo '<span class="mdc-list-item__primary-text">' . $prod['description'] . '</span>'; //Primary text
-                    echo '<span class="mdc-list-item__secondary-text">' . $prod['bestelling_amount'] . '</span>'; //Secondary text
-                    echo '<span class="mdc-list-item__meta">€' . $prod['priceLabel']['now'] . '</span>'; //Meta tag
+                    echo '<span class="mdc-list-item__secondary-text">' . $prod['bestelling_amount'] . '</span>'; //Secondary text                    
                     echo '</span>';
+                    echo '<span class="mdc-list-item__meta">€' . $prod['priceLabel']['now'] . '</span>'; //Meta tag
                     $subtotal += $prod['priceLabel']['now'] * $am; // when items don't have an ID, the random value that is returned seems to be constant so it just works
                     $total = round(1.1 * $subtotal, 2);
                     $bez = $total - $subtotal;
