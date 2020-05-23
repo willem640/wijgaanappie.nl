@@ -51,6 +51,24 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 <html>
     <head>
         <?php include 'header_material.php' ?>
+        <script type="text/javascript">
+            $(document).ready(() => {
+                document
+                        .querySelectorAll('.mdc-text-field__input:-webkit-autofill')
+                        .forEach(el => {
+                            const textField = el.parentNode;
+                            const label = textField.querySelector('.mdc-floating-label');
+                            if (label) {
+                                label.classList.add('mdc-floating-label--float-above');
+                            }
+                            if (textField.MDCTextField) {
+                                textField.MDCTextField.foundation_.notchOutline(true);
+                            }
+                        });
+            });
+
+
+        </script>
     </head>
     <body>
         <?php include 'mobile_banner.php' ?>
@@ -76,15 +94,17 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                         <input type="checkbox" name="remember_me" id="remember_me">
                         <label for="remember_me">Onthoud mij voor 30 dagen</label>
                     </div>
-                    <?php if (isset($error)) {
+                    <?php
+                    if (isset($error)) {
                         echo '<p class="mdc-typography--body1 login-error">' . $error . '</p>';
-                    } ?>
+                    }
+                    ?>
 
 
                     <div class="mdc-touch-target-wrapper">
                         <button onclick="if ($(this).closest('form').valid) {
-                                    $(this).closest('form').submit();
-                                }" class="mdc-button mdc-button--touch material-button login-button">
+                                            $(this).closest('form').submit();
+                                        }" class="mdc-button mdc-button--touch material-button login-button">
                             <div class="mdc-button__ripple"></div>
                             <span class="mdc-button__label">Inloggen</span>
                             <div class="mdc-button__touch"></div>
@@ -93,7 +113,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 </form>
             </div>
             <div class="mdc-touch-target-wrapper">
-                <button onclick="url_params = new URLSearchParams(window.location.search);window.location.href = 'register.php' + (url_params.has('return') ? '?return=' + url_params.get('return') : '')" class="mdc-button mdc-button--touch material-button register-button">
+                <button onclick="url_params = new URLSearchParams(window.location.search);
+                        window.location.href = 'register.php' + (url_params.has('return') ? '?return=' + url_params.get('return') : '')" class="mdc-button mdc-button--touch material-button register-button">
                     <div class="mdc-button__ripple"></div>
                     <span class="mdc-button__label">Registreren</span>
                     <div class="mdc-button__touch"></div>
