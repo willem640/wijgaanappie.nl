@@ -50,7 +50,11 @@ if (!($_SESSION['loggedin'] ?? false)) {
                     $total = round(1.1 * $subtotal, 2);
                     $bez = $total - $subtotal;
                 }
+                echo '</ul>';
+                echo '<ul class="mdc-list">';
+
                 // Three list items for subtotal, shipping and total
+                
                 echo '<li class="mdc-list-item" tabindex="0">';
                 echo '<span class="mdc-list-item__text">Subtotaal:</span>'; //Subtotal
                 echo '</li>';
