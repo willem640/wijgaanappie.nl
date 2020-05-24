@@ -50,12 +50,23 @@ if (!($_SESSION['loggedin'] ?? false)) {
                     $total = round(1.1 * $subtotal, 2);
                     $bez = $total - $subtotal;
                 }
-                echo '</ul>';
-                echo '<hr>'; //Vertical row
-                echo '<span>Subtotaal:€' . $subtotal . '</span>'; //Subtotal
+                // Three list items for subtotal, shipping and total
+                echo '<li class="mdc-list-item" tabindex="0">';
+                echo '<span class="mdc-list-item__text">Subtotaal:</span>'; //Subtotal
+                echo '</li>';
+                echo '<span class="mdc-list-item__meta">€' . $subtotal . "</span>"; 
+                
+                echo '<li class="mdc-list-item" tabindex="0">';
+                echo '<span class="mdc-list-item__text">Subtotaal:€</span>'; //Shipping
+                echo '</li>';
+                echo '<span class="mdc-list-item__meta">€' . $bez . "</span>"; 
+                
+                echo '<li class="mdc-list-item" tabindex="0">';
+                echo '<span class="mdc-list-item__text">Subtotaal:€</span>'; //Total
+                echo '</li>';
+                echo '<span class="mdc-list-item__meta">€' . round($total, 2) . "</span>"; 
 
-                echo '<span>Bezorgkosten:€' . $bez . '</span>'; //Shipping
-                echo '<span>Totaal:€' . round($total, 2) . '</span>'; //Total
+                echo '</ul>';
                 end_loop:
                 $j++;
                 echo '</div>';
