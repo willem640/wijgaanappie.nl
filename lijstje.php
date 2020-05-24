@@ -15,7 +15,14 @@ if (!($_SESSION['loggedin'] ?? false)) {
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     </head>
     <body>
-        <button class="mdc-fab" aria-label="Favorite">
+        <style>
+        .app-fab--absolute {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+        }
+        </style>
+        <button class="mdc-fab app-fab--absolute" aria-label="Favorite">
             <div class="mdc-fab__ripple"></div>
             <span class="mdc-fab__icon material-icons">favorite</span>
         </button>
