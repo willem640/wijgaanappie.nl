@@ -10,6 +10,6 @@ $secondary: #004ba0 !default;
 
 .material-fab {
     
-    @include mdc-fab.accessible($primary);
+    @include mdc-fab.container-color($primary);
     
 }
