@@ -27,7 +27,7 @@ session_start();
                 $('body').addClass('noscroll');
                 
             } else {
-                $('body > *').not('.top-mobile-banner').not('.circle').not('script').velocity("fadeIn");
+                $('body > *:visible').not('.top-mobile-banner').not('.circle').not('script').velocity("fadeIn");
                 setTimeout(() => {
                     $('body > *').not('.top-mobile-banner').not('.circle').not('script').css("display", "");
                 }, 450);
