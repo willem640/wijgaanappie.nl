@@ -12,8 +12,13 @@ if (!($_SESSION['loggedin'] ?? false)) {
 <html>
     <head>
         <?php include 'header_material.php' ?>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     </head>
     <body>
+        <button class="mdc-fab" aria-label="Favorite">
+            <div class="mdc-fab__ripple"></div>
+            <span class="mdc-fab__icon material-icons">favorite</span>
+        </button>
         <?php include 'mobile_banner.php' ?>
         <?php
         $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
