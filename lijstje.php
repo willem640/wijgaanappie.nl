@@ -57,18 +57,21 @@ if (!($_SESSION['loggedin'] ?? false)) {
                 
                 echo '<li class="mdc-list-item" tabindex="0">';
                 echo '<span class="mdc-list-item__text">Subtotaal:</span>'; //Subtotal
+                echo '<span class="mdc-list-item__meta">€' . round($subtotal,2) . "</span>"; 
                 echo '</li>';
-                echo '<span class="mdc-list-item__meta">€' . $subtotal . "</span>"; 
+                
                 
                 echo '<li class="mdc-list-item" tabindex="0">';
-                echo '<span class="mdc-list-item__text">Subtotaal:€</span>'; //Shipping
+                echo '<span class="mdc-list-item__text">Bezorgkosten:</span>'; //Shipping
+                echo '<span class="mdc-list-item__meta">€' . round($bez,2) . "</span>"; 
                 echo '</li>';
-                echo '<span class="mdc-list-item__meta">€' . $bez . "</span>"; 
+                
                 
                 echo '<li class="mdc-list-item" tabindex="0">';
-                echo '<span class="mdc-list-item__text">Subtotaal:€</span>'; //Total
-                echo '</li>';
+                echo '<span class="mdc-list-item__text">Totaal:</span>'; //Total
                 echo '<span class="mdc-list-item__meta">€' . round($total, 2) . "</span>"; 
+                echo '</li>';
+                
 
                 echo '</ul>';
                 end_loop:
