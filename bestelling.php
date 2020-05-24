@@ -135,7 +135,8 @@ if (!isset($_SESSION['loggedin'])) {
                     $subtotal = 0;
                     $bez = 0;
                     $total = 0;
-                    foreach ((array) $cart as $prod) {
+                    foreach ((array) $cart as $key => $prod) {
+                        $_SESSION['orderable_array'][$key] = $prod;
                         $am = $prod['bestelling_amount'] ?? 1;
                         echo '  <div class="product-card">
                             <img src="'.$prod['images'][0]['link']['href'].'">
@@ -144,17 +145,20 @@ if (!isset($_SESSION['loggedin'])) {
                             <h4 id="price" class="mdc-typography--headline4">€' . $prod['priceLabel']['now'] . '</h4>
                             <h4 id="amount" class="mdc-typography--headline4">' . $prod['bestelling_amount'] . ' Stuks</h4>
                             <div class="buttons">
-                            <form method="post" id="delete' . $prod['id'] . '">
-                            <input type="hidden" name="delete" value="' . $prod['id'] . '">
-                            <button onclick="document.getElementById(\'delete' . $prod['id'] . '\').submit();" id="remove" style="float:left">Verwijder</button>
+                            <form method="post">
+                            <input type="hidden" name="product" value="' . $key . '">
+                            <input type="hidden" name="amount" value="'.-$am.'">
+                            <button onclick="this.closest(\'form\').submit()" id="remove" style="float:left">Verwijder</button>
                             </form>
-                            <form method="post" id="add' . $prod['id'] . '">
-                                <input type="hidden" name="add" value="' . $prod['id'] . '">
-                                <button id="up" onclick="document.getElementById(\'add' . $prod['id'] . '\').submit();" style="float:right">+</button>
+                            <form method="post">
+                                <input type="hidden" name="product" value="' . $key . '">
+                                <input type="hidden" name="amount" value="1">
+                                <button id="up" onclick="this.closest(\'form\').submit()" style="float:right">+</button>
                             </form>
-                            <form method="post" id="subs' . $prod['id'] . '">
-                                <input type="hidden" name="subs" value="' . $prod['id'] . '">
-                                <button id="down" onclick="document.getElementById(\'subs' . $prod['id'] . '\').submit();" style="float:right">-</button>
+                            <form method="post">
+                                <input type="hidden" name="product" value="' . $key . '">
+                                <input type="hidden" name="amount" value="-1">
+                                <button id="down" onclick="this.closest(\'form\').submit()" style="float:right">-</button>
                             </form>
                             </div>
                             </div>
@@ -163,7 +167,7 @@ if (!isset($_SESSION['loggedin'])) {
                         $total = round(1.1 * $subtotal, 2);
                         $bez = $total - $subtotal;
                     }
-                    echo '<div class="prices">';
+                    echo '<div class="prices mdc-typography--body1">';
                     echo '<p>Subtotaal: €' . number_format($subtotal, 2, ".", " ") . '</p>';
                     echo '<p>Bezorgkosten: €' . number_format($bez, 2, ".", " ") . '</p>';
                     echo '<p>Totaal: €' . number_format($total, 2, ".", " ") . '</p>';

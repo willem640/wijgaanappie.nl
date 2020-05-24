@@ -74,7 +74,8 @@ if ($_SESSION['loggedin'] ?? false) {
 
             <div id="card">
                 <h1 class="mdc-typography--headline1">Registreren</h1>
-                <form method="post" id="register-form">
+                <form method="post" autocomplete="off" id="register-form"> <!-- disable autofill -->
+                        <input autocomplete="false" name="hidden" type="text" style="display:none;">
                     <label class="mdc-text-field mdc-text-field--outlined material-textfield" id="email-input">
                         <input type="text" name="email" class="mdc-text-field__input" aria-labelledby="email-input-label" required value="<?=$_POST['email'] ?? ''?>" pattern="([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})">
                         <span class="mdc-notched-outline">
