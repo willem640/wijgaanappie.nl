@@ -10,6 +10,7 @@ $secondary: #004ba0;
 
 @use "components/button" with ($primary: $primary);
 @use "components/card";
+@use "components/fab" with ($primary: $primary, $secondary: $secondary);
 @use "components/image-list";
 @use "components/loader" with ($primary: $primary);
 @use "components/dialog" with ($primary: $primary);

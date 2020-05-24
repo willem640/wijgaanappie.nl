@@ -1,0 +1,15 @@
+/*
+    Created on : May 24, 2020, 1:17:16 PM
+    Author     : robin
+*/
+
+@use "@material/fab" as mdc-fab;
+
+$primary: #1976d2 !default;
+$secondary: #004ba0 !default;
+
+.material-fab {
+    
+    @include mdc-fab.accessible($primary);
+    
+}
