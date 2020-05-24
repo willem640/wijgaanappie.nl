@@ -20,6 +20,7 @@ if (!($_SESSION['loggedin'] ?? false)) {
             position: fixed;
             bottom: 1rem;
             right: 1rem;
+            z-index: 1;
         }
         </style>
         <button class="mdc-fab app-fab--absolute" aria-label="Favorite">
