@@ -23,10 +23,13 @@ if (!($_SESSION['loggedin'] ?? false)) {
             z-index: 1;
         }
         </style>
-        <button class="mdc-fab app-fab--absolute" aria-label="Favorite">
-            <div class="mdc-fab__ripple"></div>
-            <span class="mdc-fab__icon material-icons">favorite</span>
-        </button>
+        <form method="post" onsubmit="return confirm('weet je zeker dat je alles hebt?')" id="clear_sweep">
+            <input type="hidden" name="clear" value="lijst leeghalen">
+            <button class="mdc-fab app-fab--absolute" aria-label="delete_sweep" onclick="document.getElementById('clear_sweep').submit();">
+                <div class="mdc-fab__ripple"></div>
+                <span class="mdc-fab__icon material-icons">delete_sweep</span>
+            </button>
+        </form>
         <?php include 'mobile_banner.php' ?>
         <?php
         $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
