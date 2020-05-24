@@ -6,6 +6,10 @@ require_once 'setup.php';
 if (!($_SESSION['loggedin'] ?? false)) {
     header('Location: login.php?return=lijstje.php');
 }
+if (isset($_POST['clear'])) {
+                DB::query('DELETE FROM current_orders');
+                echo('<script type="text/javascript">window.location.href=lijstje.php</script>');
+            }
 ?>
 
 <!DOCTYPE HTML>
@@ -94,13 +98,9 @@ if (!($_SESSION['loggedin'] ?? false)) {
                 $j++;
                 echo '</div>';
             }
-            if (isset($_POST['clear'])) {
-                DB::query('DELETE FROM current_orders');
-                echo('<script type="text/javascript">window.location.href=lijstje.php</script>');
-            }
+            
         }
         echo '</div>';
         ?>
-        <br><br><br><br><form method="post" onsubmit="return confirm('weet je zeker dat je alles hebt?')"><input type="submit"  value="lijst leeghalen" name="clear"></form>
 </body>
 </html>
