@@ -11,8 +11,6 @@
 <!-- Velocity.js animation engine -->
 <script src="assets/js/velocity.js" type="text/javascript"></script>
 
-
-
 <!-- JScroll infinite scrolling -->
 <script src="https://unpkg.com/jscroll@2.4.1/dist/jquery.jscroll.min.js"></script>
 

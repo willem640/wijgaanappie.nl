@@ -448,7 +448,7 @@ input#fancy_a{
 }
 .status h1 {
     text-align: center;
-    letter-spacing: 1vw;
+    letter-spacing: .3rem;
     font-size: 1.5rem;
     margin-bottom: 2vh;
     line-height: 1.5rem;
@@ -524,7 +524,7 @@ input#fancy_a{
     text-align: center;
     font-family: Roboto, sans-serif;
     font-weight: demibold;
-    letter-spacing: 1vw;
+    letter-spacing: .3rem;
     line-height: 1.5rem;
     font-size: 1.5rem;
     margin-bottom: 2svh;
