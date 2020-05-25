@@ -110,11 +110,7 @@ if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
             $curr_order = json_decode($curr_order[0]['contents'], true);
             if (empty($curr_order)) {
                 echo '<div id="card">';
-                echo '<h1>Je hebt nog niks besteld</h1>'
-                . '<div class="submenu">
-                    <a href="history.php" id="fancy_a">Eerdere Bestellingen</a>
-                    <a href="logout.php" id="fancy_a">Uitloggen</a>
-                   </div>';
+                echo '<h1>Je hebt nog niks besteld</h1>';
                 echo '</div>';
             } else {
                 echo '<div id="card">';
