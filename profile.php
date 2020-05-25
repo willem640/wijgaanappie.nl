@@ -146,8 +146,6 @@ if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
                             </div>
                             </div>
                             <div class="submenu">
-                    <a href="history.php" id="fancy_a">Eerdere Bestellingen</a>
-                    <a href="logout.php" id="fancy_a">Uitloggen</a>
                    </div>
                             </div>';
                     $subtotal += $order['priceLabel']['now'] * $am; // when items don't have an ID, the random value that is returned seems to be constant so it just works
@@ -169,16 +167,25 @@ if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
                 <span class="mdc-fab__icon material-icons">menu_open</span>
         </button>
         <div id="mini-options">
-            <button class="mdc-fab mdc-fab--mini material-fab off" aria-label="list_alt" onclick="document.location.href='lijstje.php'">
-                <div class="mdc-fab__ripple"></div>
-                <span class="mdc-fab__icon material-icons">list_alt</span>
-            </button>
-            <br>
-            <button class="mdc-fab mdc-fab--mini material-fab off" aria-label="report" onclick="">
-                <div class="mdc-fab__ripple"></div>
-                <span class="mdc-fab__icon material-icons">report</span>
-            </button>
-            <br>
+        <?php
+            $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
+            if ($perm_level >= 2) {
+                echo '<button class="mdc-fab mdc-fab--mini material-fab off" aria-label="list_alt" onclick="document.location.href=\'lijstje.php\'">
+                      <div class="mdc-fab__ripple"></div>
+                      <span class="mdc-fab__icon material-icons">list_alt</span>
+                      </button>
+                      <br>
+                      <button class="mdc-fab mdc-fab--mini material-fab off" aria-label="report" onclick="">
+                      <div class="mdc-fab__ripple"></div>
+                      <span class="mdc-fab__icon material-icons">report</span>
+                      </button>
+                      <br>'
+                ;
+            }
+        ?>
+        
+        
+            
             <button class="mdc-fab mdc-fab--mini material-fab off" aria-label="history" onclick="document.location.href='history.php'">
                 <div class="mdc-fab__ripple"></div>
                 <span class="mdc-fab__icon material-icons">history</span>
@@ -230,15 +237,5 @@ if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
             });
         </script>
     </body>
-    <?php
-    $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
-    if ($perm_level >= 2) {
-        echo '<a id="fancy_a" href="lijstje.php">Boodschappenlijstje</a>';
-        echo '<br><br><form method="post">'
-        . '<input type="submit" name="naar appie" value="vandaag naar de appie">'
-        . '<input type="submit" name="niet naar appie" value="vandaag niet naar de appie">'
-        . '<input type="submit" name="speciaal bericht" value="speciaal bericht">'
-        . '<input type="text" name="speciaal bericht tekst" placeholder="speciaal bericht"></form>';
-    }
-    ?>
+    
 </html>
