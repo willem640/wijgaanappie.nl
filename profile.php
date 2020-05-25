@@ -169,7 +169,7 @@ if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
                 <span class="mdc-fab__icon material-icons">menu_open</span>
         </button>
         <div id="mini-options">
-            <button class="mdc-fab mdc-fab--mini material-fab off" aria-label="list_alt" onclick="">
+            <button class="mdc-fab mdc-fab--mini material-fab off" aria-label="list_alt" onclick="document.location.href='lijstje.php'">
                 <div class="mdc-fab__ripple"></div>
                 <span class="mdc-fab__icon material-icons">list_alt</span>
             </button>
@@ -179,12 +179,12 @@ if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
                 <span class="mdc-fab__icon material-icons">report</span>
             </button>
             <br>
-            <button class="mdc-fab mdc-fab--mini material-fab off" aria-label="history" onclick="">
+            <button class="mdc-fab mdc-fab--mini material-fab off" aria-label="history" onclick="document.location.href='history.php'">
                 <div class="mdc-fab__ripple"></div>
                 <span class="mdc-fab__icon material-icons">history</span>
             </button>
             <br>
-            <button class="mdc-fab mdc-fab--mini material-fab off" aria-label="exit_to_app" onclick="">
+            <button class="mdc-fab mdc-fab--mini material-fab off" aria-label="exit_to_app" onclick="document.location.href='logout.php'">
                 <div class="mdc-fab__ripple"></div>
                 <span class="mdc-fab__icon material-icons">exit_to_app</span>
             </button>
