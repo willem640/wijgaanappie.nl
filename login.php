@@ -6,7 +6,7 @@ if ($logged_in) {
     header('Location: index.php');
 }
 $username = ($_COOKIE['username'] ?? '');
-$token = DB::query('SELECT * FROM `cookie users` WHERE username = %s', $username);
+$token = DB::query('SELECT * FROM `cookie users` WHERE username = %s', $username); // NIET COMMITTEN
 if (isset($token[0]['token']) && $token[0]['token'] == $_COOKIE['logintoken']) {
     // found session, is it valid?
     $date = new DateTime($token[0]['login time']);
@@ -51,6 +51,18 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 <html>
     <head>
         <?php include 'header_material.php' ?>
+        <script type="text/javascript">
+            var checkbox;
+            var formField;
+            $(document).ready(() => {
+                checkbox = new mdc.checkbox.MDCCheckbox(document.querySelector('.mdc-checkbox'));
+                formField = new mdc.formField.MDCFormField(document.querySelector('.mdc-form-field'));
+                formField.input = checkbox;
+            });
+
+
+
+        </script>
     </head>
     <body>
         <?php include 'mobile_banner.php' ?>
@@ -62,23 +74,42 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
                     <div class="text-field">
                         <input type="text" id="username" name="username" required>
-                        <span class="highlight"></span>
                         <span class="bar"></span>
                         <label for="username">Gebruikersnaam</label>
                     </div>
                     <div class="text-field">
                         <input type="password" id="password" name="password" required>
-                        <span class="highlight"></span>
                         <span class="bar"></span>
                         <label for="password">Wachtwoord</label>
                     </div>
-                    <div id="remember">
-                        <input type="checkbox" name="remember_me" id="remember_me">
-                        <label for="remember_me">Onthoud mij voor 30 dagen</label>
-                    </div>
-                    <?php if (isset($error)) {
+                    <!--<div id="remember">-->
+                        <div class="mdc-form-field material-form-field">
+                            <div class="mdc-touch-target-wrapper">
+                                <div class="mdc-checkbox mdc-checkbox--touch material-checkbox">
+                                    <input type="checkbox"
+                                           class="mdc-checkbox__native-control"
+                                           id="checkbox-1"
+                                           name="remember_me">
+                                    <div class="mdc-checkbox__background">
+                                        <svg class="mdc-checkbox__checkmark"
+                                             viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark-path"
+                                              fill="none"
+                                              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                        </svg>
+                                        <div class="mdc-checkbox__mixedmark"></div>
+                                    </div>
+                                    <div class="mdc-checkbox__ripple"></div>
+                                </div>
+                            </div>
+                            <label for="remember_me">Onthoud mij voor 30 dagen</label>
+                        </div>
+                    <!--</div>-->
+                    <?php
+                    if (isset($error)) {
                         echo '<p class="mdc-typography--body1 login-error">' . $error . '</p>';
-                    } ?>
+                    }
+                    ?>
 
 
                     <div class="mdc-touch-target-wrapper">

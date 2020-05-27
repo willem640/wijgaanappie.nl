@@ -1,0 +1,7 @@
+@use "@material/form-field" as mdc-form-field;
+@use "@material/typography" as mdc-typography;
+.material-form-field{
+    label{
+        @include mdc-typography.typography(body1);
+    }
+}

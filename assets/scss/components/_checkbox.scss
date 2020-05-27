@@ -1,0 +1,9 @@
+@use "@material/checkbox" as mdc-checkbox;
+
+@use "../components/formfield";
+
+$primary: #1976d2 !default;
+
+.material-checkbox{
+    @include mdc-checkbox.container-colors(rgba(0,0,0,.54), white, $primary, $primary, true);
+}
