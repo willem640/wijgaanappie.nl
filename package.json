@@ -1,0 +1,25 @@
+{
+  "name": "wijgaanappie.nl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://willemschipper2%40gmail.com@github.com/willem640/wijgaanappie.nl.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willem640/wijgaanappie.nl/issues"
+  },
+  "homepage": "https://github.com/willem640/wijgaanappie.nl#readme",
+  "dependencies": {
+    "@material/circular-progress": "^6.0.0",
+    "material-components-web": "^5.1.0",
+    "node-sass": "^4.13.1",
+    "sass": "^1.26.3"
+  }
+}
