@@ -175,8 +175,11 @@ require_once 'simple_html_dom.php';
                     current_search_query = query;
                     current_sort = sort;
                     if($('#search-results-added').length > 0){
-                        $('#search-results-added').remove();
+                        $('#search-results-added').remove(); // moet weggehaald worden om jscroll goed te laten stoppen
+
                     }
+                    
+                                                                                    // pakt zoekresultaten in cards
                     $('body').append('<div id="search-results-added" class="jscroll"><a style="display:none" href="getSearchResults.php?q=' + query + '&sort=' + sort + '&to=' + 10 + '&from=' + 0 + '"></a></div>')
                     
                     $('.jscroll').jscroll({

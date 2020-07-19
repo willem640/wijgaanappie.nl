@@ -16,6 +16,7 @@
             var error_snackbar;
             var nologin_snackbar;
             var cancel_success_snackbar;
+            
             $(document).ready(function () {
                 var ripple_surfaces = $('.ripple-surface');
                 for (var i = 0; i < ripple_surfaces.length; ++i) {
@@ -296,13 +297,13 @@
                                                 'product'),
                                         'priceLabel'),
                                 'now');
-                    } else { // sort alphabetically if something weird was selected, such as 'alphabetical'
+                    } else { // alfabetisch sorteren
                         $col = array_column(
                                 array_column(
                                         array_column($products,
                                                 '_embedded'),
                                         'product'),
-                                'description'); // access column with desc, nested bc php is dumb
+                                'description'); // array_column moet genest zijn hier
                     }
                     //print_r($products);
                     array_multisort($col, $sortdir, $products);

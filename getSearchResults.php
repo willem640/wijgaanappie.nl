@@ -15,20 +15,25 @@ if (strpos($sort, 'reverse') !== false) {
 } else {
     $sort_direction = 'ASC';
 }
-if (strpos(($sort ?? ''), 'price') !== false) {
-    $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY priceNow " . $sort_direction . " LIMIT " . $from . "," . $num, $search);
-    $count = DB::query("SELECT COUNT(*) FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY priceNow " . $sort_direction, $search);
-} else if (strpos(($sort ?? ''), 'alphabetical') !== false) {
-    $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY title " . $sort_direction . " LIMIT " . $from . "," . $num, $search);
-    $count = DB::query("SELECT COUNT(*) FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY title " . $sort_direction, $search);
-} else { //not price, not alphabetical, so sort by relevance
+$orderBy = "";
+
+if (strpos(($sort ?? ''), 'price') === false && strpos(($sort ?? ''), 'alphabetical') === false) { //not price, not alphabetical, so sort by relevance
     $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY MATCH(title) AGAINST(%s0) " . $sort_direction . " LIMIT " . $from . "," . $num, $search);
     $count = DB::query("SELECT COUNT(*) FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY MATCH(title) AGAINST(%s0) " . $sort_direction, $search);
+} else {
+    if (strpos(($sort ?? ''), 'price') !== false) {
+        $orderBy = "priceNow";
+    } else if (strpos(($sort ?? ''), 'alphabetical') !== false) {
+        $orderBy = "title";
+    }
+    $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY " . $orderBy . " " . $sort_direction . " LIMIT " . $from . "," . $num, $search);
+    $count = DB::query("SELECT COUNT(*) FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY " . $orderBy . " " . $sort_direction, $search);
 }
+
 $count = (int) ($count[0]['COUNT(*)']);
 $mh = curl_multi_init();
 
-if(count($query) === 0){
+if (count($query) === 0) {
     echo '<p class="mdc-typography--body1" style="text-align: center; width: 100%; font-size: 1.5rem">Geen resultaten gevonden</p>';
     die();
 }
@@ -64,7 +69,7 @@ foreach ($curlHandles as $handle_url => $ch) {
     $prod = $detail_lane['_embedded']['items'][0]['_embedded']['product'];
     $_SESSION['orderable_array'][$key + $from] = $prod;
     echo '<div class="mdc-card material-card">'
-    . ' <div class="mdc-card__primary-action ripple-surface" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["label"] ?? $prod["discount"]["type"]["name"])) . '\',\'' . ($key +$from). '\')">'
+    . ' <div class="mdc-card__primary-action ripple-surface" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["label"] ?? $prod["discount"]["type"]["name"])) . '\',\'' . ($key + $from) . '\')">'
     . '<div class="mdc-card__media material-card__media" style="background-image: url(' . $prod['images'][0]['link']['href'] . ')"></div>'
     . '<h5 class="mdc-typography--headline5 material-card__title">'
     . $prod["description"]
