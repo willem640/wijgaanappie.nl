@@ -7,7 +7,7 @@ $komt_chobin = $query['komt hij'];
 $array = [];
 $array['status'] = $komt_chobin;
 if($komt_chobin === '2'){
-  $array['special_status'] == $query['special_status'];
+  $array['special_status'] = $query['special_status'];
 }
 
 $json = json_encode($array);
