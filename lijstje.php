@@ -103,6 +103,14 @@ if (isset($_POST['clear'])) {
             }
             echo '<div class="mdc-card material-card">';
             print_r($all_orders);
+            $list = [];
+            foreach($all_orders as $order){
+                $order_content = json_decode($order['contents'], true);
+                foreach($order_content as $product){
+                    array_push($list, $product);
+                }
+            }
+            print_r($list);
             echo '</div>';
         }
         echo '</div>';
