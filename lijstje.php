@@ -59,7 +59,7 @@ if (isset($_POST['clear'])) {
                 if (empty($contents)) {
                     goto end_loop;
                 } //Zo krijg ik niet telkens lege orders te zien was best verwarrend   
-                echo '<div class="mdc-card material-card">';
+                echo '<div class="mdc-card material-card" style="display:none">'; //TODO weghalen oude shizzle en niet op de luie manier hier 
                 echo '<h3>' . (empty($orders['realname']) ? $orders['username'] : $orders['realname']) . '</h3>';
                 echo '<ul class="mdc-list mdc-list--two-line">';
                 $subtotal = $bez = $total = 0;
