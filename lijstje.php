@@ -117,7 +117,17 @@ if (isset($_POST['clear'])) {
                     if(!$added){array_push($list, $product);}
                 }
             }
-            print_r($list);
+            //print_r($list);
+            echo '<ul class="mdc-list mdc-list--two-line">';
+            foreach($list as $product){
+                echo '<li class="mdc-list-item" tabindex="0">'; //List item
+                echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
+                echo '<span class="mdc-list-item__primary-text">' . $product['description'] . '</span>'; //Primary text
+                echo '<span class="mdc-list-item__secondary-text">' . $product['priceLabel']['now'] . '</span>'; //Secondary text                    
+                echo '</span>';
+                echo '<span class="mdc-list-item__meta">€' . $product['bestelling_amount'] . '</span>'; //Meta tag
+            }
+            echo '</ul>';
             echo '</div>';
         }
         echo '</div>';
