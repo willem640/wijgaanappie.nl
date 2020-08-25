@@ -142,9 +142,10 @@ if (isset($_POST['clear'])) {
                     $am = $prod['bestelling_amount'];
                     echo '<li class="mdc-list-item" tabindex="0">'; //List item
                     echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
-                    echo '<span class="mdc-list-item__primary-text">' . $prod['description'] . '</span>'; //Primary text                 
-                    echo '</span>';
+                    echo '<span class="mdc-list-item__primary-text">' . $prod['description'] . '</span>'; //Primary text   
                     echo '<span class="mdc-list-item__meta">' . $prod['bestelling_amount'] . '</span>'; //Meta tag
+                    echo '</span>';
+                    
                 }
                 echo '</ul>';
                 echo '</div>';
