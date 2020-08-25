@@ -136,7 +136,7 @@ if (isset($_POST['clear'])) {
             
             //Code voor de bezorglijst
             echo '<div class="mdc-card material-card">';
-            echo '<h2 class="mdc-typography--headline3">Bezorglijst</h2>';
+            echo '<h2>Bezorglijst</h2>';
             foreach ($all_orders as $orders) {
                 $contents = json_decode($orders['contents'], true);
                 
@@ -154,6 +154,23 @@ if (isset($_POST['clear'])) {
                 
             }
             echo '</div>';
+            
+            //Code voor de tikkielijst
+            echo '<div class="mdc-card material-card">';
+            echo '<ul class="mdc-list">';
+            foreach($all_orders as $order){
+                $user = (empty($order['realname']) ? $order['username'] : $order['realname']);
+                $contents=json_decode($order['contents'], true);
+                $tot = 0;
+                foreach($contents as $prod){
+                    $tot+=1.1*$prod['priceLabel']['now'];
+                }
+                echo '<li class="mdc-list-item" tabindex="0">'; //List item
+                echo '<span class="mdc-list-item__text">' . $user . '</span>'; //Primary text   
+                echo '<span class="mdc-list-item__meta">' . round($tot, 2) . '</span>'; //Meta tag
+            }
+            echo '</ul>';
+            echo '</div';
         }
         echo '</div>';
         ?>
