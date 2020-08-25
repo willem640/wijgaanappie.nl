@@ -136,7 +136,7 @@ if (isset($_POST['clear'])) {
             
             //Code voor de bezorglijst
             echo '<div class="mdc-card material-card">';
-            echo '<center class="mdc-typography--headline3">Bezorglijst</center>';
+            echo '<h2 class="mdc-typography--headline3">Bezorglijst</h2>';
             foreach ($all_orders as $orders) {
                 $contents = json_decode($orders['contents'], true);
                 
