@@ -132,7 +132,29 @@ if (isset($_POST['clear'])) {
             echo '</div>';
             
             //Code voor de bezorglijst
-            
+            foreach ($all_orders as $orders) {
+                $contents = json_decode($orders['contents'], true);
+                if (empty($contents)) {
+                    goto end_loop;
+                } //Zo krijg ik niet telkens lege orders te zien was best verwarrend   
+                echo '<div class="mdc-card material-card">';
+                echo '<h3>' . (empty($orders['realname']) ? $orders['username'] : $orders['realname']) . '</h3>';
+                echo '<ul class="mdc-list mdc-list--two-line">';
+                $subtotal = $bez = $total = 0;
+                foreach ((array) $contents as $prod) {
+                    $am = $prod['bestelling_amount'];
+                    echo '<li class="mdc-list-item" tabindex="0">'; //List item
+                    echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
+                    echo '<span class="mdc-list-item__primary-text">' . $prod['description'] . '</span>'; //Primary text                 
+                    echo '</span>';
+                    echo '<span class="mdc-list-item__meta">' . $prod['bestelling_amount'] . '</span>'; //Meta tag
+                }
+                echo '</ul>';
+                end_loop:
+                $j++;
+                echo '</div>';
+                
+            }
         }
         echo '</div>';
         ?>
