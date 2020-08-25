@@ -102,7 +102,7 @@ if (isset($_POST['clear'])) {
                 
             }
             echo '<div class="mdc-card material-card">';
-            print_r($all_orders);
+            //print_r($all_orders);
             $list = [];
             foreach($all_orders as $order){
                 $order_content = json_decode($order['contents'], true);
@@ -118,14 +118,15 @@ if (isset($_POST['clear'])) {
                 }
             }
             //print_r($list);
+            echo '<h2>Boodschappenlijstje</h2>';
             echo '<ul class="mdc-list mdc-list--two-line">';
             foreach($list as $product){
                 echo '<li class="mdc-list-item" tabindex="0">'; //List item
                 echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
                 echo '<span class="mdc-list-item__primary-text">' . $product['description'] . '</span>'; //Primary text
-                echo '<span class="mdc-list-item__secondary-text">' . $product['priceLabel']['now'] . '</span>'; //Secondary text                    
+                echo '<span class="mdc-list-item__secondary-text">€' . $product['priceLabel']['now'] . '</span>'; //Secondary text                    
                 echo '</span>';
-                echo '<span class="mdc-list-item__meta">€' . $product['bestelling_amount'] . '</span>'; //Meta tag
+                echo '<span class="mdc-list-item__meta">' . $product['bestelling_amount'] . '</span>'; //Meta tag
             }
             echo '</ul>';
             echo '</div>';
