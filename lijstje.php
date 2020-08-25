@@ -43,6 +43,8 @@ if (isset($_POST['clear'])) {
             echo '<div class="wrapper">';
             foreach ($all_orders as $orders) {
                 $contents = json_decode($orders['contents'], true);
+                
+                //Update order history van mensen
                 $order_history = json_decode(DB::query('SELECT previous_orders FROM users WHERE username=%s', $orders['username'])[0]['previous_orders'], true);
                 $order_history[date("d-m-Y")] = array_merge(($order_history[date("d-m-Y")] ?? []), $contents);
                 $order_history_json = json_encode($order_history);
@@ -97,8 +99,11 @@ if (isset($_POST['clear'])) {
                 end_loop:
                 $j++;
                 echo '</div>';
+                
             }
-            
+            echo '<div class="mdc-card material-card">';
+            print_r($all_orders);
+            echo '</div>';
         }
         echo '</div>';
         ?>
