@@ -134,9 +134,6 @@ if (isset($_POST['clear'])) {
             //Code voor de bezorglijst
             foreach ($all_orders as $orders) {
                 $contents = json_decode($orders['contents'], true);
-                if (empty($contents)) {
-                    goto end_loop;
-                } //Zo krijg ik niet telkens lege orders te zien was best verwarrend   
                 echo '<div class="mdc-card material-card">';
                 echo '<h3>' . (empty($orders['realname']) ? $orders['username'] : $orders['realname']) . '</h3>';
                 echo '<ul class="mdc-list mdc-list--two-line">';
@@ -150,8 +147,6 @@ if (isset($_POST['clear'])) {
                     echo '<span class="mdc-list-item__meta">' . $prod['bestelling_amount'] . '</span>'; //Meta tag
                 }
                 echo '</ul>';
-                end_loop:
-                $j++;
                 echo '</div>';
                 
             }
