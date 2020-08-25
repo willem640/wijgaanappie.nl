@@ -26,6 +26,9 @@ if (isset($_POST['clear'])) {
             right: 1rem;
             z-index: 1;
         }
+        center {
+            margin: 1vh 0;
+        }
         </style>
         <form method="post" onsubmit="confirm('weet je zeker dat je alles hebt?')" id="clear_sweep">
             <input type="hidden" name="clear" value="lijst leeghalen">
@@ -133,10 +136,11 @@ if (isset($_POST['clear'])) {
             
             //Code voor de bezorglijst
             echo '<div class="mdc-card material-card">';
+            echo '<center class="mdc-typography--headline3">Bezorglijst</center>';
             foreach ($all_orders as $orders) {
                 $contents = json_decode($orders['contents'], true);
                 
-                echo '<h3>' . (empty($orders['realname']) ? $orders['username'] : $orders['realname']) . '</h3>';
+                echo '<center class="mdc-typography--headline5">' . (empty($orders['realname']) ? $orders['username'] : $orders['realname']) . '</center>';
                 echo '<ul class="mdc-list">';
                 $subtotal = $bez = $total = 0;
                 foreach ((array) $contents as $prod) {
