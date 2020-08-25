@@ -106,7 +106,7 @@ if (isset($_POST['clear'])) {
             }
             //Code voor de boodschappenlijst
             echo '<div class="mdc-card material-card">';
-            print_r($all_orders);
+            //print_r($all_orders);
             $boodschappenlijst = [];
             foreach($all_orders as $order){
                 $order_content = json_decode($order['contents'], true);
@@ -121,7 +121,7 @@ if (isset($_POST['clear'])) {
                     if(!$added){array_push($boodschappenlijst, $product);}
                 }
             }
-            echo '<h2>Boodschappenlijstje</h2>';
+            echo '<h2>Boodschappenlijst</h2>';
             echo '<ul class="mdc-list mdc-list--two-line">';
             foreach($boodschappenlijst as $product){
                 echo '<li class="mdc-list-item" tabindex="0">'; //List item
@@ -157,6 +157,7 @@ if (isset($_POST['clear'])) {
             
             //Code voor de tikkielijst
             echo '<div class="mdc-card material-card">';
+            echo '<h2>Tikkielijst</h2>';
             echo '<ul class="mdc-list">';
             foreach($all_orders as $order){
                 $user = (empty($order['realname']) ? $order['username'] : $order['realname']);
