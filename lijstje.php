@@ -101,26 +101,26 @@ if (isset($_POST['clear'])) {
                 echo '</div>';
                 
             }
+            //Code voor de boodschappenlijst
             echo '<div class="mdc-card material-card">';
-            //print_r($all_orders);
-            $list = [];
+            print_r($all_orders);
+            $boodschappenlijst = [];
             foreach($all_orders as $order){
                 $order_content = json_decode($order['contents'], true);
                 foreach($order_content as $product){
                     $added = false;
-                    foreach($list as $key => $dupe){
+                    foreach($boodschappenlijst as $key => $dupe){
                         if($product['id']==$dupe['id']){
-                            $list[$key]['bestelling_amount']++;
+                            $boodschappenlijst[$key]['bestelling_amount']++;
                             $added=true;
                         }
                     }
-                    if(!$added){array_push($list, $product);}
+                    if(!$added){array_push($boodschappenlijst, $product);}
                 }
             }
-            //print_r($list);
             echo '<h2>Boodschappenlijstje</h2>';
             echo '<ul class="mdc-list mdc-list--two-line">';
-            foreach($list as $product){
+            foreach($boodschappenlijst as $product){
                 echo '<li class="mdc-list-item" tabindex="0">'; //List item
                 echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
                 echo '<span class="mdc-list-item__primary-text">' . $product['description'] . '</span>'; //Primary text
@@ -130,6 +130,9 @@ if (isset($_POST['clear'])) {
             }
             echo '</ul>';
             echo '</div>';
+            
+            //Code voor de bezorglijst
+            
         }
         echo '</div>';
         ?>
