@@ -107,7 +107,14 @@ if (isset($_POST['clear'])) {
             foreach($all_orders as $order){
                 $order_content = json_decode($order['contents'], true);
                 foreach($order_content as $product){
-                    array_push($list, $product);
+                    $added = false;
+                    foreach($list as $key => $dupe){
+                        if($product['id']==$dupe['id']){
+                            $list[$key]['bestelling_amount']++;
+                            $added=true;
+                        }
+                    }
+                    if(!$added){array_push($list, $product);}
                 }
             }
             print_r($list);
