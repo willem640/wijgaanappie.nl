@@ -164,7 +164,8 @@ if (isset($_POST['clear'])) {
                 $contents=json_decode($order['contents'], true);
                 $tot = 0;
                 foreach($contents as $prod){
-                    $tot+=1.1*$prod['priceLabel']['now'];
+                    $am = $prod['bestelling_amount'];
+                    $tot+=1.1*($prod['priceLabel']['now']*$am);
                 }
                 echo '<li class="mdc-list-item" tabindex="0">'; //List item
                 echo '<span class="mdc-list-item__text">' . $user . '</span>'; //Primary text   
