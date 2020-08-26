@@ -1,6 +1,15 @@
 <?php
 session_start();
 include 'setup.php';
+
+if(isset($_GET['username']) && isset($_GET['token'])){
+    $token = DB::QueryFirstRow('SELECT token FROM forgot_password WHERE email=%s', $_GET['username']);
+    $timestamp = DB::QueryFirstRow('SELECT valid_till FROM forgot_password WHERE email=%s', $_GET['username']);
+    $now = new DateTime();
+    if($now < DateTime($timestamp) && $token==$_GET['token']){
+        echo 'succesfully verified';
+    }
+}
 ?>
 
 <html>
@@ -47,7 +56,7 @@ var textfield_objects = [];
                         <span class="mdc-notched-outline">
                             <span class="mdc-notched-outline__leading"></span>
                             <span class="mdc-notched-outline__notch">
-                                <span class="mdc-floating-label" id="email-input-label">Email</span>
+                                <span class="mdc-floating-label" id="email-input-label">Wachtwoord</span>
                             </span>
                             <span class="mdc-notched-outline__trailing"></span>
                         </span>
