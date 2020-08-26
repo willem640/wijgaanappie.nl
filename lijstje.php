@@ -26,6 +26,9 @@ if (isset($_POST['clear'])) {
             right: 1rem;
             z-index: 1;
         }
+        center {
+            margin: 1vh 0;
+        }
         </style>
         <form method="post" onsubmit="confirm('weet je zeker dat je alles hebt?')" id="clear_sweep">
             <input type="hidden" name="clear" value="lijst leeghalen">
@@ -56,7 +59,7 @@ if (isset($_POST['clear'])) {
                 if (empty($contents)) {
                     goto end_loop;
                 } //Zo krijg ik niet telkens lege orders te zien was best verwarrend   
-                echo '<div class="mdc-card material-card">';
+                echo '<div class="mdc-card material-card" style="display:none">'; //TODO weghalen oude shizzle en niet op de luie manier hier 
                 echo '<h3>' . (empty($orders['realname']) ? $orders['username'] : $orders['realname']) . '</h3>';
                 echo '<ul class="mdc-list mdc-list--two-line">';
                 $subtotal = $bez = $total = 0;
@@ -101,11 +104,94 @@ if (isset($_POST['clear'])) {
                 echo '</div>';
                 
             }
-            echo '<div class="mdc-card material-card">';
-            print_r($all_orders);
+            //Code voor de boodschappenlijst
+            echo '<div class="mdc-card material-card" id="boodschappen">';
+            echo '<button id="lijst_button" style="position: absolute;right: 0;top: 0;" class="mdc-icon-button material-icons boodschappen" onclick="">switch_left</button>';
+            //print_r($all_orders);
+            $boodschappenlijst = [];
+            foreach($all_orders as $order){
+                $order_content = json_decode($order['contents'], true);
+                foreach($order_content as $product){
+                    $added = false;
+                    foreach($boodschappenlijst as $key => $dupe){
+                        if($product['id']==$dupe['id']){
+                            $boodschappenlijst[$key]['bestelling_amount']++;
+                            $added=true;
+                        }
+                    }
+                    if(!$added){array_push($boodschappenlijst, $product);}
+                }
+            }
+            echo '<h2>Boodschappenlijst</h2>';
+            echo '<ul class="mdc-list mdc-list--two-line">';
+            foreach($boodschappenlijst as $product){
+                echo '<li class="mdc-list-item" tabindex="0">'; //List item
+                echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
+                echo '<span class="mdc-list-item__primary-text">' . $product['description'] . '</span>'; //Primary text
+                echo '<span class="mdc-list-item__secondary-text">€' . $product['priceLabel']['now'] . '</span>'; //Secondary text                    
+                echo '</span>';
+                echo '<span class="mdc-list-item__meta">' . $product['bestelling_amount'] . '</span>'; //Meta tag
+            }
+            echo '</ul>';
             echo '</div>';
+            
+            //Code voor de bezorglijst
+            echo '<div class="mdc-card material-card" id="bezorg" style="display:none">';
+            echo '<button id="bezorg_button" style="position: absolute;right: 0;top: 0;" class="mdc-icon-button material-icons boodschappen" onclick="">switch_left</button>';
+            echo '<h2>Bezorglijst</h2>';
+            foreach ($all_orders as $orders) {
+                $contents = json_decode($orders['contents'], true);
+                
+                echo '<center class="mdc-typography--headline5">' . (empty($orders['realname']) ? $orders['username'] : $orders['realname']) . '</center>';
+                echo '<ul class="mdc-list">';
+                $subtotal = $bez = $total = 0;
+                foreach ((array) $contents as $prod) {
+                    $am = $prod['bestelling_amount'];
+                    echo '<li class="mdc-list-item" tabindex="0">'; //List item
+                    echo '<span class="mdc-list-item__text">' . $prod['description'] . '</span>'; //Primary text   
+                    echo '<span class="mdc-list-item__meta">' . $prod['bestelling_amount'] . '</span>'; //Meta tag                    
+                }
+                echo '</ul>';
+                
+                
+            }
+            echo '</div>';
+            
+            //Code voor de tikkielijst
+            echo '<div class="mdc-card material-card" id="tikkie" style="display:none">';
+            echo '<button id="tikkie_button" style="position: absolute;right: 0;top: 0;" class="mdc-icon-button material-icons boodschappen" onclick="">switch_left</button>';
+            echo '<h2>Tikkielijst</h2>';
+            echo '<ul class="mdc-list">';
+            foreach($all_orders as $order){
+                $user = (empty($order['realname']) ? $order['username'] : $order['realname']);
+                $contents=json_decode($order['contents'], true);
+                $tot = 0;
+                foreach($contents as $prod){
+                    $am = $prod['bestelling_amount'];
+                    $tot+=1.1*($prod['priceLabel']['now']*$am);
+                }
+                echo '<li class="mdc-list-item" tabindex="0">'; //List item
+                echo '<span class="mdc-list-item__text">' . $user . '</span>'; //Primary text   
+                echo '<span class="mdc-list-item__meta">' . round($tot, 2) . '</span>'; //Meta tag
+            }
+            echo '</ul>';
+            echo '</div';
         }
         echo '</div>';
         ?>
+        <script>
+            $("#lijst_button").on('click', function(){
+               $("#boodschappen").toggle('show'); 
+               $("#bezorg").toggle('show');
+            });
+            $("#bezorg_button").on('click', function(){
+               $("#bezorg").toggle('show'); 
+               $("#tikkie").toggle('show');
+            });
+            $("#tikkie_button").on('click', function(){
+               $("#tikkie").toggle('show'); 
+               $("#boodschappen").toggle('show');
+            });
+        </script>
 </body>
 </html>

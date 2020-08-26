@@ -8,10 +8,19 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
+<<<<<<< HEAD
 var_dump($_POST);
 if (isset($_POST['email']) && isset($_POST['username'])) {
     $user = DB::queryFirstRow('SELECT `username`,`email` FROM `users` WHERE `username` = %s0 AND `email` = %s1', $_GET['email'], $_GET['username']);
     if (isset($user)) {
+=======
+var_dump($_GET);
+if(isset($_GET['email']) && isset($_GET['username'])){
+    $user = DB::queryFirstRow('SELECT `username`,`email` FROM `users` WHERE `username` = %s0 AND `email` = %s1', $_GET['username'], $_GET['email']);
+    var_dump($user);
+    //$user = ['username' => 'test_die_niet_bestaat', 'email' => 'test-4577zku20@srv1.mail-tester.com'];
+    if(isset($user)){
+>>>>>>> 135a67f82b091b8efdc823955f12de66e72675ea
         $token = bin2hex(openssl_random_pseudo_bytes(127));
         $valid_till = new DateTime();
         $valid_till->modify('+1 day');
