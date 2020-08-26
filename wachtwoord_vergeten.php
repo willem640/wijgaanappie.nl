@@ -76,7 +76,7 @@ var textfield_objects = [];
             <div id="card">
                 <h1 class="mdc-typography--headline1">Wachtwoord vergeten</h1>
 <!--                <h3 class="mdc-typography--headline3"></h3>-->
-                <form method="post" id="forgot-password-form">
+                <form method="get" id="forgot-password-form" onsubmit="wachtwoord_vergeten.php">
                     <label class="mdc-text-field mdc-text-field--outlined material-textfield" style="width: 100%" id="email-input">
                         <input type="text" name="email" class="mdc-text-field__input" aria-labelledby="email-input-label" required value="<?= $_POST['email'] ?? '' ?>" pattern="([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})">
                         <span class="mdc-notched-outline">
