@@ -105,7 +105,8 @@ if (isset($_POST['clear'])) {
                 
             }
             //Code voor de boodschappenlijst
-            echo '<div class="mdc-card material-card">';
+            echo '<div class="mdc-card material-card" id="boodschappen">';
+            echo '<button id="lijst_button" style="position: absolute;right: 0;top: 0;" class="mdc-icon-button material-icons boodschappen" onclick="">switch_left</button>';
             //print_r($all_orders);
             $boodschappenlijst = [];
             foreach($all_orders as $order){
@@ -135,7 +136,8 @@ if (isset($_POST['clear'])) {
             echo '</div>';
             
             //Code voor de bezorglijst
-            echo '<div class="mdc-card material-card">';
+            echo '<div class="mdc-card material-card" id="bezorg">';
+            echo '<button id="bezorg_button" style="position: absolute;right: 0;top: 0;" class="mdc-icon-button material-icons boodschappen" onclick="">switch_left</button>';
             echo '<h2>Bezorglijst</h2>';
             foreach ($all_orders as $orders) {
                 $contents = json_decode($orders['contents'], true);
@@ -156,7 +158,8 @@ if (isset($_POST['clear'])) {
             echo '</div>';
             
             //Code voor de tikkielijst
-            echo '<div class="mdc-card material-card">';
+            echo '<div class="mdc-card material-card" id="tikkie">';
+            echo '<button id="tikkie_button" style="position: absolute;right: 0;top: 0;" class="mdc-icon-button material-icons boodschappen" onclick="">switch_left</button>';
             echo '<h2>Tikkielijst</h2>';
             echo '<ul class="mdc-list">';
             foreach($all_orders as $order){
@@ -176,5 +179,11 @@ if (isset($_POST['clear'])) {
         }
         echo '</div>';
         ?>
+        <script>
+            $("#lijst_button").on('click', function(){
+               $("#boodschappen").toggle('show'); 
+               $("#bezorg").toggle('show');
+            });
+        </script>
 </body>
 </html>
