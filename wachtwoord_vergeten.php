@@ -7,7 +7,7 @@ require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
 var_dump($_GET);
 if(isset($_GET['email']) && isset($_GET['username'])){
-    $user = DB::queryFirstRow('SELECT `username`,`email` FROM `users` WHERE `username` = %s0 AND `email` = %s1', $_GET['email'], $_GET['username']);
+    $user = DB::queryFirstRow('SELECT `username`,`email` FROM `users` WHERE `username` = %s0 AND `email` = %s1', $_GET['username'], $_GET['email']);
     var_dump($user);
     //$user = ['username' => 'test_die_niet_bestaat', 'email' => 'test-4577zku20@srv1.mail-tester.com'];
     if(isset($user)){
