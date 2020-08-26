@@ -136,7 +136,7 @@ if (isset($_POST['clear'])) {
             echo '</div>';
             
             //Code voor de bezorglijst
-            echo '<div class="mdc-card material-card" id="bezorg">';
+            echo '<div class="mdc-card material-card" id="bezorg" style="display:none">';
             echo '<button id="bezorg_button" style="position: absolute;right: 0;top: 0;" class="mdc-icon-button material-icons boodschappen" onclick="">switch_left</button>';
             echo '<h2>Bezorglijst</h2>';
             foreach ($all_orders as $orders) {
@@ -158,7 +158,7 @@ if (isset($_POST['clear'])) {
             echo '</div>';
             
             //Code voor de tikkielijst
-            echo '<div class="mdc-card material-card" id="tikkie">';
+            echo '<div class="mdc-card material-card" id="tikkie" style="display:none">';
             echo '<button id="tikkie_button" style="position: absolute;right: 0;top: 0;" class="mdc-icon-button material-icons boodschappen" onclick="">switch_left</button>';
             echo '<h2>Tikkielijst</h2>';
             echo '<ul class="mdc-list">';
@@ -183,6 +183,14 @@ if (isset($_POST['clear'])) {
             $("#lijst_button").on('click', function(){
                $("#boodschappen").toggle('show'); 
                $("#bezorg").toggle('show');
+            });
+            $("#bezorg_button").on('click', function(){
+               $("#bezorg").toggle('show'); 
+               $("#tikkie").toggle('show');
+            });
+            $("#tikkie_button").on('click', function(){
+               $("#tikkie").toggle('show'); 
+               $("#boodschappen").toggle('show');
             });
         </script>
 </body>
