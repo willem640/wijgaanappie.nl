@@ -14,7 +14,7 @@ jobs:
       uses: appleboy/ssh-action@v0.0.7
       with:
         host: wijgaanappie.nl
-        username: u63467p60473
-        password: uTu3S84GbE9cfRY19VjqkbNc94XnGPcM
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASS }}
         port: 7685
         script: ./download.sh
