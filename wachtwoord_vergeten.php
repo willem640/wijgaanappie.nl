@@ -12,13 +12,11 @@ var_dump($_GET);
 if(isset($_GET['error'])){
     switch($_GET['error']){
         case '0' :
-            $error = "Er is een email naar je verzonden";
+            $error = "Email verzonden als de gegevens klopten";
             break;
         case '1' : 
             $error = "Token klopt niet of timestamp verlopen";
             break;
-        case '2' :
-            $error = "Onjuiste combinatie gebruikersnaam/email";
     }
 }
 if(isset($_GET['email']) && isset($_GET['username'])){
@@ -45,7 +43,7 @@ if(isset($_GET['email']) && isset($_GET['username'])){
         $mail->send();
         header('Location: wachtwoord_vergeten.php?error=0');
     } else {
-        header('Location: wachtwoord_vergeten.php?error=2');
+        header('Location: wachtwoord_vergeten.php?error=0');
     }
 }
 ?>
