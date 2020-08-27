@@ -4,9 +4,11 @@ include 'setup.php';
 
 if(isset($_GET['username']) && isset($_GET['token'])){
     $token = DB::QueryFirstRow('SELECT token FROM forgot_password WHERE email=%s', $_GET['username']);
-    $timestamp = DB::QueryFirstRow('SELECT valid_till FROM forgot_password WHERE email=%s', $_GET['username'])['valid_till'];
+    $timestamp = strtotime(DB::QueryFirstRow('SELECT valid_till FROM forgot_password WHERE email=%s', $_GET['username'])['valid_till']);
     $now = new DateTime();
     echo(gettype($timestamp));
+    $valid = ($timestamp > $now);
+    echo($valid);
     var_dump($_GET);
 }
 ?>
