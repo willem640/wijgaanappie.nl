@@ -11,7 +11,7 @@ if(isset($_GET['username']) && isset($_GET['token'])){
         echo('Successfully verified');
         //TODO: Error handling
     } else {
-        header('Location: /wachtwoord_vergeten.php?error=OnjuisteCredentials');
+        header('Location: /wachtwoord_vergeten.php?error=1');
     }
     
 }
