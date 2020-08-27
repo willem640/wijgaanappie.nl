@@ -53,7 +53,7 @@ var textfield_objects = [];
             <div id="card">
                 <h1 class="mdc-typography--headline1">Wachtwoord reset</h1>
 <!--                <h3 class="mdc-typography--headline3"></h3>-->
-                <form method="post" id="password-reset-form">
+                    <form method="post" id="password-reset-form" action="reset_wachtwoord.php">
                     <label class="mdc-text-field mdc-text-field--outlined material-textfield" id="password_0-input">
                         <input type="password" class="mdc-text-field__input" aria-labelledby="password_0-input-label" required onchange="this.setCustomValidity(this.validity.patternMismatch ? '' : '');
                                 if (this.checkValidity())
