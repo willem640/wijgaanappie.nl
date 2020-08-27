@@ -8,7 +8,7 @@ if (!($_SESSION['loggedin'] ?? false)) {
 }
 if (isset($_POST['clear'])) {
                 DB::query('DELETE FROM current_orders');
-                echo('<script type="text/javascript">window.location.href=lijstje.php</script>');
+                echo('<script type="text/javascript">window.location.href="lijstje.php"</script>');
             }
 ?>
 
