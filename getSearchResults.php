@@ -67,7 +67,7 @@ foreach ($curlHandles as $handle_url => $ch) {
     });
     $detail_lane = array_values($detail_lanes)[0];
     $prod = $detail_lane['_embedded']['items'][0]['_embedded']['product'];
-    $prod["priceLabel"]["now"] = $prod["priceLabel"]["now"] ?: ($prod["discount"]["label"] ?? getPriceFallback($prod["id"]));
+    $prod["priceLabel"]["now"] = $prod["priceLabel"]["now"] ?? getPriceFallback($prod["id"]);
     $_SESSION['orderable_array'][$key + $from] = $prod;
     echo '<div class="mdc-card material-card">'
     . ' <div class="mdc-card__primary-action ripple-surface" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["label"] ?? $prod["discount"]["type"]["name"])) . '\',\'' . ($key + $from) . '\')">'
