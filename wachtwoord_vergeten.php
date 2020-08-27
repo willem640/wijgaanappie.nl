@@ -11,6 +11,9 @@ require 'PHPMailer/SMTP.php';
 var_dump($_GET);
 if(isset($_GET['error'])){
     switch($_GET['error']){
+        case '0' :
+            $error = "Er is een email naar je verzonden";
+            break;
         case '1' : 
             $error = "Token klopt niet of timestamp verlopen";
             break;
@@ -38,7 +41,7 @@ if(isset($_GET['email']) && isset($_GET['username'])){
         $mail->Body = 'Dag ' . ($user['realname'] ?? $user['username']) . "!\n Je hebt aangegeven dat je je wachtwoord vergeten bent.\n
            https://m.wijgaanappie.nl/reset_wachtwoord.php?username=" . urlencode($user['email']) . '&token=' . $token;
         $mail->send();
-        header('Location: bevestig_wachtwoord_vergeten.php?confirm=confirm');
+        header('Location: wachtwoord_vergeten.php?error=0');
     } else {
         // proper error handling
     }
