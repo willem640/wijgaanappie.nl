@@ -10,6 +10,8 @@ if(isset($_GET['username']) && isset($_GET['token'])){
     if($now < $timestamp && $_GET['token'] == $token){
         echo('Successfully verified');
         //TODO: Error handling
+    } else {
+        header('Location: /wachtwoord_vergeten.php?error=OnjuisteCredentials');
     }
     
 }
