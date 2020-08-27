@@ -185,8 +185,8 @@ if (isset($_POST['clear'])) {
             echo '</div>';
             
             echo '</div>';
-            echo '<div class="swiper-button-prev"></div>';
-            echo '<div class="swiper-button-next"></div>';
+            echo '<div class="prev"><span class="material-icons">navigate_before</span></div>';
+            echo '<div class="next"><span class="material-icons">navigate_next</span></div>';
             echo '</div>';
         }
         echo '</div>';
@@ -199,8 +199,8 @@ if (isset($_POST['clear'])) {
 
                 // Navigation arrows
                 navigation: {
-                  nextEl: '.swiper-button-next',
-                  prevEl: '.swiper-button-prev',
+                  nextEl: '.next',
+                  prevEl: '.prev',
                 },
             })
         </script>
