@@ -14,6 +14,15 @@ if(isset($_GET['username']) && isset($_GET['token'])){
     
 }
 var_dump($_POST);
+if(isset($_POST['pass0']) && isset($_POST['pass1'])){
+    if($_POST['pass0'] != $_POST['pass1']){
+        $error = "Wachtwoorden matchen niet";
+    } else {
+        DB::update('users', ['password' => password_hash($_POST['pass0'], PASSWORD_DEFAULT)], 'email=%s', $_POST['username']);
+        DB::delete('forgot_password', 'email=%s', $_POST['username']);
+        header('Location: /login.php');
+    }
+}
 ?>
 
 <html>
