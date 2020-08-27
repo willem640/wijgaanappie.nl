@@ -3,7 +3,7 @@
 session_start();
 require_once 'setup.php';
 require_once 'simple_html_dom.php';
-var_export(getPriceFallback("wi230720"));
+
 $search = $_GET['q'] ?? '';
 $sort = $_GET['sort'] ?? '';
 $from = (int) ($_GET['from'] ?? 0);
