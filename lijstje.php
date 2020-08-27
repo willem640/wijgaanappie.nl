@@ -185,8 +185,8 @@ if (isset($_POST['clear'])) {
             echo '</div>';
             
             echo '</div>';
-            echo '<div class="swiper-button-prev">left</div>';
-            echo '<div class="swiper-button-nexr">right</div>';
+            echo '<div class="swiper-button-prev"></div>';
+            echo '<div class="swiper-button-next"></div>';
             echo '</div>';
         }
         echo '</div>';
