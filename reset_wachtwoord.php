@@ -102,11 +102,11 @@ var textfield_objects = [];
                 }
                 ?>
                 <div class="mdc-touch-target-wrapper">
-                    <button onclick="function(){
+                    <button onclick="
                             if($('#password_1-input > input').is(':valid')){
                                 $('#password-reset-form').submit();
                             }
-                        }" class="mdc-button mdc-button--touch material-button submit-register-button">
+                        " class="mdc-button mdc-button--touch material-button submit-register-button">
                         <div class="mdc-button__ripple"></div>
                         <span class="mdc-button__label">reset</span>
                         <div class="mdc-button__touch"></div>
