@@ -140,7 +140,7 @@ if (isset($_POST['clear'])) {
             echo '</div>';
             //Code voor de bezorglijst
             echo '<div class="swiper-slide">';
-            echo '<div class="mdc-card material-card" id="bezorg" style="display:none">';
+            echo '<div class="mdc-card material-card" id="bezorg">';
             echo '<button id="bezorg_button" style="position: absolute;right: 0;top: 0;" class="mdc-icon-button material-icons boodschappen" onclick="">switch_left</button>';
             echo '<h2>Bezorglijst</h2>';
             foreach ($all_orders as $orders) {
@@ -164,7 +164,7 @@ if (isset($_POST['clear'])) {
             
             //Code voor de tikkielijst
             echo '<div class="swiper-slide">';
-            echo '<div class="mdc-card material-card" id="tikkie" style="display:none">';
+            echo '<div class="mdc-card material-card" id="tikkie">';
             echo '<button id="tikkie_button" style="position: absolute;right: 0;top: 0;" class="mdc-icon-button material-icons boodschappen" onclick="">switch_left</button>';
             echo '<h2>Tikkielijst</h2>';
             echo '<ul class="mdc-list">';
@@ -186,7 +186,7 @@ if (isset($_POST['clear'])) {
             
             echo '</div>';
             echo '<div class="swiper-button-prev">left</div>';
-            echo '<div class="swiper-button-prev">right</div>';
+            echo '<div class="swiper-button-nexr">right</div>';
             echo '</div>';
         }
         echo '</div>';
