@@ -54,30 +54,32 @@ var textfield_objects = [];
                 <h1 class="mdc-typography--headline1">Wachtwoord reset</h1>
 <!--                <h3 class="mdc-typography--headline3"></h3>-->
                 <form method="post" id="password-reset-form">
-                    <label class="mdc-text-field mdc-text-field--outlined material-textfield" style="width: 100%" id="password">
-                        <input type="password" name="pass" class="mdc-text-field__input" aria-labelledby="email-input-label" required>
+                    <label class="mdc-text-field mdc-text-field--outlined material-textfield" id="password_0-input">
+                        <input type="password" class="mdc-text-field__input" aria-labelledby="password_0-input-label" required onchange="this.setCustomValidity(this.validity.patternMismatch ? '' : '');
+                                if (this.checkValidity())
+                                    $('#password_1-input > input')[0].pattern = this.value;">
                         <span class="mdc-notched-outline">
                             <span class="mdc-notched-outline__leading"></span>
                             <span class="mdc-notched-outline__notch">
-                                <span class="mdc-floating-label" id="email-input-label">Wachtwoord</span>
+                                <span class="mdc-floating-label" id="password_0-input-label">Wachtwoord</span>
                             </span>
                             <span class="mdc-notched-outline__trailing"></span>
                         </span>
                         <div class="mdc-text-field-helper-line">
-                            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg" aria-hidden="true">Voor je nieuwe wachtwoord in</div>
+                            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg" aria-hidden="true">Voer een  nieuwwachtwoord in</div>
                         </div>
                     </label><br>
-                    <label class="mdc-text-field mdc-text-field--outlined material-textfield" style="width: 100%" id="pass-verify">
-                        <input type="password" name="pass_verify" class="mdc-text-field__input" aria-labelledby="username-input-label" required>
+                    <label class="mdc-text-field mdc-text-field--outlined material-textfield" id="password_1-input">
+                        <input type="password" class="mdc-text-field__input" aria-labelledby="password_1-input-label" pattern="" required>
                         <span class="mdc-notched-outline">
                             <span class="mdc-notched-outline__leading"></span>
                             <span class="mdc-notched-outline__notch">
-                                <span class="mdc-floating-label" id="username-input-label">Herhaal wachtwoord</span>
+                                <span class="mdc-floating-label" id="password_1-input-label">Bevestig je wachtwoord</span>
                             </span>
                             <span class="mdc-notched-outline__trailing"></span>
                         </span>
                         <div class="mdc-text-field-helper-line">
-                            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg" aria-hidden="true">Herhaal hetzelfde wachtwoord</div>
+                            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg" aria-hidden="true">Zorg dat de wachtwoorden matchen</div>
                         </div>
                     </label><br>
                 </form><br>
