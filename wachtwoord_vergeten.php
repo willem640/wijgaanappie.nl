@@ -36,7 +36,7 @@ if(isset($_GET['email']) && isset($_GET['username'])){
         $mail->Subject = 'Wachtwoord vergeten';
         $mail->isHTML(false);
         $mail->Body = 'Dag ' . ($user['realname'] ?? $user['username']) . "!\n Je hebt aangegeven dat je je wachtwoord vergeten bent.\n
-           m.wijgaanappie.nl/reset_wachtwoord.php?username=" . urlencode($user['email']) . '&token=' . $token;
+           https://m.wijgaanappie.nl/reset_wachtwoord.php?username=" . urlencode($user['email']) . '&token=' . $token;
         $mail->send();
         header('Location: bevestig_wachtwoord_vergeten.php?confirm=confirm');
     } else {
