@@ -3,7 +3,7 @@
 session_start();
 require_once 'setup.php';
 require_once 'simple_html_dom.php';
-
+var_export(getPriceFallback("wi230720"));
 $search = $_GET['q'] ?? '';
 $sort = $_GET['sort'] ?? '';
 $from = (int) ($_GET['from'] ?? 0);
@@ -67,6 +67,7 @@ foreach ($curlHandles as $handle_url => $ch) {
     });
     $detail_lane = array_values($detail_lanes)[0];
     $prod = $detail_lane['_embedded']['items'][0]['_embedded']['product'];
+    $prod["priceLabel"]["now"] = $prod["priceLabel"]["now"] ?: ($prod["discount"]["label"] ?? getPriceFallback($prod["id"]));
     $_SESSION['orderable_array'][$key + $from] = $prod;
     echo '<div class="mdc-card material-card">'
     . ' <div class="mdc-card__primary-action ripple-surface" onclick="buyProductDialog(\'' . addslashes($prod["description"]) . '\', \'' . $prod["priceLabel"]["was"] . '\', \'' . $prod["priceLabel"]["now"] . '\', \'' . $prod["unitSize"] . '\', \'' . ucfirst(strtolower($prod["discount"]["label"] ?? $prod["discount"]["type"]["name"])) . '\',\'' . ($key + $from) . '\')">'
@@ -75,7 +76,7 @@ foreach ($curlHandles as $handle_url => $ch) {
     . $prod["description"]
     . '</h5>'
     . '<p class="mdc-typography--body1 material-card__content">'
-    . '€' . ($prod["priceLabel"]["now"] ?? ($prod["discount"]["label"] ?? '')) . ' - ' . $prod["unitSize"]
+    . '€' . $prod["priceLabel"]["now"] . ' - ' . $prod["unitSize"]
     . '</p>'
     . '</div>'
     . '</div>';
@@ -94,4 +95,21 @@ if ($to < $count && $from < $count) {
         $from += $num;
     }
     echo '<a style="display:none" href="getSearchResults.php?q=' . $search . '&sort=' . $sort . '&to=' . $to . '&from=' . $from . '"></a>';
+}
+
+function getPriceFallback(string $sku){
+    $html = file_get_html("https://ah.nl/producten/product/" . $sku);
+    
+    foreach($html->find("script[data-react-helmet=true]") as $el){
+        if($el->innertext !== ""){
+            $data = $el->innertext;
+            break;
+        }
+    }
+    
+    if($data === "") {return;}
+    
+    $json = json_decode($data, true);
+    
+    return $json["offers"]["price"];
 }
