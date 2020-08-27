@@ -24,6 +24,13 @@
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="//www.googletagmanager.com/gtag/js?id=UA-153875032-1"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() {
