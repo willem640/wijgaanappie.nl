@@ -105,6 +105,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                             <label for="remember_me">Onthoud mij voor 30 dagen</label>
                         </div>
                     <!--</div>-->
+                    <a class="mdc-typography--body1" href="wachtwoord_vergeten.php"><center>Wachtwoord vergeten? Klik hier!</center></a>
                     <?php
                     if (isset($error)) {
                         echo '<p class="mdc-typography--body1 login-error">' . $error . '</p>';
