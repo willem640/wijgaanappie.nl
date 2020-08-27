@@ -21,7 +21,7 @@ if ($_SESSION['loggedin'] ?? false) {
         $mail->Subject = 'Activeer je account';
         $mail->isHTML(false);
         $mail->Body = 'Dag ' . $_POST['username'] . "!\n Je account is bijna geactiveerd, klik op onderstaande link om gebruik te kunnen maken van je account.\n
-           wijgaanappie.nl/activeer.php?email=" . urlencode($_POST['email']) . '&token=' . $token;
+           m.wijgaanappie.nl/activeer.php?email=" . urlencode($_POST['email']) . '&token=' . $token;
         $mail->send();
         if(isset($_GET['return'])){
             header('Location: login.php?return='.$_GET['return']);
