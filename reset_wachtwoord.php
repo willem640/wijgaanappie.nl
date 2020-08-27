@@ -6,10 +6,7 @@ if(isset($_GET['username']) && isset($_GET['token'])){
     $token = DB::QueryFirstRow('SELECT token FROM forgot_password WHERE email=%s', $_GET['username']);
     $timestamp = DB::QueryFirstRow('SELECT valid_till FROM forgot_password WHERE email=%s', $_GET['username'])['valid_till'];
     $now = new DateTime();
-    
-    if($now < DateTime($timestamp) && $token==$_GET['token']){
-        echo 'succesfully verified';
-    }
+    echo(gettype($timestamp));
     var_dump($_GET);
 }
 ?>
