@@ -58,7 +58,7 @@ var textfield_objects = [];
                         <input type="hidden" name="username" value="<?php echo($_GET['username'])?>">
                         
                     <label class="mdc-text-field mdc-text-field--outlined material-textfield" id="password_0-input">
-                        <input type="password" class="mdc-text-field__input" aria-labelledby="password_0-input-label" required onchange="this.setCustomValidity(this.validity.patternMismatch ? '' : '');
+                        <input name="pass0" type="password" class="mdc-text-field__input" aria-labelledby="password_0-input-label" required onchange="this.setCustomValidity(this.validity.patternMismatch ? '' : '');
                                 if (this.checkValidity())
                                     $('#password_1-input > input')[0].pattern = this.value;">
                         <span class="mdc-notched-outline">
@@ -73,7 +73,7 @@ var textfield_objects = [];
                         </div>
                     </label><br>
                     <label class="mdc-text-field mdc-text-field--outlined material-textfield" id="password_1-input">
-                        <input type="password" class="mdc-text-field__input" aria-labelledby="password_1-input-label" pattern="" required>
+                        <input name="pass1" type="password" class="mdc-text-field__input" aria-labelledby="password_1-input-label" pattern="" required>
                         <span class="mdc-notched-outline">
                             <span class="mdc-notched-outline__leading"></span>
                             <span class="mdc-notched-outline__notch">
