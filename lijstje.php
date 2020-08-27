@@ -38,7 +38,7 @@ if (isset($_POST['clear'])) {
             left: 1vw;
             z-index: 10;
         }
-        .prev {
+        .next {
             position: absolute;
             top: 1vh;
             right: 1vw;
