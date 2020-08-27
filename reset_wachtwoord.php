@@ -8,14 +8,13 @@ if(isset($_GET['username']) && isset($_GET['token'])){
     $now = new DateTime();
     $valid = ($timestamp > $now);
     if($now < $timestamp && $_GET['token'] == $token){
-        echo('Successfully verified');
-        //TODO: Error handling
+        //TODO: Cleanup
     } else {
         header('Location: /wachtwoord_vergeten.php?error=1');
     }
     
 }
-var_dump($_POST);
+
 if(isset($_POST['pass0']) && isset($_POST['pass1'])){
     if($_POST['pass0'] != $_POST['pass1']){
         $error = "Wachtwoorden matchen niet";
@@ -67,7 +66,7 @@ var textfield_objects = [];
 <!--                <h3 class="mdc-typography--headline3"></h3>-->
                     <form method="post" id="password-reset-form" action="reset_wachtwoord.php">
                         <input type="hidden" name="username" value="<?php echo($_GET['username'])?>">
-                        
+                        <input type="hidden" name="token" value="<?php echo($_GET['token'])?>">
                     <label class="mdc-text-field mdc-text-field--outlined material-textfield" id="password_0-input">
                         <input name="pass0" type="password" class="mdc-text-field__input" aria-labelledby="password_0-input-label" required onchange="this.setCustomValidity(this.validity.patternMismatch ? '' : '');
                                 if (this.checkValidity())
@@ -103,7 +102,11 @@ var textfield_objects = [];
                 }
                 ?>
                 <div class="mdc-touch-target-wrapper">
-                    <button onclick="$('#password-reset-form').submit()" class="mdc-button mdc-button--touch material-button submit-register-button">
+                    <button onclick="function(){
+                            if($('#password_1-input > input').is(':valid')){
+                                $('#password-reset-form').submit()
+                            }
+                        }" class="mdc-button mdc-button--touch material-button submit-register-button">
                         <div class="mdc-button__ripple"></div>
                         <span class="mdc-button__label">reset</span>
                         <div class="mdc-button__touch"></div>
