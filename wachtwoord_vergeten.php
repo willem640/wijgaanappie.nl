@@ -9,6 +9,9 @@ require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
 var_dump($_GET);
+if(isset($_GET['error'])){
+    $error = $_GET['error'];
+}
 if(isset($_GET['email']) && isset($_GET['username'])){
     $user = DB::queryFirstRow('SELECT `username`,`email` FROM `users` WHERE `username` = %s0 AND `email` = %s1', $_GET['username'], $_GET['email']);
     var_dump($user);
