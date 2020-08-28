@@ -18,8 +18,8 @@ if (strpos($sort, 'reverse') !== false) {
 $orderBy = "";
 
 if (strpos(($sort ?? ''), 'price') === false && strpos(($sort ?? ''), 'alphabetical') === false) { //not price, not alphabetical, so sort by relevance
-    $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY MATCH(title) AGAINST(%s0) " . $sort_direction . " LIMIT " . $from . "," . $num, $search);
-    $count = DB::query("SELECT COUNT(*) FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY MATCH(title) AGAINST(%s0) " . $sort_direction, $search);
+    $query = DB::query("SELECT * FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY weight DESC, MATCH(title) AGAINST(%s0) " . $sort_direction . " LIMIT " . $from . "," . $num, $search);
+    $count = DB::query("SELECT COUNT(*) FROM `products` WHERE MATCH(title) AGAINST(%s0) ORDER BY weight DESC, MATCH(title) AGAINST(%s0) " . $sort_direction, $search);
 } else {
     if (strpos(($sort ?? ''), 'price') !== false) {
         $orderBy = "priceNow";
