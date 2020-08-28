@@ -47,6 +47,11 @@ if (isset($_POST['place_order'])) {
         $orders = json_decode($query[0]['contents'] ?? '[]', true);
 
         $ids = array_column($cart, 'id');
+        foreach($ids as $id){
+            $weight=DB::query('SELECT weight products-with-noprice WHERE id=%s', $id)[0];
+            $weight+=1;
+            DB::update('products-with-noprice', ['weight' => $weight], 'id=%s', $weight);
+        }
         $prices = array_column(array_column($cart, 'priceLabel'), 'now');
         $descriptions = array_column($cart, 'description'); // test
         $amounts = array_column($cart, 'bestelling_amount');
