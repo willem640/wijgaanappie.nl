@@ -51,7 +51,7 @@ if (isset($_POST['place_order'])) {
             $id = intval(substr($id, 2));
             $weight=intval(DB::query('SELECT weight FROM products WHERE id=%s', $id)[0]['weight']);
             $weight+=1;
-            DB::update('products', ['weight' => $weight], 'id=%s', $weight);
+            DB::update('products', ['weight' => $weight], 'id=%s', $id);
         }
         $prices = array_column(array_column($cart, 'priceLabel'), 'now');
         $descriptions = array_column($cart, 'description'); // test
@@ -72,7 +72,7 @@ if (isset($_POST['place_order'])) {
         }
         DB::update('users', ['cart' => '{}'], 'username = %s', $_SESSION['username']);
     }
-    //header('Location: profile.php');
+    header('Location: profile.php');
 }
 
 if (isset($_POST['delete']) && $_SESSION['loggedin'] === true) {
