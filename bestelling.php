@@ -50,7 +50,7 @@ if (isset($_POST['place_order'])) {
         foreach($ids as $id){
             $id = intval(substr($id, 2));
             echo(gettype($id));
-            $weight=DB::query('SELECT weight FROM products WHERE id=%s', $id)[0];
+            $weight=intval(DB::query('SELECT weight FROM products WHERE id=%s', $id)[0]['weight']);
             var_dump($weight);
             /*$weight+=1;
             DB::update('products', ['weight' => $weight], 'id=%s', $weight);*/
