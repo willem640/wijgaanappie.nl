@@ -73,7 +73,7 @@ if (isset($_POST['place_order'])) {
         }
         DB::update('users', ['cart' => '{}'], 'username = %s', $_SESSION['username']);
     }
-    header('Location: profile.php');
+    //header('Location: profile.php');
 }
 
 if (isset($_POST['delete']) && $_SESSION['loggedin'] === true) {
