@@ -49,9 +49,10 @@ if (isset($_POST['place_order'])) {
         $ids = array_column($cart, 'id');
         foreach($ids as $id){
             $id = intval(substr($id, 2));
-            print_r($id);
-            /*$weight=DB::query('SELECT weight FROM products WHERE id=%s', $id)[0];
-            $weight+=1;
+            echo(gettype($id));
+            $weight=DB::query('SELECT weight FROM products WHERE id=%s', $id)[0];
+            var_dump($weight);
+            /*$weight+=1;
             DB::update('products', ['weight' => $weight], 'id=%s', $weight);*/
         }
         $prices = array_column(array_column($cart, 'priceLabel'), 'now');
