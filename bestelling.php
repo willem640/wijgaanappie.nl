@@ -49,7 +49,7 @@ if (isset($_POST['place_order'])) {
         $ids = array_column($cart, 'id');
         foreach($ids as $id){
             $id = intval(substr($id, 2));
-            $weight=DB::query('SELECT weight products-with-noprice WHERE id=%s', $id)[0];
+            $weight=DB::query('SELECT weight FROM products-with-noprice WHERE id=%s', $id)[0];
             $weight+=1;
             DB::update('products-with-noprice', ['weight' => $weight], 'id=%s', $weight);
         }
