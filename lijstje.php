@@ -131,7 +131,7 @@ if (isset($_POST['clear'])) {
                     $added = false;
                     foreach($boodschappenlijst as $key => $dupe){
                         if($product['id']==$dupe['id']){
-                            $boodschappenlijst[$key]['bestelling_amount']++;
+                            $boodschappenlijst[$key]['bestelling_amount']+=$product['bestelling_amount'];
                             $added=true;
                         }
                     }
