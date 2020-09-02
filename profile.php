@@ -70,8 +70,11 @@ if (isset($_POST['subs']) && $_SESSION['loggedin'] === true) {
     }
     $orders = array_merge($orders); // reset keys
     $orders = checkEmptyCart($orders);
-
-    DB::update('current_orders', ['contents' => json_encode($orders)], 'username = %s', $_SESSION['username']);
+    if(empty($orders)){
+        DB::delete('current_orders', 'username=%s', $_SESSION['username']);
+    } else {
+        DB::update('current_orders', ['contents' => json_encode($orders)], 'username = %s', $_SESSION['username']);
+    }
     header('Location: profile.php');
 }
 ?>
