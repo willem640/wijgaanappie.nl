@@ -37,8 +37,11 @@ if (isset($_POST['cancel_order']) && $_SESSION['loggedin'] === true) {
     }
     $orders = array_merge($orders); // reset keys
     $orders = checkEmptyCart($orders);
-    var_dump(checkEmptyCart($orders));
-    DB::update('current_orders', ['contents' => json_encode($orders)], 'username = %s', $_SESSION['username']);
+    if(empty($orders)){
+        DB::delete('current_orders', 'username=%s', $_SESSION['username']);
+    } else {
+        DB::update('current_orders', ['contents' => json_encode($orders)], 'username = %s', $_SESSION['username']);
+    }
 }
 if (isset($_POST['add']) && $_SESSION['loggedin'] === true) {
     //TODO: is robin going to the appie?
