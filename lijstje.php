@@ -4,7 +4,7 @@ require_once 'setup.php';
 
 
 if (!($_SESSION['loggedin'] ?? false)) {
-    header('Location: login.php?return=lijstje.php');
+    //header('Location: login.php?return=lijstje.php');
 }
 if (isset($_POST['clear'])) {
                 DB::query('DELETE FROM current_orders');
@@ -45,9 +45,9 @@ if (isset($_POST['clear'])) {
             z-index: 10;
         }
         </style>
-        <form method="post" onsubmit="confirm('weet je zeker dat je alles hebt?')" id="clear_sweep">
+        <form method="post" id="clear_sweep">
             <input type="hidden" name="clear" value="lijst leeghalen">
-            <button class="mdc-fab app-fab--absolute material-fab" aria-label="delete_sweep" onclick="this.closest('form').submit();">
+            <button class="mdc-fab app-fab--absolute material-fab" aria-label="delete_sweep" onclick="var a = confirm('weet je zeker dat je alles hebt?'); if(a) this.closest('form').submit();">
                 <div class="mdc-fab__ripple"></div>
                 <span class="mdc-fab__icon material-icons">delete_sweep</span>
             </button>
