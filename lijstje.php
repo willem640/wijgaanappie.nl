@@ -47,7 +47,7 @@ if (isset($_POST['clear'])) {
         </style>
         <form method="post" id="clear_sweep">
             <input type="hidden" name="clear" value="lijst leeghalen">
-            <button class="mdc-fab app-fab--absolute material-fab" aria-label="delete_sweep" onclick="var a = confirm('weet je zeker dat je alles hebt?'); if(a) this.closest('form').submit();">
+            <button class="mdc-fab app-fab--absolute material-fab" aria-label="delete_sweep" onclick="var a = confirm('weet je zeker dat je alles hebt?'); if(a){ this.closest('form').submit();}">
                 <div class="mdc-fab__ripple"></div>
                 <span class="mdc-fab__icon material-icons">delete_sweep</span>
             </button>
