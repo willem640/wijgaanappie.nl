@@ -7,9 +7,18 @@ if (!($_SESSION['loggedin'] ?? false)) {
 }
 $all_orders = DB::query('SELECT * FROM current_orders');
 $now=date("Y-m-d");
-$contents=[];
+$finance_contents=[];
 foreach($all_orders as $order){
-    $contents[$order["username"]]=json_decode($order["contents"]);
+    $finance_contents[$order["username"]]=json_decode($order["contents"], true);
+    $contents = json_decode($order['contents'], true);
+           
+    //Update order history van mensen
+    $order_history = json_decode(DB::query('SELECT previous_orders FROM users WHERE username=%s', $orders['username'])[0]['previous_orders'], true);
+    $order_history[$now] = array_merge(($order_history[$now] ?? []), $contents);
+    $order_history_json = json_encode($order_history);
+    if (isset($_POST['clear'])) {
+        DB::update('users', ['previous_orders' => $order_history_json], 'username=%s', $order['username']);
+    }
 }
 if (isset($_POST['clear'])) {
                 
@@ -68,15 +77,7 @@ if (isset($_POST['clear'])) {
             $j = 0; //Zo doe k ff index snap key=>value nie. fight me
             echo '<div class="wrapper">';
             foreach ($all_orders as $orders) {
-                $contents = json_decode($orders['contents'], true);
                 
-                //Update order history van mensen
-                $order_history = json_decode(DB::query('SELECT previous_orders FROM users WHERE username=%s', $orders['username'])[0]['previous_orders'], true);
-                $order_history[date("d-m-Y")] = array_merge(($order_history[date("d-m-Y")] ?? []), $contents);
-                $order_history_json = json_encode($order_history);
-                if (isset($_POST['clear'])) {
-                    DB::update('users', ['previous_orders' => $order_history_json], 'username=%s', $orders['username']);
-                }
                 //$order_history = array_merge($test,$order_history);
                 //print_r($order_history);
                 if (empty($contents)) {
