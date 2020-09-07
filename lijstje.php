@@ -9,9 +9,9 @@ $all_orders = DB::query('SELECT * FROM current_orders');
 $now=date("Y-m-d");
 $contents=[];
 foreach($all_orders as $order){
-    $contents[$order["username"]]=$order["contents"];
+    $contents[$order["username"]]=json_decode($order["contents"]);
 }
-var_dump(json_encode($contents), true);
+print_r(json_encode($contents));
 if (isset($_POST['clear'])) {
                 
                 //DB::insert('finance', ['date'=> $now, 'contents'=> json_encode($contents, true)]);
