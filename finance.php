@@ -5,7 +5,7 @@ $perm_level = DB::query("SELECT perm_level FROM users WHERE username = %s", $_SE
 if($perm_level != 2){header("Location: login.php");}
 $contents=(isset($_GET['date']) ? json_decode(DB::query("SELECT all_orders FROM finance WHERE date=%s", $_GET['date']), true) : []);
 print_r($contents);
-print_r($_GET['date']);
+print_r(gettype($_GET['date']));
 ?>
 
 <!DOCTYPE HTML>
