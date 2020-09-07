@@ -5,14 +5,16 @@ require_once 'setup.php';
 if (!($_SESSION['loggedin'] ?? false)) {
     //header('Location: login.php?return=lijstje.php');
 }
+$all_orders = DB::query('SELECT * FROM current_orders');
+$now=date("Y-m-d");
+$contents=[];
+foreach($all_orders as $order){
+    $contents[$order["username"]]=$order["contents"];
+}
+var_dump($contents);
 if (isset($_POST['clear'])) {
-                $all_orders = DB::query('SELECT * FROM current_orders');
-                $now=date("Y-m-d");
-                $contents=[];
-                foreach($all_orders as $order){
-                    $contents[$order["username"]]=$order["contents"];
-                }
-                DB::insert('finance', ['date'=> $now, 'contents'=> json_encode($contents, true)]);
+                
+                //DB::insert('finance', ['date'=> $now, 'contents'=> json_encode($contents, true)]);
                 //TODO Check if date already has orders in it
                 DB::query('DELETE FROM current_orders');
                 echo('<script type="text/javascript">window.location.href="lijstje.php"</script>');
