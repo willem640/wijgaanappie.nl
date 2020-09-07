@@ -1,13 +1,19 @@
 <?php
 session_start();
 require_once 'setup.php';
-$all_orders = DB::query('SELECT * FROM current_orders');
-var_dump($all_orders);
 
 if (!($_SESSION['loggedin'] ?? false)) {
     //header('Location: login.php?return=lijstje.php');
 }
 if (isset($_POST['clear'])) {
+                $all_orders = DB::query('SELECT * FROM current_orders');
+                $now=date("Y-m-d");
+                $contents=[];
+                foreach($all_orders as $order){
+                    $contents[$order["username"]]=$order["contents"];
+                }
+                DB::insert('finance', ['date'=> $now, 'contents'=> $contents]);
+                //TODO Check if date already has orders in it
                 DB::query('DELETE FROM current_orders');
                 echo('<script type="text/javascript">window.location.href="lijstje.php"</script>');
             }
