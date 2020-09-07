@@ -3,7 +3,7 @@ session_start();
 require_once 'setup.php';
 $perm_level = DB::query("SELECT perm_level FROM users WHERE username = %s", $_SESSION['username'])[0]['perm_level'];
 if($perm_level != 2){header("Location: login.php");}
-$contents=(isset($_GET['date']) ? DB::queryFirstRow("SELECT all_orders FROM finance WHERE date=%s", $_GET['date']) : []);
+$contents=(isset($_GET['date']) ? json_decode(DB::queryFirstRow("SELECT all_orders FROM finance WHERE date=%s", $_GET['date'])['all_orders'], true) : []);
 print_r($contents);
 print_r(gettype($_GET['date']));
 ?>
