@@ -19,6 +19,7 @@ if(!($_SESSION['loggedin'] ?? false)){
     $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
     if($perm_level >= 2){
         $all_orders = DB::query('SELECT * FROM current_orders');
+	    var_dump($all_orders);
 		$j = 0; //Zo doe k ff index snap key=>value nie. fight me
            
         foreach($all_orders as $orders){
@@ -56,6 +57,8 @@ if(!($_SESSION['loggedin'] ?? false)){
 			$j++;
         }
         if(isset($_POST['clear'])){
+		$now = date("Y-m-d");
+		
 			 DB::query('DELETE FROM current_orders');
      echo('<script type="text/javascript">window.location.href=lijstje.php</script>');
 	}
