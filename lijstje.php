@@ -1,7 +1,8 @@
 <?php
 session_start();
 require_once 'setup.php';
-
+$all_orders = DB::query('SELECT * FROM current_orders');
+var_dump($all_orders);
 
 if (!($_SESSION['loggedin'] ?? false)) {
     //header('Location: login.php?return=lijstje.php');
