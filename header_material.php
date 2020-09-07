@@ -3,7 +3,7 @@
 <script src="node_modules/material-components-web/dist/material-components-web.min.js"></script>
 
 <!-- JQuery -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Velocity.js animation engine -->
 <script src="assets/js/velocity.js" type="text/javascript"></script>
