@@ -11,7 +11,7 @@ $contents=[];
 foreach($all_orders as $order){
     $contents[$order["username"]]=$order["contents"];
 }
-var_dump($contents);
+var_dump(json_encode($contents));
 if (isset($_POST['clear'])) {
                 
                 //DB::insert('finance', ['date'=> $now, 'contents'=> json_encode($contents, true)]);
