@@ -13,7 +13,7 @@ foreach($all_orders as $order){
     $contents = json_decode($order['contents'], true);
            
     //Update order history van mensen
-    $order_history = json_decode(DB::query('SELECT previous_orders FROM users WHERE username=%s', $orders['username'])[0]['previous_orders'], true);
+    $order_history = json_decode(DB::query('SELECT previous_orders FROM users WHERE username=%s', $order['username'])[0]['previous_orders'], true);
     $order_history[$now] = array_merge(($order_history[$now] ?? []), $contents);
     $order_history_json = json_encode($order_history);
     if (isset($_POST['clear'])) {
