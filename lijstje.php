@@ -6,6 +6,7 @@ if (!($_SESSION['loggedin'] ?? false)) {
     //header('Location: login.php?return=lijstje.php');
 }
 $all_orders = DB::query('SELECT * FROM current_orders');
+var_dump($all_orders);
 $now=date("Y-m-d");
 $finance_contents=[];
 foreach($all_orders as $order){
