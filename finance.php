@@ -25,6 +25,7 @@ $all_orders=(isset($_GET['date']) ? json_decode(DB::queryFirstRow("SELECT all_or
     echo '<div class="mdc-card material-card lijst" id="tikkie">';
             echo '<ul class="mdc-list">';
             foreach($all_orders[0] as $order){
+                print_r($order);
                 $user = (empty($order['realname']) ? $order['username'] : $order['realname']);
                 $contents=json_decode($order['contents'], true);
                 $tot = 0;
