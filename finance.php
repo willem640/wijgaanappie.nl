@@ -26,18 +26,15 @@ $all_orders=(isset($_GET['date']) ? json_decode(DB::queryFirstRow("SELECT all_or
             echo '<ul class="mdc-list">';
             foreach($all_orders as $username=>$order){
                 echo($username);
-                echo '<pre>';
-                print_r($order);
-                echo '</pre>';
-                /*$contents=json_decode($order['contents'], true);
+
                 $tot = 0;
-                foreach($contents as $prod){
+                foreach($order as $prod){
                     $am = $prod['bestelling_amount'];
                     $tot+=1.1*($prod['priceLabel']['now']*$am);
                 }
                 echo '<li class="mdc-list-item" tabindex="0">'; //List item
                 echo '<span class="mdc-list-item__text">' . $username . '</span>'; //Primary text   
-                echo '<span class="mdc-list-item__meta">' . round($tot, 2) . '</span>'; //Meta tag*/
+                echo '<span class="mdc-list-item__meta">' . round($tot, 2) . '</span>'; //Meta tag
             }
             echo '</ul>';
             echo '</div>';
