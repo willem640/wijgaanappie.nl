@@ -22,12 +22,11 @@ $all_orders=(isset($_GET['date']) ? json_decode(DB::queryFirstRow("SELECT all_or
     <h1><?php echo $_GET['date']?></h1>
     
     <?php
-    print_r($all_orders);
     echo '<div class="mdc-card material-card lijst" id="tikkie">';
             echo '<ul class="mdc-list">';
-            foreach($all_orders[0] as $order){
+            foreach($all_orders as $username=>$order){
                 print_r($order);
-                $user = (empty($order['realname']) ? $order['username'] : $order['realname']);
+                
                 $contents=json_decode($order['contents'], true);
                 $tot = 0;
                 foreach($contents as $prod){
@@ -35,7 +34,7 @@ $all_orders=(isset($_GET['date']) ? json_decode(DB::queryFirstRow("SELECT all_or
                     $tot+=1.1*($prod['priceLabel']['now']*$am);
                 }
                 echo '<li class="mdc-list-item" tabindex="0">'; //List item
-                echo '<span class="mdc-list-item__text">' . $user . '</span>'; //Primary text   
+                echo '<span class="mdc-list-item__text">' . $username . '</span>'; //Primary text   
                 echo '<span class="mdc-list-item__meta">' . round($tot, 2) . '</span>'; //Meta tag
             }
             echo '</ul>';
