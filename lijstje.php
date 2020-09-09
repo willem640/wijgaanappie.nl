@@ -21,6 +21,7 @@ foreach($all_orders as $order){
         DB::update('users', ['previous_orders' => $order_history_json], 'username=%s', $order['username']);
     }
 }
+var_dump($finance_contents);
 if (isset($_POST['clear'])) {
                 
                 DB::insert('finance', ['date'=> $now, 'all_orders'=> json_encode($contents, true)]);
