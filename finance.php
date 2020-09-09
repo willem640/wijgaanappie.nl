@@ -25,8 +25,6 @@ $all_orders=(isset($_GET['date']) ? json_decode(DB::queryFirstRow("SELECT all_or
     echo '<div class="mdc-card material-card lijst" id="tikkie">';
             echo '<ul class="mdc-list">';
             foreach($all_orders as $username=>$order){
-                echo($username);
-
                 $tot = 0;
                 foreach($order as $prod){
                     $am = $prod['bestelling_amount'];
