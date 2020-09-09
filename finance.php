@@ -22,6 +22,7 @@ $all_orders=(isset($_GET['date']) ? json_decode(DB::queryFirstRow("SELECT all_or
     <h1><?php echo $_GET['date']?></h1>
     
     <?php
+    print_r($all_orders);
     echo '<div class="mdc-card material-card lijst" id="tikkie">';
             echo '<ul class="mdc-list">';
             foreach($all_orders[0] as $order){
