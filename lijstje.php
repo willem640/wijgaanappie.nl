@@ -15,6 +15,7 @@ $all_orders = DB::query('SELECT * FROM current_orders');
 
 $now=date("Y-m-d");
 $finance_contents=[];
+$boodschappenlijst=[];
 foreach($all_orders as $order){
     $finance_contents[$order["username"]]=json_decode($order["contents"], true);
     $contents = json_decode($order['contents'], true);
@@ -25,6 +26,18 @@ foreach($all_orders as $order){
     $order_history_json = json_encode($order_history);
     if (isset($_POST['clear'])) {
         DB::update('users', ['previous_orders' => $order_history_json], 'username=%s', $order['username']);
+    }
+    
+    //Fill boodschappenlijst array
+    foreach($contents as $product){
+        $added = false;
+        foreach($boodschappenlijst as $key => $dupe){
+            if($product['id']==$dupe['id']){
+                $boodschappenlijst[$key]['bestelling_amount']+=$product['bestelling_amount'];
+                $added=true;
+            }
+        }
+        if(!$added){array_  push($boodschappenlijst, $product);}
     }
 }
 if (isset($_POST['clear'])) {
@@ -88,20 +101,6 @@ if (isset($_POST['clear'])) {
             //Code voor de boodschappenlijst
             echo '<div class="swiper-slide">';
             echo '<div class="mdc-card material-card lijst" id="boodschappen">';
-            $boodschappenlijst = [];
-            foreach($all_orders as $order){
-                $order_content = json_decode($order['contents'], true);
-                foreach($order_content as $product){
-                    $added = false;
-                    foreach($boodschappenlijst as $key => $dupe){
-                        if($product['id']==$dupe['id']){
-                            $boodschappenlijst[$key]['bestelling_amount']+=$product['bestelling_amount'];
-                            $added=true;
-                        }
-                    }
-                    if(!$added){array_push($boodschappenlijst, $product);}
-                }
-            }
             echo '<center class="mdc-typography--headline5">Boodschappenlijst</center>';
             echo '<ul class="mdc-list mdc-list--two-line">';
             foreach($boodschappenlijst as $product){
