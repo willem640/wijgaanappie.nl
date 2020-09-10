@@ -5,6 +5,8 @@ require_once 'setup.php';
 if (!($_SESSION['loggedin'] ?? false)) {
     //header('Location: login.php?return=lijstje.php');
 }
+$perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
+if($perm_level<2){header('Location: index.php');}
 $all_orders = DB::query('SELECT * FROM current_orders');
 $now=date("Y-m-d");
 $finance_contents=[];
@@ -71,8 +73,8 @@ if (isset($_POST['clear'])) {
         </form>
         <?php include 'mobile_banner.php' ?>
         <?php
-        $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
-        if ($perm_level >= 2) {
+        
+
             
             echo '<div class="wrapper">';
             
@@ -156,7 +158,7 @@ if (isset($_POST['clear'])) {
             echo '<div class="prev"><span class="material-icons">navigate_before</span></div>';
             echo '<div class="next"><span class="material-icons">navigate_next</span></div>';
             echo '</div>';
-        }
+        
         echo '</div>';
         ?>
         <script>
