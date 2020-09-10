@@ -1,13 +1,18 @@
 <?php
+$start=microtime(true);
 session_start();
 require_once 'setup.php';
 
 if (!($_SESSION['loggedin'] ?? false)) {
     //header('Location: login.php?return=lijstje.php');
 }
+
+//Check if user has permission to get to page
 $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
 if($perm_level<2){header('Location: index.php');}
+
 $all_orders = DB::query('SELECT * FROM current_orders');
+
 $now=date("Y-m-d");
 $finance_contents=[];
 foreach($all_orders as $order){
@@ -160,6 +165,9 @@ if (isset($_POST['clear'])) {
             echo '</div>';
         
         echo '</div>';
+        $end=microtime(true);
+        $time=$end-$start;
+        echo($time);
         ?>
         <script>
             var mySwiper = new Swiper('.swiper-container', {
