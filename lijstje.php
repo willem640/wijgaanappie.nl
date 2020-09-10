@@ -73,61 +73,9 @@ if (isset($_POST['clear'])) {
         <?php
         $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
         if ($perm_level >= 2) {
-            $all_orders = DB::query('SELECT * FROM current_orders');
-            $j = 0; //Zo doe k ff index snap key=>value nie. fight me
+            
             echo '<div class="wrapper">';
-            foreach ($all_orders as $orders) {
-                
-                //$order_history = array_merge($test,$order_history);
-                //print_r($order_history);
-                if (empty($contents)) {
-                    goto end_loop;
-                } //Zo krijg ik niet telkens lege orders te zien was best verwarrend   
-                echo '<div class="mdc-card material-card" style="display:none">'; //TODO weghalen oude shizzle en niet op de luie manier hier 
-                echo '<h3>' . (empty($orders['realname']) ? $orders['username'] : $orders['realname']) . '</h3>';
-                echo '<ul class="mdc-list mdc-list--two-line">';
-                $subtotal = $bez = $total = 0;
-                foreach ((array) $contents as $prod) {
-                    $am = $prod['bestelling_amount'];
-                    echo '<li class="mdc-list-item" tabindex="0">'; //List item
-                    echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
-                    echo '<span class="mdc-list-item__primary-text">' . $prod['description'] . '</span>'; //Primary text
-                    echo '<span class="mdc-list-item__secondary-text">' . $prod['bestelling_amount'] . '</span>'; //Secondary text                    
-                    echo '</span>';
-                    echo '<span class="mdc-list-item__meta">€' . $prod['priceLabel']['now'] . '</span>'; //Meta tag
-                    $subtotal += $prod['priceLabel']['now'] * $am; // when items don't have an ID, the random value that is returned seems to be constant so it just works
-                    $total = round(1.1 * $subtotal, 2);
-                    $bez = $total - $subtotal;
-                }
-                echo '</ul>';
-                echo '<ul class="mdc-list">';
-
-                // Three list items for subtotal, shipping and total
-                
-                echo '<li class="mdc-list-item" tabindex="0">';
-                echo '<span class="mdc-list-item__text">Subtotaal:</span>'; //Subtotal
-                echo '<span class="mdc-list-item__meta">€' . round($subtotal,2) . "</span>"; 
-                echo '</li>';
-                
-                
-                echo '<li class="mdc-list-item" tabindex="0">';
-                echo '<span class="mdc-list-item__text">Bezorgkosten:</span>'; //Shipping
-                echo '<span class="mdc-list-item__meta">€' . round($bez,2) . "</span>"; 
-                echo '</li>';
-                
-                
-                echo '<li class="mdc-list-item" tabindex="0">';
-                echo '<span class="mdc-list-item__text">Totaal:</span>'; //Total
-                echo '<span class="mdc-list-item__meta">€' . round($total, 2) . "</span>"; 
-                echo '</li>';
-                
-
-                echo '</ul>';
-                end_loop:
-                $j++;
-                echo '</div>';
-                
-            }
+            
             echo '<div class="swiper-container">';
             echo '<div class="swiper-wrapper">';
             //Code voor de boodschappenlijst
