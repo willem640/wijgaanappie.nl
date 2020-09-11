@@ -111,6 +111,7 @@ if (isset($_POST['clear'])) {
                             <center class="mdc-typography--headline5">Boodschappenlijst</center>
                             <ul class="mdc-list mdc-list--two-line">
                                 <?php
+                                    //Show the boodschappenlijst
                                     foreach($boodschappenlijst as $product){
                                         echo '<li class="mdc-list-item" tabindex="0">'; //List item
                                         echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
@@ -127,6 +128,7 @@ if (isset($_POST['clear'])) {
                         <div class="mdc-card material-card lijst" id="bezorg">
                             <center class="mdc-typography--headline5">Bezorglijst</center>
                             <?php
+                                //Show the bezorglijst
                                 foreach($bezorglijst as $user=>$order){
                                     echo '<center class="mdc-typography--headline5" id="user">' . $user . '</center>';
                                     echo '<ul class="mdc-list">';
@@ -143,28 +145,6 @@ if (isset($_POST['clear'])) {
                     </div>
                             
         <?php
-            //Code voor de bezorglijst
-            /*echo '<div class="swiper-slide">';
-            echo '<div class="mdc-card material-card lijst" id="bezorg">';
-            echo '<center class="mdc-typography--headline5">Bezorglijst</center>';
-            foreach ($all_orders as $orders) {
-                $contents = json_decode($orders['contents'], true);
-                
-                echo '<center class="mdc-typography--headline5">' . (empty($orders['realname']) ? $orders['username'] : $orders['realname']) . '</center>';
-                echo '<ul class="mdc-list">';
-                foreach ((array) $contents as $prod) {
-                    $am = $prod['bestelling_amount'];
-                    echo '<li class="mdc-list-item" tabindex="0">'; //List item
-                    echo '<span class="mdc-list-item__text">' . $prod['description'] . '</span>'; //Primary text   
-                    echo '<span class="mdc-list-item__meta">' . $prod['bestelling_amount'] . '</span>'; //Meta tag                    
-                }
-                echo '</ul>';
-                
-                
-            }
-            echo '</div>';
-            echo '</div>';
-            */
             //Code voor de tikkielijst
             echo '<div class="swiper-slide">';
             echo '<div class="mdc-card material-card lijst" id="tikkie">';
