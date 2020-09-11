@@ -55,7 +55,7 @@ foreach($all_orders as $order){
     //Fill tikkielijst array
     $tot=0;
     foreach($contents as $product){
-        $tot+=1.1*($prod['priceLabel']['now']*$prod['bestelling_amount']);
+        $tot+=1.1*($product['priceLabel']['now']*$product['bestelling_amount']);
     }
     $tikkielijst[$user]=$tot;
 }
