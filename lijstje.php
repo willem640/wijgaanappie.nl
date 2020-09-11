@@ -50,9 +50,6 @@ foreach($all_orders as $order){
         $j=['desc'=>$product['description'], 'amount'=>$product['bestelling_amount']];
         array_push($bezorglijst[$user], $j);
     }
-    echo '<pre>';
-    print_r($bezorglijst);
-    echo '</pre>';
 }
 
 //If orders are cleared push them all to finance and clear current orders
