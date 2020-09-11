@@ -44,10 +44,11 @@ foreach($all_orders as $order){
     }
     
     //Fill bezorglijst array
-    $bezorglijst[(empty($order['realname']) ? $order['username'] : $order['realname'])]=[];
+    $user=(empty($order['realname']) ? $order['username'] : $order['realname'])
+    $bezorglijst[$user]=[];
     foreach($contents as $product){
         $j=['desc'=>$product['description'], 'amount'=>$product['bestelling_amount]];
-        array_push($bezorglijst[(empty($order['realname']) ? $order['username'] : $order['realname'])], $j];
+        array_push($bezorglijst[$user)], $j);
     }
     echo '<pre>';
     print_r($bezorglijst);
