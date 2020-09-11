@@ -11,11 +11,13 @@ if (!($_SESSION['loggedin'] ?? false)) {
 $perm_level = DB::query('SELECT perm_level FROM users WHERE username = %s', $_SESSION['username'])[0]['perm_level'];
 if($perm_level<2){header('Location: index.php');}
 
+//Initiate vital variables
 $all_orders = DB::query('SELECT * FROM current_orders');
-
 $now=date("Y-m-d");
 $finance_contents=[];
 $boodschappenlijst=[];
+
+//Iterate through orders
 foreach($all_orders as $order){
     $finance_contents[$order["username"]]=json_decode($order["contents"], true);
     $contents = json_decode($order['contents'], true);
@@ -39,7 +41,10 @@ foreach($all_orders as $order){
         }
         if(!$added){array_push($boodschappenlijst, $product);}
     }
+    
 }
+
+//If orders are cleared push them all to finance and clear current orders
 if (isset($_POST['clear'])) {
                 
                 DB::insert('finance', ['date'=> $now, 'all_orders'=> json_encode($finance_contents, true)]);
@@ -90,11 +95,30 @@ if (isset($_POST['clear'])) {
             </button>
         </form>
         <?php include 'mobile_banner.php' ?>
+        <div class="wrapper">
+            <div class="swiper-container">
+                <div class="swiper-slide">
+                    <div class="mdc-card material-card lijst" id="boodschappen">
+                        <center class="mdc-typography--headline5">Boodschappenlijst</center>
+                        <ul class="mdc-list mdc-list--two-line">
+                            <?php
+                                foreach($boodschappenlijst as $product){
+                                    echo '<li class="mdc-list-item" tabindex="0">'; //List item
+                                    echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
+                                    echo '<span class="mdc-list-item__primary-text">' . $product['description'] . '</span>'; //Primary text
+                                    echo '<span class="mdc-list-item__secondary-text">€' . $product['priceLabel']['now'] . '</span>'; //Secondary text                    
+                                    echo '</span>';
+                                    echo '<span class="mdc-list-item__meta">' . $product['bestelling_amount'] . '</span>'; //Meta tag
+                                }
+                            ?>
+                        </ul>
+                    </div>
+                </div>
         <?php
         
 
             
-            echo '<div class="wrapper">';
+            /*echo '<div class="wrapper">';
             
             echo '<div class="swiper-container">';
             echo '<div class="swiper-wrapper">';
@@ -113,7 +137,7 @@ if (isset($_POST['clear'])) {
             }
             echo '</ul>';
             echo '</div>';
-            echo '</div>';
+            echo '</div>';*/
             //Code voor de bezorglijst
             echo '<div class="swiper-slide">';
             echo '<div class="mdc-card material-card lijst" id="bezorg">';
