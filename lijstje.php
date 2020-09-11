@@ -127,13 +127,13 @@ if (isset($_POST['clear'])) {
                         <div class="mdc-card material-card lijst" id="bezorg">
                             <center class="mdc-typography--headline5">Bezorglijst</center>
                             <?php
-                                foreach($bezorglijst as $user){
+                                foreach($bezorglijst as $user=>$order){
                                     echo '<center class="mdc-typography--headline5" id="user">' . $user . '</center>';
                                     echo '<ul class="mdc-list">';
-                                    foreach($user as $product){
+                                    foreach($order as $product){
                                         echo '<li class="mdc-list-item" tabindex="0">'; //List item
                                         echo '<span class="mdc-list-item__text">' . $product['desc'] . '</span>'; //Primary text   
-                                        echo '<span class="mdc-list-item__meta">' . $prod['amount'] . '</span>'; //Meta tag         
+                                        echo '<span class="mdc-list-item__meta">' . $product['amount'] . '</span>'; //Meta tag         
                                         echo '</li>';
                                     }
                                     echo '</ul>';
