@@ -48,7 +48,7 @@ foreach($all_orders as $order){
     $bezorglijst[$user]=[];
     foreach($contents as $product){
         $j=['desc'=>$product['description'], 'amount'=>$product['bestelling_amount']];
-        array_push($bezorglijst[$user)], $j);
+        array_push($bezorglijst[$user], $j);
     }
     echo '<pre>';
     print_r($bezorglijst);
