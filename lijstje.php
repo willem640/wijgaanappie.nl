@@ -123,32 +123,28 @@ if (isset($_POST['clear'])) {
                             </ul>
                         </div>
                     </div>
+                    <div class="swiper-slide">
+                        <div class="mdc-card material-card lijst" id="bezorg">
+                            <center class="mdc-typography--headline5">Bezorglijst</center>
+                            <?php
+                                foreach($bezorglijst as $user){
+                                    echo '<center class="mdc-typography--headline5" id="user">' . $user . '</center>';
+                                    echo '<ul class="mdc-list">';
+                                    foreach($user as $product){
+                                        echo '<li class="mdc-list-item" tabindex="0">'; //List item
+                                        echo '<span class="mdc-list-item__text">' . $product['desc'] . '</span>'; //Primary text   
+                                        echo '<span class="mdc-list-item__meta">' . $prod['amount'] . '</span>'; //Meta tag         
+                                        echo '</li>';
+                                    }
+                                    echo '</ul>';
+                                }
+                            ?>
+                        </div>
+                    </div>
+                            
         <?php
-        
-
-            
-            /*echo '<div class="wrapper">';
-            
-            echo '<div class="swiper-container">';
-            echo '<div class="swiper-wrapper">';
-            //Code voor de boodschappenlijst
-            echo '<div class="swiper-slide">';
-            echo '<div class="mdc-card material-card lijst" id="boodschappen">';
-            echo '<center class="mdc-typography--headline5">Boodschappenlijst</center>';
-            echo '<ul class="mdc-list mdc-list--two-line">';
-            foreach($boodschappenlijst as $product){
-                echo '<li class="mdc-list-item" tabindex="0">'; //List item
-                echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
-                echo '<span class="mdc-list-item__primary-text">' . $product['description'] . '</span>'; //Primary text
-                echo '<span class="mdc-list-item__secondary-text">€' . $product['priceLabel']['now'] . '</span>'; //Secondary text                    
-                echo '</span>';
-                echo '<span class="mdc-list-item__meta">' . $product['bestelling_amount'] . '</span>'; //Meta tag
-            }
-            echo '</ul>';
-            echo '</div>';
-            echo '</div>';*/
             //Code voor de bezorglijst
-            echo '<div class="swiper-slide">';
+            /*echo '<div class="swiper-slide">';
             echo '<div class="mdc-card material-card lijst" id="bezorg">';
             echo '<center class="mdc-typography--headline5">Bezorglijst</center>';
             foreach ($all_orders as $orders) {
@@ -168,7 +164,7 @@ if (isset($_POST['clear'])) {
             }
             echo '</div>';
             echo '</div>';
-            
+            */
             //Code voor de tikkielijst
             echo '<div class="swiper-slide">';
             echo '<div class="mdc-card material-card lijst" id="tikkie">';
