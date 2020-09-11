@@ -37,7 +37,7 @@ foreach($all_orders as $order){
                 $added=true;
             }
         }
-        if(!$added){array_  push($boodschappenlijst, $product);}
+        if(!$added){array_push($boodschappenlijst, $product);}
     }
 }
 if (isset($_POST['clear'])) {
