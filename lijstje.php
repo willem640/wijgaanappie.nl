@@ -16,6 +16,7 @@ $all_orders = DB::query('SELECT * FROM current_orders');
 $now=date("Y-m-d");
 $finance_contents=[];
 $boodschappenlijst=[];
+$bezorglijst=[];
 
 //Iterate through orders
 foreach($all_orders as $order){
@@ -42,6 +43,15 @@ foreach($all_orders as $order){
         if(!$added){array_push($boodschappenlijst, $product);}
     }
     
+    //Fill bezorglijst array
+    $bezorglijst[(empty($order['realname']) ? $order['username'] : $order['realname'])]=[];
+    foreach($contents as $product){
+        $j=['desc'=>$product['description'], 'amount'=>$product['bestelling_amount]];
+        array_push($bezorglijst[(empty($order['realname']) ? $order['username'] : $order['realname'])], $j];
+    }
+    echo '<pre>';
+    print_r($bezorglijst);
+    echo '</pre>';
 }
 
 //If orders are cleared push them all to finance and clear current orders
@@ -148,7 +158,6 @@ if (isset($_POST['clear'])) {
                 
                 echo '<center class="mdc-typography--headline5">' . (empty($orders['realname']) ? $orders['username'] : $orders['realname']) . '</center>';
                 echo '<ul class="mdc-list">';
-                $subtotal = $bez = $total = 0;
                 foreach ((array) $contents as $prod) {
                     $am = $prod['bestelling_amount'];
                     echo '<li class="mdc-list-item" tabindex="0">'; //List item
