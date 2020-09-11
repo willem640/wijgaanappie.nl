@@ -97,23 +97,24 @@ if (isset($_POST['clear'])) {
         <?php include 'mobile_banner.php' ?>
         <div class="wrapper">
             <div class="swiper-container">
-                <div class="swiper-slide">
-                    <div class="mdc-card material-card lijst" id="boodschappen">
-                        <center class="mdc-typography--headline5">Boodschappenlijst</center>
-                        <ul class="mdc-list mdc-list--two-line">
-                            <?php
-                                foreach($boodschappenlijst as $product){
-                                    echo '<li class="mdc-list-item" tabindex="0">'; //List item
-                                    echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
-                                    echo '<span class="mdc-list-item__primary-text">' . $product['description'] . '</span>'; //Primary text
-                                    echo '<span class="mdc-list-item__secondary-text">€' . $product['priceLabel']['now'] . '</span>'; //Secondary text                    
-                                    echo '</span>';
-                                    echo '<span class="mdc-list-item__meta">' . $product['bestelling_amount'] . '</span>'; //Meta tag
-                                }
-                            ?>
-                        </ul>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="mdc-card material-card lijst" id="boodschappen">
+                            <center class="mdc-typography--headline5">Boodschappenlijst</center>
+                            <ul class="mdc-list mdc-list--two-line">
+                                <?php
+                                    foreach($boodschappenlijst as $product){
+                                        echo '<li class="mdc-list-item" tabindex="0">'; //List item
+                                        echo '<span class="mdc-list-item__text">'; //Span for texts and meta tag
+                                        echo '<span class="mdc-list-item__primary-text">' . $product['description'] . '</span>'; //Primary text
+                                        echo '<span class="mdc-list-item__secondary-text">€' . $product['priceLabel']['now'] . '</span>'; //Secondary text                    
+                                        echo '</span>';
+                                        echo '<span class="mdc-list-item__meta">' . $product['bestelling_amount'] . '</span>'; //Meta tag
+                                    }
+                                ?>
+                            </ul>
+                        </div>
                     </div>
-                </div>
         <?php
         
 
