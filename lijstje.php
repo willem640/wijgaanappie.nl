@@ -17,6 +17,7 @@ $now=date("Y-m-d");
 $finance_contents=[];
 $boodschappenlijst=[];
 $bezorglijst=[];
+$tikkielijst=[];
 
 //Iterate through orders
 foreach($all_orders as $order){
@@ -50,8 +51,17 @@ foreach($all_orders as $order){
         $j=['desc'=>$product['description'], 'amount'=>$product['bestelling_amount']];
         array_push($bezorglijst[$user], $j);
     }
+    
+    //Fill tikkielijst array
+    tot=0;
+    foreach($contents as $product){
+        $tot+=1.1*($prod['priceLabel']['now']*$prod['bestelling_amount']);
+    }
+    $tikkielijst[$user]=$tot;
 }
-
+echo '<pre>';
+var_dump($tikkielijst);
+echo '</pre>';
 //If orders are cleared push them all to finance and clear current orders
 if (isset($_POST['clear'])) {
                 
@@ -156,7 +166,7 @@ if (isset($_POST['clear'])) {
                 $tot = 0;
                 foreach($contents as $prod){
                     $am = $prod['bestelling_amount'];
-                    $tot+=1.1*($prod['priceLabel']['now']*$am);
+                    $tot+=1.1*($prod['priceLabel']['now']*$prod['bestelling_amount']);
                 }
                 echo '<li class="mdc-list-item" tabindex="0">'; //List item
                 echo '<span class="mdc-list-item__text">' . $user . '</span>'; //Primary text   
