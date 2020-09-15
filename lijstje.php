@@ -169,35 +169,13 @@ if (isset($_POST['clear'])) {
                             </ul>
                         </div>
                     </div>
+                </div>
+                <div class="prev"><span class="material-icons">navigate_before</span></div>
+                <div class="next"><span class="material-icons">navigate_next</span></div>
+            </div>
+        </div>
                             
         <?php
-            //Code voor de tikkielijst
-            /*echo '<div class="swiper-slide">';
-            echo '<div class="mdc-card material-card lijst" id="tikkie">';
-            echo '<center class="mdc-typography--headline5">Tikkielijst</center>';
-            echo '<ul class="mdc-list">';
-            foreach($all_orders as $order){
-                $user = (empty($order['realname']) ? $order['username'] : $order['realname']);
-                $contents=json_decode($order['contents'], true);
-                $tot = 0;
-                foreach($contents as $prod){
-                    $am = $prod['bestelling_amount'];
-                    $tot+=1.1*($prod['priceLabel']['now']*$prod['bestelling_amount']);
-                }
-                echo '<li class="mdc-list-item" tabindex="0">'; //List item
-                echo '<span class="mdc-list-item__text">' . $user . '</span>'; //Primary text   
-                echo '<span class="mdc-list-item__meta">' . round($tot, 2) . '</span>'; //Meta tag
-            }
-            echo '</ul>';
-            echo '</div>';
-            echo '</div>';
-            
-            echo '</div>';
-            echo '<div class="prev"><span class="material-icons">navigate_before</span></div>';
-            echo '<div class="next"><span class="material-icons">navigate_next</span></div>';
-            echo '</div>';*/
-        
-        echo '</div>';
         $end=microtime(true);
         $time=$end-$start;
         echo($time);
