@@ -57,7 +57,7 @@ foreach($all_orders as $order){
     foreach($contents as $product){
         $tot+=1.1*($product['priceLabel']['now']*$product['bestelling_amount']);
     }
-    $tikkielijst[$user]=$tot;
+    $tikkielijst[$user]=round($tot, 2);
 }
 echo '<pre>';
 var_dump($tikkielijst);
@@ -153,10 +153,26 @@ if (isset($_POST['clear'])) {
                             ?>
                         </div>
                     </div>
+                    <div class="swiper-slide">
+                        <div class="mdc-card material-card lijst" id="boodschappen">
+                            <center class="mdc-typography--headline5">Tikkielijst</center>
+                            <ul class="mdc-list mdc-list--two-line">
+                                <?php
+                                    //Show the boodschappenlijst
+                                    foreach($tikkielijst as $user=>$amount){
+                                        echo '<li class="mdc-list-item" tabindex="0">'; //List item
+                                        echo '<span class="mdc-list-item__text">' . $user . '</span>'; //Primary text   
+                                        echo '<span class="mdc-list-item__meta">' . $amount . '</span>'; //Meta tag
+                                        echo '</li>';
+                                    }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
                             
         <?php
             //Code voor de tikkielijst
-            echo '<div class="swiper-slide">';
+            /*echo '<div class="swiper-slide">';
             echo '<div class="mdc-card material-card lijst" id="tikkie">';
             echo '<center class="mdc-typography--headline5">Tikkielijst</center>';
             echo '<ul class="mdc-list">';
@@ -179,7 +195,7 @@ if (isset($_POST['clear'])) {
             echo '</div>';
             echo '<div class="prev"><span class="material-icons">navigate_before</span></div>';
             echo '<div class="next"><span class="material-icons">navigate_next</span></div>';
-            echo '</div>';
+            echo '</div>';*/
         
         echo '</div>';
         $end=microtime(true);
