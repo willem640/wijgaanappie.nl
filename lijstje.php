@@ -156,9 +156,9 @@ if (isset($_POST['clear'])) {
                     <div class="swiper-slide">
                         <div class="mdc-card material-card lijst" id="boodschappen">
                             <center class="mdc-typography--headline5">Tikkielijst</center>
-                            <ul class="mdc-list mdc-list--two-line">
+                            <ul class="mdc-list">
                                 <?php
-                                    //Show the boodschappenlijst
+                                    //Show the tikkielijst
                                     foreach($tikkielijst as $user=>$amount){
                                         echo '<li class="mdc-list-item" tabindex="0">'; //List item
                                         echo '<span class="mdc-list-item__text">' . $user . '</span>'; //Primary text   
