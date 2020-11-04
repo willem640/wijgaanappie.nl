@@ -1,0 +1,140 @@
+<html>
+<body>
+<h1>Superglobals</h1>
+<p>Superglobals zijn eigenlijk gewoon variabelen die echt super zijn omdat je ze overal op je website kan gebruiken en niet alleen binnen de pagina. Voorbeelden zijn hiervan de $_POST, $_SESSION, $_SERVER (met een heleboel info over de gebruiker) en $_COOKIE. Een lijst 
+van alle $_SERVER variablen is hieronder shamelessly gekopieerd van w3schools.</p>
+<table class="w3-table-all notranslate">
+<tbody><tr>
+<th style="width:35%">Element/Code</th>
+<th style="width:65%">Description</th>
+</tr>
+<tr>
+<td>$_SERVER['PHP_SELF']</td>
+<td>Returns the filename of the currently executing script</td>
+</tr>
+<tr>
+<td>$_SERVER['GATEWAY_INTERFACE']</td>
+<td>Returns the version of the Common Gateway Interface (CGI) the server is 
+using</td>
+</tr>
+<tr>
+<td>$_SERVER['SERVER_ADDR']</td>
+<td>Returns the IP address of the host server</td>
+</tr>
+<tr>
+<td>$_SERVER['SERVER_NAME']</td>
+<td>Returns the name of the host server (such as www.w3schools.com)</td>
+</tr>
+<tr>
+<td>$_SERVER['SERVER_SOFTWARE']</td>
+<td>Returns the server identification string (such as Apache/2.2.24)</td>
+</tr>
+<tr>
+<td>$_SERVER['SERVER_PROTOCOL']</td>
+<td>Returns the name and revision of the information protocol (such as HTTP/1.1)</td>
+</tr>
+<tr>
+<td>$_SERVER['REQUEST_METHOD']</td>
+<td>Returns the request method used to access the page (such as POST)</td>
+</tr>
+<tr>
+<td>$_SERVER['REQUEST_TIME']</td>
+<td>Returns the timestamp of the start of the request (such as 1377687496)</td>
+</tr>
+<tr>
+<td>$_SERVER['QUERY_STRING']</td>
+<td>Returns the query string if the page is accessed via a query string</td>
+</tr>
+<tr>
+<td>$_SERVER['HTTP_ACCEPT']</td>
+<td>Returns the Accept header from the current request </td>
+</tr>
+<tr>
+<td>$_SERVER['HTTP_ACCEPT_CHARSET']</td>
+<td>Returns the Accept_Charset header from the current request (such as 
+utf-8,ISO-8859-1)</td>
+</tr>
+<tr>
+<td>$_SERVER['HTTP_HOST']</td>
+<td>Returns the Host header from the current request </td>
+</tr>
+<tr>
+<td>$_SERVER['HTTP_REFERER']</td>
+<td>Returns the complete URL of the current page (not reliable because not all 
+user-agents support it)</td>
+</tr>
+<tr>
+<td>$_SERVER['HTTPS']</td>
+<td>Is the script queried through a secure HTTP protocol</td>
+</tr>
+<tr>
+<td>$_SERVER['REMOTE_ADDR']</td>
+<td>Returns the IP address from where the user is viewing the current page</td>
+</tr>
+<tr>
+<td>$_SERVER['REMOTE_HOST']</td>
+<td>Returns the Host name from where the user is viewing the current page</td>
+</tr>
+<tr>
+<td>$_SERVER['REMOTE_PORT']</td>
+<td>Returns the port being used on the user's machine to communicate with the 
+web server</td>
+</tr>
+<tr>
+<td>$_SERVER['SCRIPT_FILENAME']</td>
+<td>Returns the absolute pathname of the currently executing script</td>
+</tr>
+<tr>
+<td>$_SERVER['SERVER_ADMIN']</td>
+<td>Returns the value given to the SERVER_ADMIN directive in the web server 
+configuration file (if your script runs on a virtual host, it will be the value 
+defined for that virtual host) (such as someone@w3schools.com)</td>
+</tr>
+<tr>
+<td>$_SERVER['SERVER_PORT']</td>
+<td>Returns the port on the server machine being used by the web server for 
+communication (such as 80)</td>
+</tr>
+<tr>
+<td>$_SERVER['SERVER_SIGNATURE']</td>
+<td>Returns the server version and virtual host name which are added to 
+server-generated pages</td>
+</tr>
+<tr>
+<td>$_SERVER['PATH_TRANSLATED']</td>
+<td>Returns the file system based path to the current script</td>
+</tr>
+<tr>
+<td>$_SERVER['SCRIPT_NAME']</td>
+<td>Returns the path of the current script</td>
+</tr>
+<tr>
+<td>$_SERVER['SCRIPT_URI']</td>
+<td>Returns the URI of the current page</td>
+</tr>
+</tbody></table>
+<h1>Cookies en Sessies</h1>
+<p>De $_COOKIE en $_SESSION variabelen zijn speciale superglobals die je zelf kan aanpassen, waarbij je als je van session-variablen gebruik wilt maken je php bestand moet beginnen met session_start(); en je alle session variabelen
+in een keer kan verwijderen dmv session_destroy();. Session variabelen zijn altijd opgeslagen op de server en blijven bestaan totdat de gebruiker de website verlaat, anders dan een cookie die op de client is opgeslagen en een veel langere levenstijd kan hebben. Om een cookie te creeren gebruik je de functie <br><code>setcookie(name, value, expire, path, domain, secure, httponly);</code></p>
+<h1>Functies</h1>
+<p>Functies zijn gewoon een handige manier om bepaalde stukken code niet telkens te hoeven uitschrijven. Ze hebben de volgende syntax:</p>
+<pre>
+<code>
+	function functionName(optional arguments) {
+		code to be executed;
+		return $valueToBeReturned;
+	}
+</code>
+</pre>
+<p>Je functie kun je dan op elk moment in je website weer callen (met de juiste arguments) om je return variabelen op te vragen.</p>
+<h1>Forms</h1>
+<p>Voor het gebruiken van forms moet je altijd eerst valideren of een variabele wel bestaat, dit doe je met <code>isset($_POST['naamVanVariabele'])</code> en wil je een pagina zichzelf laten aanroepen dan geef je in een form als action mee <code>&lt;?php echo($_SERVER['PHP_SELF']); ?&gt;</code></p>
+<h1>Handige Links</h1>
+<p>Hieronder nog een aantal handige links voor bijvoorbeeld lijstjes van functies die te maken hebben met strings, arrays e.d.</p>
+<ul>
+	<li><a href="https://www.w3schools.com/php/php_ref_string.asp">String functions</a></li>
+	<li><a href="https://www.w3schools.com/php/php_ref_array.asp">Array functions</a></li>
+	<li><a href="https://www.w3schools.com/html/html_forms.asp"></a>Gwn alle forms want ik ben te lui om het over te kopieren</li>
+</ul>
+</body>
+</html>
