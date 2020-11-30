@@ -9,4 +9,6 @@
     'email' => $email,
     'tekst' => $tekst
   ]);
+
+  header("Location: gastenboek.php");
 ?>
