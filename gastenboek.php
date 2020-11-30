@@ -9,4 +9,4 @@ foreach($results as $result){
   echo '<hr>';
 }
 ?>
-<button onclick="window.location.href='form.php'">Terug naar invulpagina</button>
+<button onclick="window.location.href='form.html'">Terug naar invulpagina</button>
