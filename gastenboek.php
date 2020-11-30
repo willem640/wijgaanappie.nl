@@ -8,3 +8,4 @@ foreach($results as $result){
   echo '<hr>';
 }
 ?>
+<form action="form.html"><input type="submit" value="Terug naar invulpagina></input></form>
