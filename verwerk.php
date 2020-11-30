@@ -3,5 +3,5 @@
   $naam = $_POST['naam'];
   $email = $_POST['email'];
   $tekst = $_POST['tekst'];
-  echo($naam, $tekst, $email);
+  echo($naam . $tekst . $email);
 ?>
