@@ -5,8 +5,7 @@
 <html>
   <h1>Leerlingadministratie Breeweg</h1>
   <hr>
-  <table border="1" cellpadding="5" cellspacing="5" style="
-    width: 100%;>
+  <table border="1" cellpadding="5" cellspacing="5" style="width: 100%;">
       <tr>
         <th>Leerlingnummer</th>
         <th>Voornaam</th>
