@@ -9,7 +9,11 @@
     <?php
     $results = DB::query('SELECT * FROM lijst');
     foreach($results as $row){
-      echo $row;
+      echo '<tr>';
+      foreach($row as $cell){
+        echo '<td>' . $cell . '</td>';
+      }
+      echo '</tr>';
     }
     ?>
   </table>
