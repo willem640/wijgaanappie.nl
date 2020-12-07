@@ -6,9 +6,11 @@
   <h1>Leerlingadministratie Breeweg</h1>
   <hr>
   <table>
+    <?php
     $results = DB::query('SELECT * FROM lijst');
     foreach($results as $row){
       echo $row;
     }
+    ?>
   </table>
 </html>
