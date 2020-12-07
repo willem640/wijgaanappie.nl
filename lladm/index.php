@@ -1,5 +1,6 @@
 <?php
-  require_once('setup.php');
+  session_start();
+  require_once 'setup.php';
 ?>
 <html>
   <h1>Leerlingadministratie Breeweg</h1>
